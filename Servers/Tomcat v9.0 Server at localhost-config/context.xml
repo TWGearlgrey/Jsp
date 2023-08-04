@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- The contents of this file will be loaded for each web application --><Context>
+
+    <!-- Default set of monitored resources. If one of these changes, the    -->
+    <!-- web application will be reloaded.                                   -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+   
+    <Resource 
+	   	name="jdbc/userdb"
+	   	auth="Container"
+	   	type="javax.sql.DataSource"
+	   	driverClassName="com.mysql.cj.jdbc.Driver"
+	   	url="jdbc:mysql://127.0.0.1:3306/userdb"
+	   	username="root"
+	   	password="1234"
+	   	maxTotal="13"
+	   	maxIdle="13"
+	   	maxWaitMillis="3000"
+	   	/>
+    	<!--
+    		1.
+    			컨넥션풀의 이름은 name="jdbc/userdb"
+    		2. 
+    			핵심은 driverClassName ... password 4가지
+    		3.
+	    		maxTotal 은 최대갯수
+	    		maxIdle
+	    		maxawaitMillis 은 모든 커넥션객체가 사용중일때 대기시간, 이를 넘어가면 커넥션을 끊음
+   		-->
+   		
+ 	<!-- 커넥션 풀 설정 -->
+    <Resource 
+    	name="jdbc/Jboard"
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="com.mysql.cj.jdbc.Driver"
+    	url="jdbc:mysql://127.0.0.1:3306/Jboard"
+    	username="root"
+    	password="1234"
+    	maxTotal="13"
+    	maxIdle="13"
+    	maxWaitMillis="3000"
+    	/>
+</Context>
