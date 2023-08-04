@@ -25,8 +25,5 @@
 			wr.withdraw(5000);
 			wr.show(out);
 		%>
-		
-		
-		
 	</body>
 </html>
