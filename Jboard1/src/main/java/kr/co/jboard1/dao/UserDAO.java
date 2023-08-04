@@ -2,6 +2,7 @@ package kr.co.jboard1.dao;
 
 import kr.co.jboard1.db.DBHelper;
 import kr.co.jboard1.db.SQL;
+import kr.co.jboard1.vo.TermsVO;
 import kr.co.jboard1.vo.UserVO;
 
 public class UserDAO extends DBHelper {
@@ -27,9 +28,7 @@ public class UserDAO extends DBHelper {
 			psmt.setString(8, vo.getAddr1());
 			psmt.setString(9, vo.getAddr2());
 			psmt.setString(10, vo.getRegip());
-			
 			psmt.executeUpdate();
-			
 			close();
 			
 		}catch(Exception e) {
@@ -163,5 +162,25 @@ public class UserDAO extends DBHelper {
 		}
 		return result;
 	}
-	
+	public TermsVO selectTerms() {
+		TermsVO vo = new TermsVO();
+
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_TERMS);
+			
+			if(rs.next()) {
+				vo.setTerms(rs.getString(1));
+				vo.setPrivacy(rs.getString(2));
+			}
+			
+			close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
 }

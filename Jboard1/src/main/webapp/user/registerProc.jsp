@@ -36,4 +36,6 @@
 	vo.setRegip(regip);
 	
 	UserDAO.getInstance().insertUser(vo);
+	
+	response.sendRedirect("/Jboard1/user/login.jsp");
 %>
