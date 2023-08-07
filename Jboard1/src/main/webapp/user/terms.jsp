@@ -40,31 +40,6 @@
 			});
 		}
     
-	    /*
-    	$(function() {
-			
-    		// 취소버튼 
-    		$('.btnCancel').click(function(e) {
-    			//alert('btnCancel Click!');
-				location.href = '/Jboard1/user/login.jsp';
-			})
-    		
-    		// 동의버튼
-    		$('.btnNext').click(function(e) {
-    			//alert('btnNext Click!');
-				e.preventDefault();
-				
-				if($('input[name=chk1]').is((':checked')) && $('input[name=chk2]').is((':checked'))) {
-					location.href = '/Jboard1/user/register.jsp';
-				}else if($('input[name=chk1]').is((':checked'))){
-					alert('개인정보 취급방침에 동의하셔야 합니다.')
-				}else {
-					alert('이용약관에 동의하셔야 합니다.')
-				}
-			})
-		})
-		*/
-    
     </script>    
 </head>
 <body>
