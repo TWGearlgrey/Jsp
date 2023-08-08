@@ -71,10 +71,10 @@
                 <% for(ArticleVO article : articles){ %>
                 <tr>
                     <td><%= pageStartNum-- %></td>
-                    <td><a href="#"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
+                    <td><a href="/Jboard1/view.jsp?no=<%= article.getNo() %>"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
                     <td><%= article.getNick() %></td>
                     <td><%= article.getRdate() %></td>
-                    <td><%= article.getHit() %></td>
+                    <td><%= article.getHit() %></td> 
                 </tr>
                 <% } %>
             </table>
