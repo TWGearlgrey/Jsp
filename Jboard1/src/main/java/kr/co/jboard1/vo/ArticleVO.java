@@ -14,6 +14,17 @@ public class ArticleVO {
 	private String regip;
 	private String rdate;
 	
+	// 추가 필드
+	private String nick;
+	
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	////////////////////////////////////// 추가 필드 end...
+	
 	
 	public int getNo() {
 		return no;
