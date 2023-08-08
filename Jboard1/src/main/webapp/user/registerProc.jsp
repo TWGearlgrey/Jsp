@@ -1,5 +1,5 @@
 <%@page import="kr.co.jboard1.dao.UserDAO"%>
-<%@page import="kr.co.jboard1.vo.UserVO"%>
+<%@page import="kr.co.jboard1.dto.UserDTO"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="javax.sql.DataSource"%>
@@ -23,7 +23,7 @@
 	String addr2 = request.getParameter("addr2");
 	String regip = request.getRemoteAddr();
 	
-	UserVO vo = new UserVO();
+	UserDTO vo = new UserDTO();
 	vo.setUid(uid);
 	vo.setPass(pass1);
 	vo.setName(name);

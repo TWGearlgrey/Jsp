@@ -1,5 +1,5 @@
 <%@page import="kr.co.jboard1.dao.UserDAO"%>
-<%@page import="kr.co.jboard1.vo.TermsVO"%>
+<%@page import="kr.co.jboard1.dto.TermsDTO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -8,7 +8,7 @@
 <%@page import="javax.naming.Context"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	TermsVO vo = UserDAO.getInstance().selectTerms();
+TermsDTO vo = UserDAO.getInstance().selectTerms();
 %>
 <!DOCTYPE html>
 <html lang="en">

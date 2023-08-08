@@ -31,6 +31,13 @@ public class SQL {
 												+ "`regip`=?,"
 												+ "`rdate`=NOW()";
 	
+	public final static String SELECT_ARTICLE = "SELECT "
+												+ "a.*, "
+												+ "b.`nick` "
+												+ "FROM `Article` AS a "
+												+ "JOIN `User` AS b "
+												+ "ON a.writer = b.uid WHERE `no`=?;";
+	
 	public final static String SELECT_ARTICLES = "SELECT "
 												+ "a.*, "
 												+ "b.`nick` "

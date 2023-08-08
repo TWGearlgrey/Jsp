@@ -1,6 +1,6 @@
-<%@page import="kr.co.jboard1.vo.ArticleVO"%>
+<%@page import="kr.co.jboard1.dto.ArticleDTO"%>
 <%@page import="kr.co.jboard1.dao.ArticleDAO"%>
-<%@page import="kr.co.jboard1.vo.UserVO"%>
+<%@page import="kr.co.jboard1.dto.UserDTO"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="kr.co.jboard1.db.SQL"%>
 <%@page import="java.sql.Connection"%>
@@ -9,7 +9,7 @@
 <%@page import="javax.naming.Context"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	//// 흐름 : list -> write -> writeProc -> DB전달/ -> list
+//// 흐름 : list -> write -> writeProc -> DB전달/ -> list
 	
 	// 전송 데이터 수신
 	request.setCharacterEncoding("UTF-8");
@@ -19,7 +19,7 @@
 	String writer  = request.getParameter("writer");
 	String regip   = request.getRemoteAddr();
 	
-	ArticleVO vo = new ArticleVO();
+	ArticleDTO vo = new ArticleDTO();
 	vo.setTitle(title);
 	vo.setContent(content);
 	vo.setWriter(writer);
