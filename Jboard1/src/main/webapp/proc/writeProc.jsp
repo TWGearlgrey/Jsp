@@ -19,15 +19,15 @@
 	String writer  = request.getParameter("writer");
 	String regip   = request.getRemoteAddr();
 	
-	ArticleDTO vo = new ArticleDTO();
-	vo.setTitle(title);
-	vo.setContent(content);
-	vo.setWriter(writer);
-	vo.setRegip(regip);
+	ArticleDTO dto = new ArticleDTO();
+	dto.setTitle(title);
+	dto.setContent(content);
+	dto.setWriter(writer);
+	dto.setRegip(regip);
 	
 	// 데이터베이스 처리
 	ArticleDAO dao = new ArticleDAO();
-	dao.insertArticle(vo);
+	dao.insertArticle(dto);
 	
 	// 리다이렉트
 	response.sendRedirect("/Jboard1/list.jsp");
