@@ -17,6 +17,35 @@
 %>
 <script>
 	$(function(){
+		// 댓글 수정
+		$('.mod').click(function(e){
+			e.preventDefault();
+			
+			const txt = $(this).text();
+			if(txt == '수정') {
+				$(this).parent().prev().addClass('modi');
+				$(this).parent().prev().attr('readonly', false);
+				$(this).parent().prev().focus();
+				$(this).text('수정완료');
+				$(this).prev().show();
+			}else {
+				// 수정완료
+				
+				
+				// 수정 데이터 전송
+				//$(this).parent().parent().submit();
+				$(this).closest('form').submit();
+				
+				// 수정 모드 해제
+				$(this).parent().prev().removeClass('modi');
+				$(this).parent().prev().attr('readonly', true);
+				$(this).text('수정');
+				$(this).prev().hide();
+				
+			}
+		});
+		
+		// 댓글 삭제 알림
 		$('.del').click(function(){
 			
 			const result = confirm('정말 삭제 하시겠습니까?');
@@ -28,17 +57,23 @@
 			}
 		});
 		
-		$('.rpt').click(function(){
-			
-			const result = confirm('정말 신고 하시겠습니까?');
-			
-			if(result == true){
-				alert('신고되었습니다!');
-				return false;
-			}else{
+		// 댓글 쓰기 취소
+		const commentContent = document.querySelector('form > textarea[name=content]');
+		const btnCancel = document.querySelector('.btnCancel');
+		btnCancel.onclick = function(e){
+			e.preventDefault();
+			commentContent.value = '';
+		}
+		
+		// 원글 삭제 알림
+		const btnDelete = document.getElementsByClassName('btnDelete')[0];
+		btnDelete.onclick = function(){
+			if(confirm('정말 삭제 하시겠습니까?')){
+				return true;
+			}else {
 				return false;
 			}
-		});
+		}
 	});
 </script>
 <main>
@@ -66,8 +101,10 @@
             </tr>
         </table>
         <div>
-            <a href="#" class="btnDelete">삭제</a>
-            <a href="#" class="btnModify">수정</a>
+        	<% if(sessUser.getUid().equals(dto.getWriter())) { %>
+            <a href="/Jboard1/delete.jsp?no=<%= no %>" class="btnDelete">삭제</a>
+            <a href="/Jboard1/modify.jsp?no=<%= no %>" class="btnModify">수정</a>
+            <% } %>
             <a href="/Jboard1/list.jsp" class="btnList">목록</a>
         </div>  
         
@@ -76,22 +113,21 @@
             <h3>댓글목록</h3>
             <% for(ArticleDTO comment : comments){ %>
             <article class="comment">
-                <span>
-                    <span><%= comment.getNick() %></span>
-                    <span><%= comment.getRdate() %></span>
-                </span>
-                <textarea name="comment" readonly><%= comment.getContent() %></textarea>
-                
-                <% if(sessUser.getUid().equals(comment.getWriter())){ %>
-                <div>
-                    <a href="/Jboard1/proc/commentDelete.jsp?no=<%= comment.getNo() %>&parent=<%= comment.getParent() %>" class="del">삭제</a>
-                    <a href="#" class="mod">수정</a>
-                </div>
-                <% }else { %>
-                <div>
-                    <a href="#" class="rpt">신고</a>
-                </div>
-                <% } %>
+            	<form action="/Jboard1/proc/commentUpdate.jsp" method="post">
+	                <span>
+	                    <span><%= comment.getNick() %></span>
+	                    <span><%= comment.getRdate() %></span>
+	                </span>
+	                <textarea name="comment" readonly><%= comment.getContent() %></textarea>
+	                
+	                <% if(sessUser.getUid().equals(comment.getWriter())){ %>
+	                <div>
+	                    <a href="/Jboard1/proc/commentDelete.jsp?no=<%= comment.getNo() %>&parent=<%= comment.getParent() %>" class="del">삭제</a>
+	                    <a href="#" class="can">취소</a>
+	                    <a href="#" class="mod">수정</a>
+	                </div>
+	                <% } %>
+                </form>
             </article>
             <% } %>
             

@@ -32,6 +32,9 @@ public class ArticleDTO {
 	public void setNo(int no) {
 		this.no = no;
 	}
+	public void setNo(String no) {
+		this.no = Integer.parseInt(no);
+	}
 	
 	public int getParent() {
 		return parent;
@@ -76,6 +79,9 @@ public class ArticleDTO {
 	}
 	public void setFile(int file) {
 		this.file = file;
+	}
+	public void setFile(String file) {
+		this.file = Integer.parseInt(file);
 	}
 	
 	public int getHit() {
