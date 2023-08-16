@@ -102,7 +102,7 @@ public class UserDTO {
 	public String getLeaveDate() {
 		return leaveDate;
 	}
-	public void setLeaveDate(String leaveData) {
-		this.leaveDate = leaveData;
+	public void setLeaveDate(String leaveDate) {
+		this.leaveDate = leaveDate;
 	}
 }

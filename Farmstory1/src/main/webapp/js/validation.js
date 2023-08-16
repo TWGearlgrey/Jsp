@@ -49,16 +49,16 @@ $(function(){
 	});
 	
 	// 이름 검사
-	$('input[name=name]').focustout(function(){
+	$('input[name=name]').focusout(function(){
+		
 		const name = $(this).val();
 		
-		if(name.match(reName)) {
+		if(name.match(reName)){
 			$('.resultName').text('');
 			isNameOk = true;
-			
-		}else {
+		}else{
 			$('.resultName').css('color', 'red').text('유효한 이름이 아닙니다.');
-			isNameOk = false;
+			isNameOk = false;					
 		}
 	});
 	

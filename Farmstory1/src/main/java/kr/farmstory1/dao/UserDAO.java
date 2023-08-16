@@ -36,7 +36,6 @@ public class UserDAO extends DBHelper {
 			e.printStackTrace();
 		}
 	}
-	
 	public UserDTO selectUser(String uid, String pass) {
 		
 		UserDTO user = null;
@@ -72,28 +71,9 @@ public class UserDAO extends DBHelper {
 		
 		return user;
 	}
-	
-	public TermsDTO selectTemrs() {
-		TermsDTO dto = new TermsDTO();
-		
-		try {
-			conn = getConnection();
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(SQL.SELECT_TERMS);
-			
-			if(rs.next()) {
-				dto.setTerms(rs.getString(1));
-				dto.setPrivacy(rs.getString(2));
-			}
-			
-			close();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return dto;
-	}
+	public void selectUsers() {}
+	public void updateUser() {}
+	public void deleteUser() {}
 	
 	// uid, nick, hp, email 체크 메서드
 	public int selectCountUid(String uid) {
@@ -118,7 +98,6 @@ public class UserDAO extends DBHelper {
 		
 		return result;
 	}
-	
 	public int selectCountNick(String nick) {
 		
 		int result = 0;
@@ -141,7 +120,6 @@ public class UserDAO extends DBHelper {
 
 		return result;
 	}
-	
 	public int selectCountHp(String hp) {
 
 		int result = 0;
@@ -164,7 +142,6 @@ public class UserDAO extends DBHelper {
 		
 		return result;
 	}
-	
 	public int selectCountEmail(String email) {
 
 		int result = 0;
@@ -185,5 +162,26 @@ public class UserDAO extends DBHelper {
 			e.printStackTrace();
 		}
 		return result;
+	}
+	public TermsDTO selectTemrs() {
+		TermsDTO dto = new TermsDTO();
+		
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_TERMS);
+			
+			if(rs.next()) {
+				dto.setTerms(rs.getString(1));
+				dto.setPrivacy(rs.getString(2));
+			}
+			
+			close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 }
