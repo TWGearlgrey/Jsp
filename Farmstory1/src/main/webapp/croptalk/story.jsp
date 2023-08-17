@@ -22,8 +22,73 @@
             </nav>
 
             <!-- 내용 시작 -->
-            <img src="../images/board_list.png" alt="">
-
+			
+			<!-- 게시물 목록  -->
+			<%-- 
+		    <section class="list">
+		        <h3>글목록</h3>
+		        <article>
+		            <table border="0">
+		                <tr>
+		                    <th>번호</th>
+		                    <th>제목</th>
+		                    <th>글쓴이</th>
+		                    <th>날짜</th>
+		                    <th>조회</th>
+		                </tr>
+		                
+		                <tr>
+		                    <td>pageStartNum</td>
+		                    <td><a href="#">Title</a>&nbsp;[3]</td>
+		                    <td>Nick</td>
+		                    <td>Rdate</td>
+		                    <td>Hit</td> 
+		                </tr>
+		            </table>
+		        </article>
+		
+		        <!-- 페이지 네비게이션 -->
+		        <div class="paging">
+		            <a href="#" class="prev">이전</a>
+		            <a href="#" class="num current">1</a>
+		            <a href="#" class="next">다음</a>
+		        </div>
+		
+		        <!-- 글쓰기 버튼 -->
+		        <a href="/Jboard1/write.jsp" class="btnWrite">글쓰기</a>
+    		</section>
+			--%>
+			
+		    <section class="write">
+		        <h3>글쓰기</h3>
+		        <article>
+		            <form action="#" method="post">
+		            	<input type="hidden" name="writer" readonly value="">
+		                <table>
+		                    <tr>
+		                        <td>제목</td>
+		                        <td><input type="text" name="title" required placeholder="제목을 입력하세요."/></td>
+		                    </tr>
+		                    <tr>
+		                        <td>내용</td>
+		                        <td>
+		                            <textarea name="content" required></textarea>                                
+		                        </td>
+		                    </tr>
+		                    <tr>
+		                        <td>첨부</td>
+		                        <td><input type="file" name="file"/></td>
+		                    </tr>
+		                </table>
+		                <div>
+		                    <a href="#" class="btnCancel">취소</a>
+		                    <input type="submit"  class="btnWrite" value="작성완료">
+		                </div>
+		            </form>
+		        </article>
+    		</section>
+			
+			
             <!-- 내용 끝 -->
 
         </article>
