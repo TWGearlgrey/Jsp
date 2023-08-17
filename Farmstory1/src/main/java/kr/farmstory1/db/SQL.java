@@ -38,7 +38,9 @@ public class SQL {
 												+ "`regip`=?, "
 												+ "`rdate`=NOW()";
 	
-	public static final String SELECT_ARTILCE = "SELECT "
+	public static final String SELECT_ARTICLE = "SELECT * FROM `Article` WHERE `no`=?";
+	
+	public static final String SELECT_ARTILCES = "SELECT "
 												+ "a.*, "
 												+ "b.`nick` "
 												+ "FROM `Article` AS a "

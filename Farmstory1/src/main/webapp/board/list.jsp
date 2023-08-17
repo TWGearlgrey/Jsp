@@ -73,7 +73,7 @@
 			            <% for(ArticleDTO article : articles){ %>
 			            <tr>
 			                <td><%= pageStartNum-- %></td>
-			                <td><a href="./view.jsp?group=<%= group %>&cate=<%= cate %>"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
+			                <td><a href="./view.jsp?group=<%= group %>&cate=<%= cate %>&no=<%= article.getNo() %>"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
 			                <td><%= article.getNick() %></td>
 			                <td><%= article.getRdate() %></td>
 			                <td><%= article.getHit() %></td> 
