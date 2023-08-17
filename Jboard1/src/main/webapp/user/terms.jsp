@@ -72,7 +72,7 @@ TermsDTO vo = UserDAO.getInstance().selectTerms();
                     </tr>
                 </table>
                 <div>
-                    <a href="#" class="btnCancel">취소</a>
+                    <a href="/Jboard1/user/login.jsp" class="btnCancel">취소</a>
                     <a href="#" class="btnNext">다음</a>
                 </div>
             </section>

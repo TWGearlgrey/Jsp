@@ -1,3 +1,4 @@
+<%@page import="kr.co.jboard1.dao.UserDAO"%>
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -10,7 +11,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String hp = request.getParameter("hp");
 	
-	int result = 0;
+	int result = UserDAO.getInstance().selectCountHp(hp);
 	
 	// JSON 생성
 	JsonObject json = new JsonObject();
