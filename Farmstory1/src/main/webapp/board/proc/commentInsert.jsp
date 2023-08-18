@@ -17,7 +17,12 @@
 	dto.setRegip(regip);
 	
 	ArticleDAO dao = new ArticleDAO();
+	
+	// 댓글 입력
 	dao.insertComment(dto);
+	
+	// 댓글 카운트 수정
+	dao.insertCommentCount(parent);
 	
 	response.sendRedirect("/Farmstory1/board/view.jsp?group="+group+"&cate="+cate+"&no="+parent);
 %>

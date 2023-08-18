@@ -47,6 +47,10 @@ public class SQL {
 	
 	public final static String UPDATE_ARTICLE = "UPDATE `Article` SET `title`=?, `content`=? WHERE `no`=?";
 	
+	public static final String SELECT_LATESTS = "SELECT `no`, `title`, `rdate` FROM `Article` "
+												+ "WHERE `parent`=0 AND `cate`=? "
+												+ "ORDER BY `no` DESC LIMIT ?;";
+	
 	public static final String SELECT_ARTICLE = "SELECT * FROM `Article` WHERE `no`=?";
 	
 	public static final String SELECT_ARTILCES = "SELECT "
@@ -66,5 +70,12 @@ public class SQL {
 												+ "ON a.writer = b.uid "
 												+ "WHERE `parent`=?";
 	
+	public static final String DELETE_ARTICLE = "DELETE FROM `Article` WHERE `no`=? OR `parent`=?";
+	public static final String DELETE_COMMENT = "DELETE FROM `Article` WHERE `no`=?";
+	
+	// 추가
 	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0 AND `cate`=?";
+	
+	public final static String INSERT_COMMENT_COUNT = "UPDATE `Article` SET `comment` = `comment` + 1 WHERE `no`=?";
+	public final static String DELETE_COMMENT_COUNT = "UPDATE `Article` SET `comment` = `comment` - 1 WHERE `no`=?";
 }

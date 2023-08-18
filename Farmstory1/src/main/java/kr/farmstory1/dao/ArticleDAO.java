@@ -158,7 +158,56 @@ public class ArticleDAO extends DBHelper {
 		}
 	}
 	
+	public void deleteArticle(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			psmt.setString(2, no);
+			psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteComment(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_COMMENT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	// 추가
+	public List<ArticleDTO> selectLatests(String cate, int size) {
+		List<ArticleDTO> latests = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_LATESTS);
+			psmt.setString(1, cate);
+			psmt.setInt(2, size);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleDTO dto = new ArticleDTO();
+				dto.setNo(rs.getInt("no"));
+				dto.setTitle(rs.getString("title"));
+				dto.setRdate(rs.getString("rdate"));
+				latests.add(dto);
+			}
+			close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return latests;
+	}
+	
 	public int selectCountTotal(String cate) {
 		
 		int total = 0;
@@ -179,5 +228,29 @@ public class ArticleDAO extends DBHelper {
 		}
 		
 		return total;
+	}
+
+	public void insertCommentCount(String parent) {
+		try {
+			conn =getConnection();
+			psmt = conn.prepareStatement(SQL.INSERT_COMMENT_COUNT);
+			psmt.setString(1, parent);
+			psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteCommentCount(String parent) {
+		try {
+			conn=getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_COMMENT_COUNT);
+			psmt.setString(1, parent);
+			psmt.executeUpdate();
+			close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
