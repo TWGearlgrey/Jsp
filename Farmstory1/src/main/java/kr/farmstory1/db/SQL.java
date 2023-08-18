@@ -45,6 +45,8 @@ public class SQL {
 												+ "`regip`=?,"
 												+ "`rdate`=NOW()";
 	
+	public final static String UPDATE_ARTICLE = "UPDATE `Article` SET `title`=?, `content`=? WHERE `no`=?";
+	
 	public static final String SELECT_ARTICLE = "SELECT * FROM `Article` WHERE `no`=?";
 	
 	public static final String SELECT_ARTILCES = "SELECT "
