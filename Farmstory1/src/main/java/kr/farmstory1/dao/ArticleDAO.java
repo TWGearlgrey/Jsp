@@ -27,6 +27,21 @@ public class ArticleDAO extends DBHelper {
 		}
 	}
 	
+	public void insertComment(ArticleDTO dto) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.INSERT_COMMENT);
+			psmt.setInt(1, dto.getParent());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getWriter());
+			psmt.setString(4, dto.getRegip());
+			psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public ArticleDTO selectArticle(String no) {
 		
 		ArticleDTO dto = null;
@@ -93,6 +108,40 @@ public class ArticleDAO extends DBHelper {
 			e.printStackTrace();
 		}
 		return articles;
+	}
+	
+	public List<ArticleDTO> selectComments(String no) {
+		
+		List<ArticleDTO> comments = new ArrayList<ArticleDTO>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COMMENTS);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleDTO dto = new ArticleDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setParent(rs.getInt(2));
+				dto.setComment(rs.getInt(3));
+				dto.setCate(rs.getString(4));
+				dto.setTitle(rs.getString(5));
+				dto.setContent(rs.getString(6));
+				dto.setFile(rs.getInt(7));
+				dto.setHit(rs.getInt(8));
+				dto.setWriter(rs.getString(9));
+				dto.setRegip(rs.getString(10));
+				dto.setRdate(rs.getString(11));
+				dto.setNick(rs.getString(12));
+				comments.add(dto);
+			}
+			close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return comments;
 	}
 	
 	

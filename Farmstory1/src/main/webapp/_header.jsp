@@ -1,6 +1,9 @@
 <%@page import="kr.farmstory1.dto.UserDTO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+	request.setCharacterEncoding("UTF-8");
+	String success = request.getParameter("success");
+	
 	UserDTO sessUser = (UserDTO) session.getAttribute("sessUser");
 %>
 <!DOCTYPE html>
@@ -16,6 +19,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>    
     <script>
+    	const success = <%= success %>;
+    	if(success == 100){
+    		alert('로그인이 실패했습니다. 아이디 또는 비밀번호를 다시 확인하시기 바랍니다.');
+    	}else if(success == 101) {
+    		alert('로그인을 먼저 하셔야 합니다.');
+    	}
+    	
+    
+    
         $(function(){
             $('.slider > ul').bxSlider({
                 slideWidth: 980,
@@ -38,7 +50,7 @@
                 
                 <% if(sessUser == null){ %>
                 <a href="/Farmstory1/user/login.jsp">로그인 |</a>
-                <a href="/Farmstory1/user/register.jsp">회원가입 |</a>
+                <a href="/Farmstory1/user/terms.jsp">회원가입 |</a>
                 <% }else { %>
                 <a href="/Farmstory1/user/logout.jsp">로그아웃 |</a>
                 	<% if(!sessUser.getRole().equals("USER")){ %>

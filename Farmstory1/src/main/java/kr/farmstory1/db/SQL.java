@@ -38,6 +38,13 @@ public class SQL {
 												+ "`regip`=?, "
 												+ "`rdate`=NOW()";
 	
+	public final static String INSERT_COMMENT = "INSERT INTO `Article` SET "
+												+ "`parent`=?, "
+												+ "`content`=?,"
+												+ "`writer`=?,"
+												+ "`regip`=?,"
+												+ "`rdate`=NOW()";
+	
 	public static final String SELECT_ARTICLE = "SELECT * FROM `Article` WHERE `no`=?";
 	
 	public static final String SELECT_ARTILCES = "SELECT "
@@ -48,6 +55,14 @@ public class SQL {
 												+ "WHERE `parent`=0 AND `cate`=? "
 												+ "ORDER BY `no` DESC "
 												+ "LIMIT ?, 10";
+	
+	public static final String SELECT_COMMENTS = "SELECT "
+												+ "a.*, "
+												+ "b.`nick` "
+												+ "FROM `Article` AS a "
+												+ "JOIN `User` AS b "
+												+ "ON a.writer = b.uid "
+												+ "WHERE `parent`=?";
 	
 	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0 AND `cate`=?";
 }

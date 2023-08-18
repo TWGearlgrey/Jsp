@@ -89,7 +89,7 @@
 			        <% } %>
 			        
 			        <% for(int i=pageGroupStart ; i<=pageGroupEnd ; i++) { %>
-			        <a href="./list.jsp?group=<%= group %>&cate=<%= cate %>&pg=<%= i %>" class="num <%= (currentPage == i)?"current":"" %>">1</a>
+			        <a href="./list.jsp?group=<%= group %>&cate=<%= cate %>&pg=<%= i %>" class="num <%= (currentPage == i)?"current":"" %>"><%= i %></a>
 			        <% } %>
 			        
 			        <% if(pageGroupEnd < lastPageNum) { %>
