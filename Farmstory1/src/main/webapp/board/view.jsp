@@ -46,6 +46,19 @@
 				return false;
 			}
 		});
+		<%--
+		// 댓글 수정 
+		$('.mod').click(function(e){
+			e.preventDefault();
+			
+			const txt = $(this).text();
+			it(txt == '수정') {
+				// 수정모드 전환
+				$(this).parent().prev().addClass('modi');
+				$(this).parent().prev().attr('readonly', false);
+			}
+		})
+		--%>
 	});
 	
 	

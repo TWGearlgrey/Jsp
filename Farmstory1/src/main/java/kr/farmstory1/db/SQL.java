@@ -78,4 +78,21 @@ public class SQL {
 	
 	public final static String INSERT_COMMENT_COUNT = "UPDATE `Article` SET `comment` = `comment` + 1 WHERE `no`=?";
 	public final static String DELETE_COMMENT_COUNT = "UPDATE `Article` SET `comment` = `comment` - 1 WHERE `no`=?";
+	
+	
+	////////////////////////////////////////////////////////
+	// Product					////////////////////////////
+	////////////////////////////////////////////////////////
+	public final static String INSERT_PRODUCT ="INSERT INTO `Product` SET "
+												+ "`type`=?, "
+												+ "`pName`=?, "
+												+ "`price`=?, "
+												+ "`delivery`=?, "
+												+ "`stock`=?, "
+												+ "`thumb1`=?, "
+												+ "`thumb2`=?, "
+												+ "`thumb3`=?, "
+												+ "`seller`=?, "
+												+ "`etc`=?, "
+												+ "`rdate`=NOW()";
 }
