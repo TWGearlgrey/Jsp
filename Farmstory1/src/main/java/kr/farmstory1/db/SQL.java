@@ -12,7 +12,7 @@ public class SQL {
 											+ "`nick`=?, "
 											+ "`email`=?, "
 											+ "`hp`=?, "
-											+ "`zip`=?, "
+											+ "`zip`=?, " 
 											+ "`addr1`=?, "
 											+ "`addr2`=?, "
 											+ "`regip`=?, "
@@ -96,10 +96,35 @@ public class SQL {
 												+ "`etc`=?, "
 												+ "`rdate`=NOW()";
 	
+	public final static String SELECT_PRODUCT = "SELECT * FROM `Product` WHERE `pNo`=?";
+	
 	public final static String SELECT_PRODUCTS_ALL = "SELECT * FROM `Product` WHERE `stock` > 0 LIMIT ?, 10";
 	public final static String SELECT_PRODUCTS_TYPE = "SELECT * FROM `Product` WHERE `stock` > 0 AND `type`=? LIMIT ?, 10";
 	public final static String SELECT_COUNT_PRODUCTS_ALL = "SELECT COUNT(*) FROM `Product` WHERE `stock` > 0";
 	public final static String SELECT_COUNT_PRODUCTS_TYPE = "SELECT COUNT(*) FROM `Product` WHERE `stock` > 0 AND `type`=?";
 	
+	
+	////////////////////////////////////////////////////////
+	// Order					////////////////////////////
+	////////////////////////////////////////////////////////
+	public final static String INSERT_ORDER = "INSERT INTO `Order` SET "
+												+ "`orderProduct`=?, "
+												+ "`orderCount`=?, "
+												+ "`orderDelivery`=?, "
+												+ "`orderPrice`=?, "
+												+ "`orderTotal`=?, "
+												+ "`receiver`=?, "
+												+ "`hp`=?, "
+												+ "`zip`=?, "
+												+ "`addr1`=?, "
+												+ "`addr2`=?, "
+												+ "`orderEtc`=?, "
+												+ "`orderUser`=?, "
+												+ "`orderDate`=NOW()";
+	
+	public final static String SELECT_ORDER = "";
+	public final static String SELECT_ORDERS = "";
+	public final static String UPDATE_ORDER = "";
+	public final static String DELETE_ORDER = "";
 	
 }

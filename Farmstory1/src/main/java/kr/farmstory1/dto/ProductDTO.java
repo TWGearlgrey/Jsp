@@ -68,7 +68,7 @@ public class ProductDTO {
 	public int getPrice() {
 		return price;
 	}
-	public String  getPriceWithComma() {
+	public String getPriceWithComma() {
 		DecimalFormat df = new DecimalFormat("###,###");
 		return df.format(price);
 	}
@@ -118,7 +118,7 @@ public class ProductDTO {
 		return thumb1;
 	}
 	public void setThumb1(String thumb1) {
-		this.thumb1 = fileRename(thumb1);
+		this.thumb1 = thumb1;
 	}
 	public void setThumb1ForRename(String thumb1) {
 		this.thumb1 = fileRename(thumb1);
@@ -130,7 +130,7 @@ public class ProductDTO {
 		return thumb2;
 	}
 	public void setThumb2(String thumb2) {
-		this.thumb2 = fileRename(thumb2);
+		this.thumb2 = thumb2;
 	}
 	public void setThumb2ForRename(String thumb2) {
 		this.thumb2 = fileRename(thumb2);
@@ -142,7 +142,7 @@ public class ProductDTO {
 		return thumb3;
 	}
 	public void setThumb3(String thumb3) {
-		this.thumb3 = fileRename(thumb3);
+		this.thumb3 = thumb3;
 	}
 	public void setThumb3ForRename(String thumb3) {
 		this.thumb3 = fileRename(thumb3);
