@@ -71,7 +71,7 @@
 			e.preventDefault();
 			
 			$('#formCheck').submit();
-		})
+		});
 	});
 </script>
 <main>
