@@ -2,9 +2,7 @@ package kr.farmstory1.db;
 
 public class SQL {
 	
-	////////////////////////////////////////////////////////
-	// User						////////////////////////////
-	////////////////////////////////////////////////////////
+	// ━━━━┫ User    ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	public static final String INSERT_USER = "INSERT INTO `User` SET "
 											+ "`uid`=?, "
 											+ "`pass`=SHA2(?, 256)," 
@@ -24,12 +22,9 @@ public class SQL {
 	public static final String SELECT_COUNT_EMAIL = "SELECT COUNT(*) FROM `User` WHERE `email`=?";
 	public static final String SELECT_COUNT_HP    = "SELECT COUNT(*) FROM `User` WHERE `hp`=?";
 	public static final String SELECT_TERMS = "SELECT * FROM `Terms`";
+	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛	
 	
-	
-	
-	////////////////////////////////////////////////////////
-	// Article					////////////////////////////
-	////////////////////////////////////////////////////////
+	// ━━━━┫ Article ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓	
 	public static final String INSERT_ARTICLE = "INSERT INTO `Article` SET "
 												+ "`cate`=?, "
 												+ "`title`=?, "
@@ -78,11 +73,9 @@ public class SQL {
 	
 	public final static String INSERT_COMMENT_COUNT = "UPDATE `Article` SET `comment` = `comment` + 1 WHERE `no`=?";
 	public final static String DELETE_COMMENT_COUNT = "UPDATE `Article` SET `comment` = `comment` - 1 WHERE `no`=?";
+	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛	
 	
-	
-	////////////////////////////////////////////////////////
-	// Product					////////////////////////////
-	////////////////////////////////////////////////////////
+	// ━━━━┫ Product ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	public final static String INSERT_PRODUCT ="INSERT INTO `Product` SET "
 												+ "`type`=?, "
 												+ "`pName`=?, "
@@ -104,9 +97,7 @@ public class SQL {
 	public final static String SELECT_COUNT_PRODUCTS_TYPE = "SELECT COUNT(*) FROM `Product` WHERE `stock` > 0 AND `type`=?";
 	
 	
-	////////////////////////////////////////////////////////
-	// Order					////////////////////////////
-	////////////////////////////////////////////////////////
+	// ━━━━┫ Order   ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	public final static String INSERT_ORDER = "INSERT INTO `Order` SET "
 												+ "`orderProduct`=?, "
 												+ "`orderCount`=?, "
@@ -123,8 +114,10 @@ public class SQL {
 												+ "`orderDate`=NOW()";
 	
 	public final static String SELECT_ORDER = "";
-	public final static String SELECT_ORDERS = "";
+	public final static String SELECT_ORDERS ="SELECT a.*, b.pName, c.name, b.thumb1 FROM `Order` AS a JOIN `Product` AS b ON a.orderProduct = b.pNo JOIN `User` AS c ON a.orderUser = c.uid ORDER BY `orderNo` LIMIT ?, 10";
 	public final static String UPDATE_ORDER = "";
-	public final static String DELETE_ORDER = "";
+	public final static String DELETE_ORDER = "DELETE FROM `Order` WHERE `orderNo`=?";
 	
+	public final static String SELECT_COUNT_ORDERS_ALL = "SELECT COUNT(*) FROM `Order`";
+	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛	
 }

@@ -47,7 +47,6 @@
 	}
 	
 	List<ProductDTO> products = dao.selectProducts(start);
-
 %>
 <main>
     <%@ include file="./_aside.jsp" %>

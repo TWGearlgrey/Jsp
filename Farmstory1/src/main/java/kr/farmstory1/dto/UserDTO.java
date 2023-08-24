@@ -15,12 +15,16 @@ public class UserDTO {
 	private String regDate;
 	private String leaveDate;
 	
+	// ───────────────────────────────────────────────────────┐
+	
 	public String getUid() {
 		return uid;
 	}
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
+	
+	// ───────────────────────────────────────────────────────┤
 	
 	public String getPass() {
 		return pass;
@@ -29,12 +33,16 @@ public class UserDTO {
 		this.pass = pass;
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	// ───────────────────────────────────────────────────────┤
 	
 	public String getNick() {
 		return nick;
@@ -43,12 +51,16 @@ public class UserDTO {
 		this.nick = nick;
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	// ───────────────────────────────────────────────────────┤
 	
 	public String getHp() {
 		return hp;
@@ -57,12 +69,16 @@ public class UserDTO {
 		this.hp = hp;
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public String getRole() {
 		return role;
 	}
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	// ───────────────────────────────────────────────────────┤
 	
 	public String getZip() {
 		return zip;
@@ -71,12 +87,16 @@ public class UserDTO {
 		this.zip = zip;
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public String getAddr1() {
 		return addr1;
 	}
 	public void setAddr1(String addr1) {
 		this.addr1 = addr1;
 	}
+	
+	// ───────────────────────────────────────────────────────┤
 	
 	public String getAddr2() {
 		return addr2;
@@ -85,12 +105,16 @@ public class UserDTO {
 		this.addr2 = addr2;
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public String getRegip() {
 		return regip;
 	}
 	public void setRegip(String regip) {
 		this.regip = regip;
 	}
+	
+	// ───────────────────────────────────────────────────────┤
 	
 	public String getRegDate() {
 		return regDate;
@@ -99,10 +123,14 @@ public class UserDTO {
 		this.regDate = regDate;
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public String getLeaveDate() {
 		return leaveDate;
 	}
 	public void setLeaveDate(String leaveDate) {
 		this.leaveDate = leaveDate;
 	}
+	
+	// ───────────────────────────────────────────────────────┘
 }

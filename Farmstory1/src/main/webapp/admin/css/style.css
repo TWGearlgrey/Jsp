@@ -115,6 +115,15 @@ main > section > article table tr > td {
     text-align: center;
 }
 
+main > section > article table tr > td:nth-child(3) {
+    display: block;
+    width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 32px;
+}
+
 /* 푸터영역 */
 footer {
     width: 100%;
@@ -231,6 +240,10 @@ footer > p {
     text-decoration: underline;
 }
 
+#orderList .hidden { 
+	display: none; 
+}
+
 #orderPopup {
     position: absolute;
     left: 0;
@@ -292,6 +305,11 @@ footer > p {
 
 #orderPopup > section > article > table tr {
     border-bottom: 1px dotted #999;
+}
+
+#orderPopup .thumb > img {
+	width: 120px;
+	height: 120px;
 }
 
 #orderPopup .btnClose {

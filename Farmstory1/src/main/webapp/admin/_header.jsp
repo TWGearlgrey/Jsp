@@ -25,7 +25,7 @@
 <body>
     <div id="container">
         <header>
-            <a href="./index.html" class="logo"><img src="./images/admin_logo.jpg" alt="로고"/></a>
+            <a href="./index.jsp" class="logo"><img src="./images/admin_logo.jpg" alt="로고"/></a>
             <p>
                 <a href="/Farmstory1">HOME |</a>
                 <a href="#">로그아웃 |</a>

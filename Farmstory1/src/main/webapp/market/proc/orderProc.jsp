@@ -4,34 +4,34 @@
 <%
 	// 전송 데이터 수신
 	request.setCharacterEncoding("UTF-8");
-	String pNo      = request.getParameter("pNo");
-	String count    = request.getParameter("count");
-	String delivery = request.getParameter("delivery");
-	String price    = request.getParameter("price");
-	String total    = request.getParameter("final");
-	String uid      = request.getParameter("uid");
+	String orderProduct  = request.getParameter("orderProduct");
+	String orderCount    = request.getParameter("orderCount");
+	String orderDelivery = request.getParameter("orderDelivery");
+	String orderPrice    = request.getParameter("orderPrice");
+	String orderTotal    = request.getParameter("orderTotal");
+	String orderUser     = request.getParameter("orderUser");
 	
-	String buyer = request.getParameter("buyer");
-	String hp    = request.getParameter("hp");
-	String zip   = request.getParameter("zip");
-	String addr1 = request.getParameter("addr1");
-	String addr2 = request.getParameter("addr2");
-	String etc   = request.getParameter("etc");
+	String receiver = request.getParameter("receiver");
+	String hp       = request.getParameter("hp");
+	String zip      = request.getParameter("zip");
+	String addr1    = request.getParameter("addr1");
+	String addr2    = request.getParameter("addr2");
+	String etc      = request.getParameter("etc");
 
 	// dto 생성
 	OrderDTO dto = new OrderDTO();
-	dto.setOrderProduct(pNo);
-	dto.setOrderCount(count);
-	dto.setOrderDelivery(delivery);
-	dto.setOrderPrice(price);
-	dto.setOrderTotal(total);
-	dto.setReceiver(buyer);
+	dto.setOrderProduct(orderProduct);
+	dto.setOrderCount(orderCount);
+	dto.setOrderDelivery(orderDelivery);
+	dto.setOrderPrice(orderPrice);
+	dto.setOrderTotal(orderTotal);
+	dto.setReceiver(receiver);
 	dto.setHp(hp);
 	dto.setZip(zip);
 	dto.setAddr1(addr1);
 	dto.setAddr2(addr2);
 	dto.setOrderEtc(etc);
-	dto.setOrderUser(uid);
+	dto.setOrderUser(orderUser);
 
 	// 데이터 처리
 	OrderDAO dao = new OrderDAO();

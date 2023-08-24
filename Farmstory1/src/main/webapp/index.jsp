@@ -9,9 +9,9 @@
 	List<ArticleDTO> latests2 = dao.selectLatests("school", 5);
 	List<ArticleDTO> latests3 = dao.selectLatests("story",  5);
 
-	List<ArticleDTO> tabLatests1 = dao.selectLatests("notice",  3);
-	List<ArticleDTO> tabLatests2 = dao.selectLatests("qna",     3);
-	List<ArticleDTO> tabLatests3 = dao.selectLatests("faq",     3);
+	List<ArticleDTO> tabLatests1 = dao.selectLatests("notice", 3);
+	List<ArticleDTO> tabLatests2 = dao.selectLatests("qna",    3);
+	List<ArticleDTO> tabLatests3 = dao.selectLatests("faq",    3);
 %>
 <main>
     <div class="slider">

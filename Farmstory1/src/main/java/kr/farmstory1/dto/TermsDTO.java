@@ -4,6 +4,8 @@ public class TermsDTO {
 	private String terms;
 	private String privacy;
 	
+	// ───────────────────────────────────────────────────────┐
+	
 	public String getTerms() {
 		return terms;
 	}
@@ -11,10 +13,14 @@ public class TermsDTO {
 		this.terms = terms;
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public String getPrivacy() {
 		return privacy;
 	}
 	public void setPrivacy(String privacy) {
 		this.privacy = privacy;
 	}
+	
+	// ───────────────────────────────────────────────────────┘
 }

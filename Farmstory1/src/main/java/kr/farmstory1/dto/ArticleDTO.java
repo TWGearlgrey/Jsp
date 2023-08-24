@@ -13,7 +13,9 @@ public class ArticleDTO {
 	private String regip;
 	private String rdate;
 	
-	// 추가 필드
+	// ───────────────────────────────────────────────────────┐
+	
+	// 추가 필드 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	private String nick;
 	
 	public String getNick() {
@@ -24,7 +26,7 @@ public class ArticleDTO {
 		this.nick = nick;
 	}
 	
-	//////////////////////////////////
+	// 추가 필드 end... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	
 	public int getNo() {
 		return no;
@@ -36,6 +38,8 @@ public class ArticleDTO {
 		this.no = Integer.parseInt(no);
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public int getParent() {
 		return parent;
 	}
@@ -46,12 +50,16 @@ public class ArticleDTO {
 		this.parent = Integer.parseInt(parent);
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public int getComment() {
 		return comment;
 	}
 	public void setComment(int comment) {
 		this.comment = comment;
 	}
+	
+	// ───────────────────────────────────────────────────────┤
 	
 	public String getCate() {
 		return cate;
@@ -60,12 +68,16 @@ public class ArticleDTO {
 		this.cate = cate;
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	// ───────────────────────────────────────────────────────┤
 	
 	public String getContent() {
 		return content;
@@ -74,12 +86,16 @@ public class ArticleDTO {
 		this.content = content;
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public int getFile() {
 		return file;
 	}
 	public void setFile(int file) {
 		this.file = file;
 	}
+	
+	// ───────────────────────────────────────────────────────┤
 	
 	public int getHit() {
 		return hit;
@@ -88,6 +104,8 @@ public class ArticleDTO {
 		this.hit = hit;
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public String getWriter() {
 		return writer;
 	}
@@ -95,12 +113,16 @@ public class ArticleDTO {
 		this.writer = writer;
 	}
 	
+	// ───────────────────────────────────────────────────────┤
+	
 	public String getRegip() {
 		return regip;
 	}
 	public void setRegip(String regip) {
 		this.regip = regip;
 	}
+	
+	// ───────────────────────────────────────────────────────┤
 	
 	public String getRdate() {
 		return rdate.substring(2, 10);
@@ -111,5 +133,7 @@ public class ArticleDTO {
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
+	
+	// ───────────────────────────────────────────────────────┘
 	
 }

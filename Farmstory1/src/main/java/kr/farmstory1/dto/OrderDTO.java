@@ -16,7 +16,35 @@ public class OrderDTO {
 	private String orderDate;
 	private String orderEtc;
 	
-	// ───────────────────────────────────────────────────────┤
+	// ────추가필드─────────────────────────────────────────────┐
+	
+	private String pName;
+	private String name;
+	
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	private String thumb1;
+	
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	
+	// ───────────────────────────────────────────────────────┐
 	
 	public int getOrderNo() {
 		return orderNo;
@@ -97,6 +125,9 @@ public class OrderDTO {
 	// ───────────────────────────────────────────────────────┤
 	
 	public String getOrderDate() {
+		return orderDate.substring(2, 10);
+	}
+	public String getOrderFullDate() {
 		return orderDate;
 	}
 	public void setOrderDate(String orderDate) {
@@ -157,5 +188,5 @@ public class OrderDTO {
 		this.addr2 = addr2;
 	}
 
-	// ───────────────────────────────────────────────────────┤
+	// ───────────────────────────────────────────────────────┘
 }
