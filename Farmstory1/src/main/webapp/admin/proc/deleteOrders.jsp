@@ -6,8 +6,8 @@
 	
 	OrderDAO dao = new OrderDAO();
 	
-	for(String order : chks) {
-		dao.deleteOrder(order);
+	for(String orderNo : chks) {
+		dao.deleteOrder(orderNo);
 	}
 	
 	response.sendRedirect("../orderList.jsp");
