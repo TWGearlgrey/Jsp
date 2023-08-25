@@ -1,4 +1,4 @@
-package controller.user1;
+package controller.user3;
 
 import java.io.IOException;
 
@@ -12,49 +12,49 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dto.User1DTO;
-import service.User1Service;
+import dto.User3DTO;
+import service.User3Service;
 
-@WebServlet("/user1/register.do")
+@WebServlet("/user3/register.do")
 public class RegisterController extends HttpServlet {
 	
-	private static final long serialVersionUID = 5882551264173206241L;
-	private User1Service service = new User1Service();
+	private static final long serialVersionUID = 4539879348675934L;
+	private User3Service service = new User3Service();
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public void init() throws ServletException {
-		logger.info("user1::RegisterController init()...1");
+		logger.info("user3::DeleteController init()...1");
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("user1::RegisterController doGet()...1");
+		logger.info("user3::DeleteController doGet()...1");
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user1/register.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/user3/register.jsp");
 		dispatcher.forward(req, resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		logger.info("user1::RegisterController doPost()...1");
+		logger.info("user3::DeleteController doPost()...1");
 		
-		String uid 	= req.getParameter("uid");
+		String uid  = req.getParameter("uid");
 		String name = req.getParameter("name");
-		String hp 	= req.getParameter("hp");
-		String age 	= req.getParameter("age");
+		String hp   = req.getParameter("hp");
+		String age  = req.getParameter("age");
 		
-		User1DTO dto = new User1DTO();
+		User3DTO dto = new User3DTO();
 		dto.setUid(uid);
 		dto.setName(name);
 		dto.setHp(hp);
 		dto.setAge(age);
 		
-		service.insertUser1(dto);
+		service.insertUser3(dto);
 		
-		logger.info("user1::RegisterController doPost()...2 : " + dto);
+		logger.info("user3::RegisterController doPost()...2 : " + dto);
 		
-		resp.sendRedirect("/Ch10/user1/list.do");
+		resp.sendRedirect("/Ch10/user3/list.do");
 	}
 }

@@ -11,25 +11,21 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dto.User1DTO;
+import dto.User3DTO;
 
-public class User1DAO {
+public class User3DAO {
 	
 	private final String HOST = "jdbc:mysql://52.79.237.168:3306/UserDB";
 	private final String USER = "java";
 	private final String PASS = "!Q2w3e4r";
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	// ━┫ logger ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	private Logger logger = LoggerFactory.getLogger(this.getClass()); // ┃
-	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
-	
-	// ━┫기본 CRUD┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-	
-	public void insertUser1(User1DTO dto) {
+	public void insertUser3(User3DTO dto) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			PreparedStatement psmt = conn.prepareStatement("INSERT INTO `User1` VALUES (?, ?, ?, ?);");
+			PreparedStatement psmt = conn.prepareStatement("INSERT INTO `User3` VALUES (?, ?, ?, ?);");
 			psmt.setString(1, dto.getUid());
 			psmt.setString(2, dto.getName());
 			psmt.setString(3, dto.getHp());
@@ -40,18 +36,17 @@ public class User1DAO {
 			conn.close();
 			
 		} catch (Exception e) {
-			logger.error("User1DAO insertUser1 error : " + e.getMessage());
+			logger.error("User3DAO insertUser3 error : " + e.getMessage());
 		}
 	}
 	
-	public User1DTO selectUser1(String uid) {
-		
-		User1DTO dto = new User1DTO();
+	public User3DTO selectUser3(String uid) {
+		User3DTO dto = new User3DTO();
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			PreparedStatement psmt = conn.prepareStatement("SELECT * FROM `User1` WHERE `uid`=?");
+			PreparedStatement psmt = conn.prepareStatement("SELECT * FROM `User3` WHERE `uid`=?");
 			psmt.setString(1, uid);
 			ResultSet rs = psmt.executeQuery();
 			
@@ -66,47 +61,44 @@ public class User1DAO {
 			conn.close();
 			
 		} catch (Exception e) {
-			logger.error("User1DAO selectUser1 error : " + e.getMessage());
+			logger.error("User3DAO selectUser3 error : " + e.getMessage());
 		}
-		
 		return dto;
 	}
 	
-	public List<User1DTO> selectUser1s() {
-		
-		List<User1DTO> users = new ArrayList<>();
+	public List<User3DTO> selectUser3s() {
+		List<User3DTO> users = new ArrayList<>();
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `User1`;");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `User3`;");
 			
 			while(rs.next()) {
-				User1DTO dto = new User1DTO();
+				User3DTO dto = new User3DTO();
 				dto.setUid(rs.getString(1));
 				dto.setName(rs.getString(2));
 				dto.setHp(rs.getString(3));
 				dto.setAge(rs.getInt(4));
 				users.add(dto);
 			}
-			
 			rs.close();
 			stmt.close();
 			conn.close();
 			
 		} catch (Exception e) {
-			logger.error("User1DAO selectUser1s error : " + e.getMessage());
+			logger.error("User3DAO selectUser3s error : " + e.getMessage());
 		}
 		
 		return users;
 	}
 	
-	public void updateUser1(User1DTO dto) {
+	public void updateUser3(User3DTO dto) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			PreparedStatement psmt = conn.prepareStatement("UPDATE `User1` SET `name`=?, `hp`=?, `age`=? WHERE `uid`=?");
+			PreparedStatement psmt = conn.prepareStatement("UPDATE `User3` SET `name`=?, `hp`=?, `age`=? WHERE `uid`=?");
 			psmt.setString(1, dto.getName());
 			psmt.setString(2, dto.getHp());
 			psmt.setInt(3, dto.getAge());
@@ -116,24 +108,22 @@ public class User1DAO {
 			conn.close();
 
 		}catch(Exception e) {
-			logger.error("User1DAO updateUser1 error : " + e.getMessage());
+			logger.error("User3DAO updateUser3 error : " + e.getMessage());
 		}
 	}
 	
-	public void deleteUser1(String uid) {
+	public void deleteUser3(String uid) {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn = DriverManager.getConnection(HOST, USER, PASS);
-			PreparedStatement psmt = conn.prepareStatement("DELETE FROM `User1` WHERE `uid`=?");
+			PreparedStatement psmt = conn.prepareStatement("DELETE FROM `User3` WHERE `uid`=?");
 			psmt.setString(1, uid);
 			psmt.executeUpdate();
 			psmt.close();
 			conn.close();
 
 		}catch(Exception e) {
-			logger.error("User1DAO deleteUser1 error : " + e.getMessage());
+			logger.error("User3DAO deleteUser3 error : " + e.getMessage());
 		}
 	}
-
-	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 }

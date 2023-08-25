@@ -44,4 +44,14 @@ public class User2DTO {
 	public void setAge(String age) {
 		this.age = Integer.parseInt(age);
 	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "User2DTO [uid=" + uid + ", name=" + name + ", hp=" + hp + ", age=" + age + "]";
+	}
+	
+	
+	
 }

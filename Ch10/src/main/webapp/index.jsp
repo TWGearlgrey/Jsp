@@ -3,7 +3,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>MVC실습::메인</title>
 	</head>
 	<body>
 		<h3>10장. MVC 실습</h3>

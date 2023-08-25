@@ -1,6 +1,6 @@
 package dto;
 
-public class User1DTO {
+public class User6DTO {
 	private String uid;
 	private String name;
 	private String hp;
@@ -49,9 +49,6 @@ public class User1DTO {
 	
 	@Override
 	public String toString() {
-		return "User1DTO [uid=" + uid + ", name=" + name + ", hp=" + hp + ", age=" + age + "]";
+		return "User6DTO [uid=" + uid + ", name=" + name + ", hp=" + hp + ", age=" + age + "]";
 	}
-	
-	
-	
 }

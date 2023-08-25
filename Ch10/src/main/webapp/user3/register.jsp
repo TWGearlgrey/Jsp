@@ -3,14 +3,14 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>user2::register</title>
+		<title>user3::register</title>
 	</head>
 	<body>
-		<h3>User2 등록</h3>
+		<h3>User3 등록</h3>
 		<a href="/Ch10">처음으로</a>
-		<a href="/Ch10/user2/list.do">User2 목록</a>
+		<a href="/Ch10/user3/list.do">User1 목록</a>
 		
-		<form action="/Ch10/user2/register.do" method="post">
+		<form action="/Ch10/user3/register.do" method="post">
 			<table border="1">
 				<tr>
 					<td>아이디</td>
