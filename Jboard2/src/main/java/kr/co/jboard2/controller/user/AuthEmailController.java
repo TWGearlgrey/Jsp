@@ -43,4 +43,24 @@ public class AuthEmailController extends HttpServlet {
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
 	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		logger.info("authEmailController doPost()...1");
+		
+		String code = req.getParameter("code");
+		logger.info("authEmailController doPost()...2 code : " + code);
+		
+		int result = service.confirmCodeByEmail(code);
+		logger.info("authEmailController doPost()...3 result : " + result);
+		
+		// JSON 생성
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		
+		// JSON 출력
+		PrintWriter writer = resp.getWriter();
+		writer.print(json.toString());
+	}
 }

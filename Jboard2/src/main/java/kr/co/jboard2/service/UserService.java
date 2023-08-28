@@ -26,6 +26,9 @@ public class UserService {
 	}
 	private UserService() {}
 	
+	// 전역변수
+	private static String generatedCode;
+	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private UserDAO dao =  UserDAO.getInstance();
 	
@@ -65,13 +68,14 @@ public class UserService {
 		
 		// 인증코드 생성
 		int code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+		generatedCode = ""+code;
 		logger.info("receiver : " + receiver);
 		
 		// 기본정보
 		String sender   = "shipdesignup@gmail.com";
 		String password = "pwufxjssxylqfkmi";
 		String title    = "Jboard2 인증코드 입니다.";
-		String content  = "<h1>인증 코드는 "+ code + "</h1>";
+		String content  = "<h1>인증 코드는 "+ generatedCode + "</h1>";
 		
 		// Gmail SMTP 서버 설정
 		Properties props = new Properties();
@@ -105,9 +109,21 @@ public class UserService {
 			
 		}catch(Exception e) {
 			status = 0;
-			logger.error("email 전송 실패 : " + e.getMessage());
+			logger.error("sendCodeMyEmail error : " + e.getMessage());
 		}
 		
 		return status;
+	} // sendCodeByEmail end...
+	
+	public int confirmCodeByEmail(String code) {
+		
+		if(code.equals(generatedCode)) {
+			logger.info("gcode return 1...");
+			return 1;
+			
+		}else {
+			logger.info("gcode return 0...");
+			return 0;
+		}
 	}
 }

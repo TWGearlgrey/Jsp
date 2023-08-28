@@ -102,11 +102,11 @@
 					success: function(data) {
 						
 						if(data.status > 0) {
-							$('.auth').show();
 							$('.resultEmail').css('color', 'green').text('이메일을 확인 후 인증코드를 입력하세요.');
-							
+							$('.auth').show();
+								
 						}else {
-							$('.resultEmail').css('color', 'red').text('인증코드 전송을 실패했습니다. 이메일을 정확히 입력하세요.');
+							$('.resultEmail').css('color', 'red').text('인증코드 전송을 실패했습니다. 잠시 후 다시 시도해주세요.');
 						}
 						
 						preventDoubleClick = false;
@@ -118,12 +118,25 @@
 		$('#btnEmailAuth').click(function() {
 			
 			const code = $('input[name=auth]').val();
+			const jsonData = {
+				"code": code	
+			};
 			
-			if(receivedCode == code){
-				$('.resultEmail').css('color', 'green').text('이메일이 인증되었습니다.');
-			}else{
-				$('.resultEmail').css('color', 'red').text('인증에 실패했습니다.');
-			}
+			$.ajax({
+				url: '/Jboard2/user/authEmail.do',
+				type: 'POST',
+				data: jsonData,
+				dataType: 'json',
+				success: function(data) {
+					
+					if(data.result > 0){
+						$('.resultEmail').css('color', 'green').text('이메일이 인증되었습니다.');
+						
+					}else {
+						$('.resultEmail').css('color', 'red').text('이메일 인증에 실패했습니다.');
+					}
+				}
+			});
 		});
 	});
 
