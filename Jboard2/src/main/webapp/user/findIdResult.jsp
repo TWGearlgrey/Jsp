@@ -7,19 +7,19 @@
                 <caption>아이디 찾기 결과</caption>
                 <tr>
                     <td>이름</td>
-                    <td>홍길동</td>
+                    <td>${user.name}</td>
                 </tr>
                 <tr>
                     <td>아이디</td>
-                    <td>honggildong</td>
+                    <td>${user.uid}</td>
                 </tr>
                 <tr>
                     <td>이메일</td>
-                    <td>honggildong@gmail.com</td>
+                    <td>${user.email}</td>
                 </tr>
                 <tr>
                     <td>가입일</td>
-                    <td>2022-11-16 10:20</td>
+                    <td>${user.regDate}</td>
                 </tr>
             </table>                                        
         </form>
@@ -29,8 +29,8 @@
         </p>
 
         <div>
-            <a href="./login.html" class="btn btnCancel">로그인</a>
-            <a href="./register.html" class="btn btnNext">비밀번호 찾기</a>
+            <a href="/Jboard2/user/login.do" class="btn btnCancel">로그인</a>
+            <a href="/Jboard2/user/register.do" class="btn btnNext">비밀번호 찾기</a>
         </div>
     </section>
 </main>

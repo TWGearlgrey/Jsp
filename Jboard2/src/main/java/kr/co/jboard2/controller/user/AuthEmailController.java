@@ -29,19 +29,39 @@ public class AuthEmailController extends HttpServlet {
 		
 		logger.info("authEmailController doGet()...1");
 		
+		String name  = req.getParameter("name");
 		String email = req.getParameter("email");
 		
-		int status = service.sendCodeByEmail(email);
+		int result = 0;
+		int status = 0;
+		
+		if(name == null) {
+			// 회원가입할 때 이메일 인증
+			result = service.selectCountEmail(email);
+			status = service.sendCodeByEmail(email);
+			logger.info("when register result : " + result + ", status : " + status);
+			
+		}else {
+			// 아이디 찾기 할 때 이메일 인증
+			result = service.selectCountNameAndEmail(name, email);
+			
+			if(result == 1) {
+				status = service.sendCodeByEmail(email);
+			}
+			logger.info("when findId result : " + result + ", status : " + status);
+		}
 		
 		logger.info("email status : " + status);
 		
 		// JSON 생성
 		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
 		json.addProperty("status", status);
 		
 		// JSON 출력
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
+		
 	}
 	
 	@Override

@@ -8,26 +8,30 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import kr.co.jboard2.dto.UserDTO;
 import kr.co.jboard2.service.UserService;
 
-@WebServlet("/user/findIdResult.do")
-public class FindIdResultController extends HttpServlet {
+@WebServlet("/user/logout.do")
+public class LogoutController extends HttpServlet {
 
-	private static final long serialVersionUID = -8385164502186998461L;
+	private static final long serialVersionUID = 4736583377544488787L;
 	private UserService service = UserService.getInstance();
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String name  = req.getParameter("name");
-		String email = req.getParameter("email");
+		logger.info("LoginController doGet()...1");
 		
-		UserDTO user = service.selectUserByNameAndEmail(name, email);
-		req.setAttribute("user", user);
+		HttpSession session = req.getSession();
+		session.invalidate();
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findIdResult.jsp");
-		dispatcher.forward(req, resp);
+		resp.sendRedirect("/Jboard2/user/login.do?success=200");
 	}
 }

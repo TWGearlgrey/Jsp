@@ -7,7 +7,7 @@
                 <caption>회원정보 설정</caption>
                 <tr>
                     <td>아이디</td>
-                    <td>abc</td>
+                    <td>${sessUser.uid}</td>
                 </tr>
                 <tr>
                     <td>비밀번호</td>
