@@ -6,10 +6,12 @@ $(function() {
 	
 	$('#btnEmailCode').click(function() {
 		
+		const type  = $('input[name=type]').val();
 		const name  = $('input[name=name]').val();
 		const email = $('input[name=email]').val();
 		
 		const jsonData = {
+			"type": type,
 			"name": name, 
 			"email": email
 		};

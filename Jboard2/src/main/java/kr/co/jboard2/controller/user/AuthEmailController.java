@@ -29,26 +29,29 @@ public class AuthEmailController extends HttpServlet {
 		
 		logger.info("authEmailController doGet()...1");
 		
+		String type  = req.getParameter("type");
 		String name  = req.getParameter("name");
 		String email = req.getParameter("email");
+		
+		logger.info("TYPE : " + type);
 		
 		int result = 0;
 		int status = 0;
 		
-		if(name == null) {
+		if(type.equals("REGISTER")) {
 			// 회원가입할 때 이메일 인증
 			result = service.selectCountEmail(email);
 			status = service.sendCodeByEmail(email);
-			logger.info("when register result : " + result + ", status : " + status);
+			logger.info("when register result (sc:0, 1) : " + result + ", status : " + status);
 			
-		}else {
+		}else if(type.equals("FIND_ID")) {
 			// 아이디 찾기 할 때 이메일 인증
 			result = service.selectCountNameAndEmail(name, email);
 			
 			if(result == 1) {
 				status = service.sendCodeByEmail(email);
 			}
-			logger.info("when findId result : " + result + ", status : " + status);
+			logger.info("when findId result (sc:1, 1): " + result + ", status : " + status);
 		}
 		
 		logger.info("email status : " + status);

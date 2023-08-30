@@ -7,11 +7,11 @@
                 <caption>아이디 찾기 결과</caption>
                 <tr>
                     <td>이름</td>
-                    <td>${user.name}</td>
+                    <td>${requestScope.user.name}</td>
                 </tr>
                 <tr>
                     <td>아이디</td>
-                    <td>${user.uid}</td>
+                    <td>${user.getUid()}</td>
                 </tr>
                 <tr>
                     <td>이메일</td>
