@@ -5,7 +5,6 @@
 <script>
 	
 	$(function() {
-		
 		$('.btnNext').click(function(e) {
 			e.preventDefault();
 			
@@ -15,9 +14,7 @@
 			}else {
 				alert('이메일 인증을 수행하셔야 합니다.');
 			}
-			
 		});
-		
 	});
 	
 </script>

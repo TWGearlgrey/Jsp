@@ -5,10 +5,15 @@
 	
 	if(success == 100){
 		alert('아이디, 비밀번호를 다시 확인하십시오.');
+		
 	}else if(success == 101){
 		alert('정상적인 접근이 아닙니다. 로그인 후 이용해주세요.');
+		
 	}else if(success == 200){
 		alert('정상적으로 로그아웃 되었습니다.');
+		
+	}else if(success == 300){
+		alert('비밀번호가 성공적으로 변경되었습니다..');
 	}
 
 </script>
