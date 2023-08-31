@@ -31,12 +31,12 @@ public class FindIdResultController extends HttpServlet {
 		String name  = req.getParameter("name");
 		String email = req.getParameter("email");
 		
-		logger.info("FindIdResultController doPost()...2 name : " + name + ", email : " + email);
+		logger.debug("name : " + name + ", email : " + email);
 		
 		UserDTO user = service.selectUserByNameAndEmail(name, email);
 		req.setAttribute("user", user);
 		
-		logger.info("FindIdResultController doPost()...3 user : " + (user==null?"null":"is not null"));
+		logger.debug("user : " + (user==null?"null":"is not null"));
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findIdResult.jsp");
 		dispatcher.forward(req, resp);

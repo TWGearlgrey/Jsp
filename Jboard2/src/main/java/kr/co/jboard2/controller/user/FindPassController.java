@@ -39,6 +39,8 @@ public class FindPassController extends HttpServlet {
 		
 		String uid = req.getParameter("uid");
 		
+		logger.debug("uid : " + uid);
+		
 		HttpSession session = req.getSession();
 		session.setAttribute("uid", uid);
 		

@@ -11,6 +11,11 @@ $(function() {
 		const uid   = $('input[name=uid]').val();
 		const email = $('input[name=email]').val();
 		
+		console.log('type : ' + type);
+		console.log('name : ' + name);
+		console.log('uid : ' + uid);
+		console.log('email : ' + email);
+		
 		const jsonData = {
 			"type": type,
 			"uid": uid, 

@@ -29,9 +29,22 @@ public class LoginController extends HttpServlet {
 		
 		logger.info("LoginController doGet()...1");
 		
+		
 		String success = req.getParameter("success");
 		req.setAttribute("success", success);
 		
+		if(success == null) {
+			logger.info("[SUCC] is null : LOGIN PAGE ENTER");
+		}else if(success.equals("100")) {
+			logger.info("[SUCC] 100 : FAILED LOGIN");
+		}else if(success.equals("101")) {
+			logger.info("[SUCC] 101 : 비정상적 접근");
+		}else if(success.equals("200")) {
+			logger.info("[SUCC] 200 : SUCCESS LOGOUT");
+		}else if(success.equals("300")) {
+			logger.info("[SUCC] 300 : SUCCESS PASS MODIFY");
+		}
+			
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/login.jsp");
 		dispatcher.forward(req, resp);
 	}
@@ -43,11 +56,16 @@ public class LoginController extends HttpServlet {
 		
 		String uid  = req.getParameter("uid");
 		String pass = req.getParameter("pass");
+		
+		logger.debug("uid : " + uid);
+		logger.debug("pass : " + pass);
 	
 		UserDTO user = service.selectUser(uid, pass);
 		
+		logger.debug("user : " + user);
+		
 		if(user != null) {
-			logger.info("LoginController doPost()...2-1 success");
+			logger.info("LoginController doPost()...2-1 SUCCESS");
 			
 			// 현재 세션 구하기
 			HttpSession session = req.getSession();
@@ -59,7 +77,7 @@ public class LoginController extends HttpServlet {
 			resp.sendRedirect("/Jboard2/list.do");
 			
 		}else {
-			logger.info("LoginController doPost()...2-2 failed : user is Null");
+			logger.info("LoginController doPost()...2-2 FAILED : USER IS NULL");
 			
 			// 리다이렉트
 			resp.sendRedirect("/Jboard2/user/login.do?success=100");

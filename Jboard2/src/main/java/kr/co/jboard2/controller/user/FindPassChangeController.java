@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,8 +29,19 @@ public class FindPassChangeController extends HttpServlet {
 		
 		logger.info("FindPassChangeController doGet()...1");
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findPassChange.jsp");
-		dispatcher.forward(req, resp);
+		HttpSession session = req.getSession();
+		String uid = (String) session.getAttribute("uid");
+		
+		logger.debug("uid : " + uid);
+		
+		if(uid == null) {
+			logger.debug("Redirenct reason UID IS NULL. uid : " + uid);
+			resp.sendRedirect("/Jboard2/user/findPass.do");
+			
+		}else {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findPassChange.jsp");
+			dispatcher.forward(req, resp);
+		}
 	}
 	
 	@Override

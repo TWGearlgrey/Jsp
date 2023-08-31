@@ -34,7 +34,7 @@ public class AuthEmailController extends HttpServlet {
 		String name  = req.getParameter("name");
 		String email = req.getParameter("email");
 		
-		logger.info("TYPE : " + type);
+		logger.debug("TYPE : " + type);
 		
 		int result = 0;
 		int status = 0;
@@ -46,7 +46,7 @@ public class AuthEmailController extends HttpServlet {
 			if(result == 0) {
 				status = service.sendCodeByEmail(email);
 			}
-			logger.info("when register (sc:0, 1) result : " + result + ", status : " + status);
+			logger.debug("when register (sc:0, 1) result : " + result + ", status : " + status);
 			
 		}else if(type.equals("FIND_ID")) {
 			// 아이디 찾기 할 때 이메일 인증
@@ -55,7 +55,7 @@ public class AuthEmailController extends HttpServlet {
 			if(result == 1) {
 				status = service.sendCodeByEmail(email);
 			}
-			logger.info("when findId (sc:1, 1) result : " + result + ", status : " + status);
+			logger.debug("when findId (sc:1, 1) result : " + result + ", status : " + status);
 			
 		}else if(type.equals("FIND_PASS")) {
 			// 비밀번호 찾기 할 때 이메일 인증
@@ -64,10 +64,17 @@ public class AuthEmailController extends HttpServlet {
 			if(result == 1) {
 				status = service.sendCodeByEmail(email);
 			}
-			logger.info("when findPass (sc:1, 1) result : " + result + ", status : " + status);
+			logger.debug("when findPass (sc:1, 1) result : " + result + ", status : " + status);
+		}else if(type.equals("MODIFY")) {
+			// 이메일 수정 할 때 이메일 인증
+			result = service.selectCountEmail(email);
+			
+			if(result == 0) {
+				status = service.sendCodeByEmail(email);
+			}
+				
+			logger.debug("when modifyEmail (sc:0, 1) result : " + result + ", status : " + status);
 		}
-		
-		logger.info("email status : " + status);
 		
 		// JSON 생성
 		JsonObject json = new JsonObject();
@@ -77,7 +84,6 @@ public class AuthEmailController extends HttpServlet {
 		// JSON 출력
 		PrintWriter writer = resp.getWriter();
 		writer.print(json.toString());
-		
 	}
 	
 	@Override

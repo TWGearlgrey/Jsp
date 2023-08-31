@@ -29,7 +29,7 @@ public class CheckHpController extends HttpServlet {
 		String hp = req.getParameter("hp");
 		int result = service.selectCountHp(hp);
 		
-		logger.info("result(sc:1) : " + result);
+		logger.debug("result(dupl:1) : " + result);
 		
 		// JSON 생성
 		JsonObject json = new JsonObject();

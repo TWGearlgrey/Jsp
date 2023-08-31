@@ -1,53 +1,55 @@
 /**
  * 사용자 중복 체크
  */
-window.onload = function(){
+$(function(){	
 	
 	const inputUid    = document.getElementsByName('uid')[0];
 	const uidResult   = document.getElementsByClassName('uidResult')[0];
 	const btnCheckUid = document.getElementById('btnCheckUid');
 	
-	// 아이디 중복 체크
-	btnCheckUid.onclick = function() {
-		
-		const uid = inputUid.value;
-		
-		// 아이디 유효성 검사
-		if(!uid.match(reUid)){
-			uidResult.innerText = '유효한 아이디가 아닙니다.';
-			uidResult.style.color = 'red';
-			isUidOk = false;
-			return;				
-		}
-		
-		// 서버 전송
-		const xhr = new XMLHttpRequest();
-		xhr.open('GET', '/Jboard2/user/checkUid.do?uid='+uid);
-		xhr.send();
-		
-		xhr.onreadystatechange = function() {
+	if(btnCheckUid != null) {
+		// 아이디 중복 체크
+		btnCheckUid.onclick = function() {
 			
-			if(xhr.readyState == XMLHttpRequest.DONE){
+			const uid = inputUid.value;
+			
+			// 아이디 유효성 검사
+			if(!uid.match(reUid)){
+				uidResult.innerText = '유효한 아이디가 아닙니다.';
+				uidResult.style.color = 'red';
+				isUidOk = false;
+				return;				
+			}
+			
+			// 서버 전송
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', '/Jboard2/user/checkUid.do?uid='+uid);
+			xhr.send();
+			
+			xhr.onreadystatechange = function() {
 				
-				if(xhr.status == 200) {
+				if(xhr.readyState == XMLHttpRequest.DONE){
 					
-					const data = JSON.parse(xhr.response);
-					
-					if(data.result > 0) {
-						uidResult.innerText = '이미 사용중인 아이디입니다.';
-						uidResult.style.color = 'red';
-						isUidOk = false;
+					if(xhr.status == 200) {
 						
-					}else {
-						uidResult.innerText = '사용 가능한 아이디입니다.';
-						uidResult.style.color = 'green';
-						isUidOk = true;
+						const data = JSON.parse(xhr.response);
 						
+						if(data.result > 0) {
+							uidResult.innerText = '이미 사용중인 아이디입니다.';
+							uidResult.style.color = 'red';
+							isUidOk = false;
+							
+						}else {
+							uidResult.innerText = '사용 가능한 아이디입니다.';
+							uidResult.style.color = 'green';
+							isUidOk = true;
+							
+						}
 					}
-				}
-			} // readyState end
-		} // onreadysatatechange end
-	} // btnCheckUid onclick end
+				} // readyState end
+			} // onreadysatatechange end
+		} // btnCheckUid onclick end
+	}
 	
 	// 닉네임 중복 체크
 	$('#btnCheckNick').click(function() {
@@ -112,4 +114,4 @@ window.onload = function(){
 	// 이메일 중복 체크
 	
 	
-} // onload end
+}); // end

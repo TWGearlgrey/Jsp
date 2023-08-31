@@ -28,6 +28,28 @@ public class SQL {
 	public static final String SELECT_COUNT_HP   			 = "SELECT COUNT(*) FROM `User` WHERE `hp`=?";
 	public static final String SELECT_TERMS     	         = "SELECT * FROM `Terms`";
 	public static final String UPDATE_USER_PASS              = "UPDATE `User` SET `pass`=SHA2(?, 256) WHERE `uid`=?";
+	public static final String UPDATE_USER_FOR_WITHDRAW      = "UPDATE `User` SET "
+																+ "`pass`=null, "
+																+ "`name`=null, "
+																+ "`nick`=null, "
+																+ "`email`=null, "
+																+ "`hp`=null, "
+																+ "`role`=null, "
+																+ "`zip`=null, "
+																+ "`addr1`=null, "
+																+ "`addr2`=null, "
+																+ "`leaveDate`=NOW() "
+																+ "WHERE `uid`=?";
+	
+	public static final String UPDATE_USER                   = "UPDATE `User` SET "
+																+ "`name`=?, "
+																+ "`nick`=?, "
+																+ "`email`=?, "
+																+ "`hp`=?, "
+																+ "`zip`=?, "
+																+ "`addr1`=?, "
+																+ "`addr2`=? "
+																+ "WHERE `uid`=?";
 	
 	//////////////////////////////////////
 	// Article							//
@@ -35,6 +57,7 @@ public class SQL {
 	public final static String INSERT_ARTICLE = "INSERT INTO `Article` SET "
 												+ "`title`=?, "
 												+ "`content`=?,"
+												+ "`file`=?,"
 												+ "`writer`=?,"
 												+ "`regip`=?,"
 												+ "`rdate`=NOW()";
@@ -45,6 +68,8 @@ public class SQL {
 												+ "`writer`=?,"
 												+ "`regip`=?,"
 												+ "`rdate`=NOW()";
+	
+	public final static String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `Article`;";
 	
 	public final static String SELECT_ARTICLE = "SELECT * FROM `Article` WHERE `no`=?;";
 	
@@ -76,4 +101,15 @@ public class SQL {
 	
 	public final static String DELETE_ARTICLE = "DELETE FROM `Article` WHERE `no`=? OR `parent`=?;";
 	public final static String DELETE_COMMENT = "DELETE FROM `Article` WHERE `no`=?;";
+	
+	
+	
+	//////////////////////////////////////
+	// File								//
+	//////////////////////////////////////
+	public final static String INSERT_FILE = "INSERT INTO `File` SET "
+												+ "`ano`=?, "
+												+ "`oriName`=?, "
+												+ "`newName`=?, "
+												+ "`rdate`=NOW()";
 }

@@ -49,6 +49,10 @@ public class RegisterController extends HttpServlet {
 		String addr2 = req.getParameter("addr2");
 		String regip = req.getRemoteAddr();
 		
+		logger.debug("uid : " + uid + ", pass1 : " + pass1 + ", name : " + name);
+		logger.debug("nick : " + nick + ", email : " + email + ", hp : " + hp);
+		logger.debug("zip : " + zip + ", addr1 : " + addr1 + ", addr2 : " + addr2);
+		
 		UserDTO dto = new UserDTO();
 		dto.setUid(uid);
 		dto.setPass(pass1);
@@ -60,6 +64,8 @@ public class RegisterController extends HttpServlet {
 		dto.setAddr1(addr1);
 		dto.setAddr2(addr2);
 		dto.setRegip(regip);
+		
+		logger.debug("dto : " + dto);
 		
 		service.insertUser(dto);
 		

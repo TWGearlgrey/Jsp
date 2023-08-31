@@ -76,8 +76,12 @@ public class UserService {
 		dao.updateUser(dto);
 	}
 	
-	public void updateUserPass(String uid, String pass) {
-		dao.updateUserPass(uid, pass);
+	public int updateUserPass(String uid, String pass) {
+		return dao.updateUserPass(uid, pass);
+	}
+	
+	public int updateUserForWithdraw(String uid) {
+		return dao.updateUserForWithdraw(uid);
 	}
 	
 	public void deleteUser(String uid) {
@@ -138,11 +142,11 @@ public class UserService {
 	public int confirmCodeByEmail(String code) {
 		
 		if(code.equals(generatedCode)) {
-			logger.info("gcode return 1...");
+			logger.info("generatedCode return 1...");
 			return 1;
 			
 		}else {
-			logger.info("gcode return 0...");
+			logger.info("generatedCode return 0...");
 			return 0;
 		}
 	}
