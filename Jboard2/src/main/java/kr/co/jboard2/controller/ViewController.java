@@ -38,11 +38,18 @@ public class ViewController extends HttpServlet {
 			
 			logger.debug("no : " + no);
 			
+			// 글 조회
 			ArticleDTO article = service.selectArticle(no);
+			
+			// 댓글 조회
 			List<ArticleDTO> comments = service.selectComments(no);
+			
+			// View 공유 참조
+			req.setAttribute("no", no);
 			req.setAttribute("article", article);
 			req.setAttribute("comments", comments);
 			
+			logger.debug("no : " + no);
 			logger.debug("article : " + article);
 			logger.debug("comments : " + comments);
 			

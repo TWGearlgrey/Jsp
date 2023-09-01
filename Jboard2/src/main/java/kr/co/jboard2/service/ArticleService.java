@@ -1,12 +1,17 @@
 package kr.co.jboard2.service;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +21,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.jboard2.dao.ArticleDAO;
 import kr.co.jboard2.dto.ArticleDTO;
+import kr.co.jboard2.dto.FileDTO;
 
 public enum ArticleService {
 
@@ -45,11 +51,11 @@ public enum ArticleService {
 	}
 	
 	public void updateArticle(ArticleDTO dto) {
-		
+		dao.updateArticle(dto);
 	}
 	
 	public void deleteArticle(String no) {
-		
+		dao.deleteArticle(no);
 	}
 	
 	public void updateArticleForComment(String no) {
@@ -117,7 +123,30 @@ public enum ArticleService {
 	}
 	
 	// 파일 다운로드
-	public void downloadFile() {
+	public void downloadFile(HttpServletRequest req, HttpServletResponse resp, FileDTO dto) throws IOException {
+		// response 파일 다운로드 헤더 수정 (response : server에서 client로 넘어가는 전송 객체) 
+		resp.setContentType("application/octet-stream");
+		resp.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(dto.getOriName(), "utf-8"));
+		resp.setHeader("Content-Transfer-Encoding", "binary");
+		resp.setHeader("Pragma", "no-cache");
+		resp.setHeader("Cache-Control", "private");
 		
+		// response 파일 스트림 작업
+		String path = getFilePath(req);
+		File file = new File(path + "/" + dto.getNewName());
+		
+		BufferedInputStream  bis = new BufferedInputStream(new FileInputStream(file));
+		BufferedOutputStream bos = new BufferedOutputStream(resp.getOutputStream());
+		
+		while(true){
+			int data = bis.read();
+			if(data == -1) {
+				break;
+			}
+			
+			bos.write(data);
+		}
+		bis.close();
+		bos.close();
 	}
 }

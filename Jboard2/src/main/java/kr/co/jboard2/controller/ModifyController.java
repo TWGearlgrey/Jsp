@@ -42,8 +42,13 @@ public class ModifyController extends HttpServlet {
 			logger.info("ModifyController doGet()...1");
 			
 			String no = req.getParameter("no");
+			
+			logger.debug("no : " + no);
+			
 			ArticleDTO article = aService.selectArticle(no);
 			req.setAttribute("article", article);
+			
+			logger.debug("article : " + article);
 			
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/modify.jsp");
 			dispatcher.forward(req, resp);
@@ -71,12 +76,14 @@ public class ModifyController extends HttpServlet {
 		logger.debug("oName : " + oName);
 		
 		ArticleDTO dto = new ArticleDTO();
-		dto.setNo(no);
 		dto.setTitle(title);
 		dto.setContent(content);
 		dto.setFile(oName);
+		dto.setNo(no);
 		
 		aService.updateArticle(dto);
+		
+		logger.debug("dto : " + dto);
 		
 		// 파일명 수정 및 파일 테이블 Insert
 		if(oName != null) {
@@ -88,6 +95,8 @@ public class ModifyController extends HttpServlet {
 			fileDto.setAno(no);
 			fileDto.setOriName(oName);
 			fileDto.setNewName(sName);
+			
+			logger.debug("fileDto : " + fileDto);
 			
 			fService.insertFile(fileDto);
 		}

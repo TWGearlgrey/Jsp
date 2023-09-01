@@ -103,8 +103,6 @@ public class ListController extends HttpServlet {
 			List<ArticleDTO> articles = service.selectArticles(start);
 			req.setAttribute("articles", articles);
 			
-			logger.debug("articles : " + articles);
-			
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/list.jsp");
 			dispatcher.forward(req, resp);
 			

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.jboard2.db.DBHelper;
 import kr.co.jboard2.db.SQL;
 import kr.co.jboard2.dto.ArticleDTO;
+import kr.co.jboard2.dto.FileDTO;
 
 public class ArticleDAO extends DBHelper {
 
@@ -108,7 +109,7 @@ public class ArticleDAO extends DBHelper {
 	
 	public ArticleDTO selectArticle(String no) {
 		
-		ArticleDTO dto = new ArticleDTO();
+		ArticleDTO article = new ArticleDTO();
 		
 		try {
 			conn = getConnection();
@@ -117,17 +118,30 @@ public class ArticleDAO extends DBHelper {
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
-				dto.setNo(rs.getInt(1));
-				dto.setParent(rs.getInt(2));
-				dto.setComment(rs.getInt(3));
-				dto.setCate(rs.getString(4));
-				dto.setTitle(rs.getString(5));
-				dto.setContent(rs.getString(6));
-				dto.setFile(rs.getInt(7));
-				dto.setHit(rs.getInt(8));
-				dto.setWriter(rs.getString(9));
-				dto.setRegip(rs.getString(10));
-				dto.setRdate(rs.getString(11));
+				// 게시글 정보
+				article.setNo(rs.getInt(1));
+				article.setParent(rs.getInt(2));
+				article.setComment(rs.getInt(3));
+				article.setCate(rs.getString(4));
+				article.setTitle(rs.getString(5));
+				article.setContent(rs.getString(6));
+				article.setFile(rs.getInt(7));
+				article.setHit(rs.getInt(8));
+				article.setWriter(rs.getString(9));
+				article.setRegip(rs.getString(10));
+				article.setRdate(rs.getString(11));
+				
+				// 파일정보
+				FileDTO fileDto = new FileDTO();
+				fileDto.setFno(rs.getInt(12));
+				fileDto.setAno(rs.getInt(13));
+				fileDto.setOriName(rs.getString(14));
+				fileDto.setNewName(rs.getString(15));
+				fileDto.setDownload(rs.getInt(16));
+				fileDto.setRdate(rs.getString(17));
+				
+				article.setFileDto(fileDto);
+				logger.debug("selectArticle fileDto : " + fileDto);
 			}
 			close();
 			
@@ -135,7 +149,7 @@ public class ArticleDAO extends DBHelper {
 			logger.error("selectArticle error : " + e.getMessage());
 		}
 		
-		return dto;
+		return article;
 	}
 	
 	public List<ArticleDTO> selectArticles(int start) {
@@ -180,7 +194,8 @@ public class ArticleDAO extends DBHelper {
 			psmt = conn.prepareStatement(SQL.UPDATE_ARTICLE);
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
-			psmt.setInt(3, dto.getNo());
+			psmt.setInt(3, dto.getFile());
+			psmt.setInt(4, dto.getNo());
 			psmt.executeUpdate();
 			close();
 			
@@ -190,7 +205,17 @@ public class ArticleDAO extends DBHelper {
 	}
 	
 	public void deleteArticle(String no) {
-		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			psmt.setString(2, no);
+			psmt.executeUpdate();
+			close();
+			
+		} catch (Exception e) {
+			logger.error("deleteArticle error : " + e.getMessage());
+		}
 	}
 	
 	public int selectCountTotal() {

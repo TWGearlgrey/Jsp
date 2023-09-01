@@ -379,6 +379,10 @@ footer > p {
     box-sizing: border-box;
     border-bottom: 1px solid #e9e9e9;
 }
+#board > .view table td .downloadZone {
+	color: blue;
+	text-decoration: underline;
+}	
 #board > .view table td > input {
     width: 400px;
     height: 24px;

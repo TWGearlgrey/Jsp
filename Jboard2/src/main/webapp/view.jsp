@@ -10,10 +10,15 @@
                 <th>제목</th>
                 <td><input type="text" name="title" value="${article.title}" readonly/></td>
             </tr>
-            <tr>
-                <th>파일</th>
-                <td><a href="#">2020년 상반기 매출자료.xls</a>&nbsp;<span>7</span>회 다운로드</td>
-            </tr>
+            <c:if test="${article.file > 0}">
+	            <tr>
+	                <th>파일</th>
+	                <td>
+		                <a href="/Jboard2/fileDownload.do?fno=${article.fileDto.fno }" class="downloadZone">${article.fileDto.oriName}</a>&nbsp;
+		                <span>${article.fileDto.download}</span>회 다운로드
+	                </td>
+	            </tr>
+            </c:if>
             <tr>
                 <th>내용</th>
                 <td>
@@ -24,7 +29,7 @@
         
         <div>
         	<c:if test="${article.writer == sessUser.uid}">
-	            <a href="#" class="btn btnRemove">삭제</a>
+	            <a href="/Jboard2/delete.do?no=${article.no}" class="btn btnRemove">삭제</a>
 	            <a href="/Jboard2/modify.do?no=${article.no}" class="btn btnModify">수정</a>
             </c:if>
             <a href="/Jboard2/list.do" class="btn btnList">목록</a>
@@ -38,11 +43,13 @@
 	            <article>
 	                <span class="nick">${comment.nick}</span>
 	                <span class="date">${comment.rdate}</span>
-	                <p class="content">${comment.content}</p>                        
+	                <p class="content">${comment.content}</p> 
+	                <c:if test="${comment.writer == sessUser.uid}">                       
 	                <div>
 	                    <a href="#" class="remove">삭제</a>
 	                    <a href="#" class="modify">수정</a>
 	                </div>
+	                </c:if>
 	            </article>
             </c:forEach>
             <c:if test="${article.comment < 1}">

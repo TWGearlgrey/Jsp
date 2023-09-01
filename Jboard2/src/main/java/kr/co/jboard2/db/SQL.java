@@ -71,7 +71,10 @@ public class SQL {
 	
 	public final static String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `Article`;";
 	
-	public final static String SELECT_ARTICLE = "SELECT * FROM `Article` WHERE `no`=?;";
+	public final static String SELECT_ARTICLE = "SELECT * FROM `Article` AS a "
+												+ "LEFT JOIN `File` AS b "
+												+ "ON a.`no` = b.`ano` "
+												+ "WHERE `no`=?;";
 	
 	public final static String SELECT_ARTICLES = "SELECT "
 												+ "a.*, "
@@ -93,7 +96,7 @@ public class SQL {
 	
 	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0;";
 	
-	public final static String UPDATE_ARTICLE = "UPDATE `Article` SET `title`=?, `content`=? WHERE `no`=?";
+	public final static String UPDATE_ARTICLE = "UPDATE `Article` SET `title`=?, `content`=?, `file`=? WHERE `no`=?";
 	public final static String UPDATE_COMMENT = "UPDATE `Article` SET `content`=? WHERE `no`=?";
 	
 	public final static String UPDATE_ARTICLE_FOR_COMMENT = "UPDATE `Article` SET `comment` = `comment` + 1 WHERE `no`=?";
@@ -112,4 +115,8 @@ public class SQL {
 												+ "`oriName`=?, "
 												+ "`newName`=?, "
 												+ "`rdate`=NOW()";
+	
+	public final static String SELECT_FILE = "SELECT * FROM `File` WHERE `fno`=?";
+	
+	public final static String DELETE_FILE = "DELETE FROM `File` WHERE `ano`=?";
 }
