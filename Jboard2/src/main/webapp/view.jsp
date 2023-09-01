@@ -5,45 +5,62 @@
 	
 	$(function() {
 		
+		// 게시글 삭제 컨펌
+		$(document).on('click', '.btnRemove', function(e) {
+			
+			if(confirm('정말 삭제하시겠습니까?')){
+				return true;
+			}else {
+				return false;
+			}
+		});
+		
+		
 		// 댓글 삭제(동적 생성 이벤트 구현)
 		$(document).on('click', '.remove', function(e) {
-			e.preventDefault();
-			//alert('클릭!');
-			const no = $(this).data('no');
-			const parent = $(this).data('pno');
-			const article = $(this).parent().parent();
-			console.log('no : ' + no);
-			console.log('article : ' + article);
 			
-			const jsonData = {
-				"kind": "REMOVE", 
-				"no": no, 
-				"parent": parent
-			}
-			
-			$.ajax({
-				url: '/Jboard2/comment.do',
-				type: 'GET',
-				data: jsonData,
-				dataType: 'json',
-				success: function(data) {
+			if(confirm('정말 삭제하시겠습니까?')){
+				e.preventDefault();
+				//alert('클릭!');
+				const no = $(this).data('no');
+				const parent = $(this).data('pno');
+				const article = $(this).parent().parent();
+				console.log('no : ' + no);
+				console.log('article : ' + article);
 				
-					if(data.result > 0) {
-						
-						alert('댓글이 삭제되었습니다.');
-						
-						// 화면처리
-						article.remove();
-						
-						if(data.currentComment < 1) {
-							$('.empty').show();
-						}
-						
-						console.log('currentComment : ' + data.currentComment);
-						
-					}
+				const jsonData = {
+					"kind": "REMOVE", 
+					"no": no, 
+					"parent": parent
 				}
-			});
+				
+				$.ajax({
+					url: '/Jboard2/comment.do',
+					type: 'GET',
+					data: jsonData,
+					dataType: 'json',
+					success: function(data) {
+					
+						if(data.result > 0) {
+							
+							alert('댓글이 삭제되었습니다.');
+							
+							// 화면처리
+							article.remove();
+							
+							if(data.currentComment < 1) {
+								$('.empty').show();
+							}
+							
+							console.log('currentComment : ' + data.currentComment);
+							
+						}
+					}
+				});
+				
+			}else {
+				return false;
+			}
 		});
 		
 		
