@@ -39,7 +39,7 @@ public class ModifyController extends HttpServlet {
 
 		if(sessUser != null) {
 			
-			logger.info("ModifyController doGet()...1");
+			logger.info("doGet()...1");
 			
 			String no = req.getParameter("no");
 			
@@ -61,7 +61,7 @@ public class ModifyController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("ModifyController doPost()...1");
+		logger.info("doPost()...1");
 		
 		MultipartRequest mr = aService.uploadFile(req);
 		

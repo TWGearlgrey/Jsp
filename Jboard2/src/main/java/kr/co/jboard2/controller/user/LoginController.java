@@ -27,7 +27,7 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("LoginController doGet()...1");
+		logger.info("doGet()...1");
 		
 		
 		String success = req.getParameter("success");
@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		logger.info("LoginController doPost()...1");
+		logger.info("doPost()...1");
 		
 		String uid  = req.getParameter("uid");
 		String pass = req.getParameter("pass");
@@ -65,7 +65,7 @@ public class LoginController extends HttpServlet {
 		logger.debug("user : " + user);
 		
 		if(user != null) {
-			logger.info("LoginController doPost()...2-1 SUCCESS");
+			logger.info("doPost()...2-1 SUCCESS");
 			
 			// 현재 세션 구하기
 			HttpSession session = req.getSession();
@@ -77,7 +77,7 @@ public class LoginController extends HttpServlet {
 			resp.sendRedirect("/Jboard2/list.do");
 			
 		}else {
-			logger.info("LoginController doPost()...2-2 FAILED : USER IS NULL");
+			logger.info("doPost()...2-2 FAILED : USER IS NULL");
 			
 			// 리다이렉트
 			resp.sendRedirect("/Jboard2/user/login.do?success=100");

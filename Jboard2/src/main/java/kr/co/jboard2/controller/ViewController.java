@@ -34,6 +34,9 @@ public class ViewController extends HttpServlet {
 		UserDTO sessUser = (UserDTO) session.getAttribute("sessUser");
 		
 		if(sessUser != null) {
+			
+			logger.info("doGet()...1");
+			
 			String no = req.getParameter("no");
 			
 			logger.debug("no : " + no);
@@ -64,33 +67,5 @@ public class ViewController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("ViewController doPost()...1");
-		
-		String no      = req.getParameter("parent");
-		String content = req.getParameter("content");
-		String writer  = req.getParameter("writer");
-		String regip   = req.getRemoteAddr();
-		
-		logger.debug("no : " + no);
-		logger.debug("content : " + content);
-		logger.debug("writer : " + writer);
-		logger.debug("regip : " + regip);
-		
-		ArticleDTO dto = new ArticleDTO();
-		dto.setParent(no);
-		dto.setContent(content);
-		dto.setWriter(writer);
-		dto.setRegip(regip);
-		
-		logger.debug("dto : " + dto); 
-		
-		// 댓글 등록
-		service.insertComment(dto);
-		
-		// 댓글 카운트 ++;
-		service.updateArticleForComment(no);
-		
-		
-		resp.sendRedirect("/Jboard2/view.do?no="+no);
 	}
 }

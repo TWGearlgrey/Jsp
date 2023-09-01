@@ -26,9 +26,13 @@ public class CheckNickController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		logger.info("doGet()...1");
+		
 		String nick = req.getParameter("nick");
 		int result = service.selectCountNick(nick);
 		
+		logger.debug("nick : " + nick);
 		logger.debug("result(dupl:1) : " + result);
 		
 		// JSON 생성

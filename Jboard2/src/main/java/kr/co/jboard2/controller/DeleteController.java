@@ -35,7 +35,7 @@ public class DeleteController extends HttpServlet{
 		
 		if(sessUser != null) {
 		
-			logger.info("DeleteController doGet()...1");
+			logger.info("doGet()...1");
 	
 			// 글 번호 수신
 			String no = req.getParameter("no");
@@ -43,11 +43,11 @@ public class DeleteController extends HttpServlet{
 			
 			// 파일 삭제(DB)
 			int result = fService.deleteFile(no);
-			logger.info("DeleteController doGet()...2-1 file DB delete...");
+			logger.info("doGet()...2-1 file DB delete...");
 			
 			// 파일 삭제(Directory)
 			if(result > 0) {
-				logger.info("DeleteController doGet()...2-2 file dir delete...");
+				logger.info("doGet()...2-2 file dir delete...");
 				
 				String path = aService.getFilePath(req);
 				File file = new File(path + "/" + "파일명");
@@ -59,14 +59,14 @@ public class DeleteController extends HttpServlet{
 					file.delete();
 				}
 				
-				logger.info("DeleteController doGet()...2-3 file dir delete end");
+				logger.info("doGet()...2-3 file dir delete end");
 			}else {
-				logger.info("DeleteController doGet()...2-end file is null");
+				logger.info("doGet()...2-end file is null");
 			}
 			
 			// 게시글+댓글 삭제
 			aService.deleteArticle(no);
-			logger.info("DeleteController doGet()...3");
+			logger.info("doGet()...3");
 			
 			resp.sendRedirect("/Jboard2/list.do");
 		

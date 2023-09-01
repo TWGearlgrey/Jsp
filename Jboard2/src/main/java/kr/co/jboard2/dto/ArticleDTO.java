@@ -149,12 +149,15 @@ public class ArticleDTO {
 	
 	
 	public String getRdate() {
+		return rdate.substring(2, 10);
+	}
+	public String getFullRdate() {
 		return rdate;
 	}
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
 	}
-	
+
 	
 	
 	@Override

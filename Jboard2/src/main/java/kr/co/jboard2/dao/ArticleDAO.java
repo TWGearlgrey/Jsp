@@ -53,8 +53,9 @@ public class ArticleDAO extends DBHelper {
 		return no;
 	}
 	
-	public void insertComment(ArticleDTO dto) {
+	public int insertComment(ArticleDTO dto) {
 		
+		int result = 0;
 		
 		try {
 			conn = getConnection();
@@ -63,12 +64,14 @@ public class ArticleDAO extends DBHelper {
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getWriter());
 			psmt.setString(4, dto.getRegip());
-			psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			close();
 			
 		} catch (Exception e) {
 			logger.error("insertComment() error : " + e.getMessage());
 		}
+		
+		return result;
 	}
 	
 	public List<ArticleDTO> selectComments(String no) {
@@ -152,14 +155,22 @@ public class ArticleDAO extends DBHelper {
 		return article;
 	}
 	
-	public List<ArticleDTO> selectArticles(int start) {
+	public List<ArticleDTO> selectArticles(int start, String search) {
 		
 		List<ArticleDTO> articles = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_ARTICLES);
-			psmt.setInt(1, start);
+			
+			if(search == null) {
+				psmt = conn.prepareStatement(SQL.SELECT_ARTICLES);
+				psmt.setInt(1, start);
+				
+			}else {
+				psmt = conn.prepareStatement(SQL.SELECT_ARTICLES_FOR_SEARCH);
+				psmt.setString(1, "%"+search+"%");
+				psmt.setInt(2, start);
+			}
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -218,13 +229,72 @@ public class ArticleDAO extends DBHelper {
 		}
 	}
 	
-	public int selectCountTotal() {
+	public int deleteComment(String no) {
+		
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_COMMENT);
+			psmt.setString(1, no);
+			result = psmt.executeUpdate();
+			
+			close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public void deleteArticleForComment(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_ARTICLE_FOR_COMMENT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error("deleteArticleForComment error : " + e.getMessage());
+		}
+	}
+	
+	public int currentCommentsCount(String no) {
+
+		int currentComment = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.CURRENT_COMMENTS_COUNT);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				currentComment = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			logger.error("currentCommentsCount error : " + e.getMessage());
+		}
+		return currentComment;
+	}
+	
+	public int selectCountTotal(String search) {
 		
 		int total = 0;
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL);
+			
+			if(search == null) {
+				psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL);
+				
+			}else {
+				psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL_FOR_SEARCH);
+				psmt.setString(1, "%"+search+"%");
+			}
+			
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {

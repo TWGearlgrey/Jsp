@@ -26,7 +26,7 @@ public class TermsController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("TermsController doGet()...1");
+		logger.info("doGet()...1");
 		
 		TermsDTO terms = service.selectTerms();
 		req.setAttribute("terms", terms);

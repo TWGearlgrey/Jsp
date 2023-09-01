@@ -40,7 +40,7 @@ public class FileDownloadController extends HttpServlet {
 		
 		if(sessUser != null) {
 		
-			logger.info("FileDownloadController doGet()...1");
+			logger.info("doGet()...1");
 			
 			// 데이터 수신
 			String fno = req.getParameter("fno");
@@ -53,7 +53,7 @@ public class FileDownloadController extends HttpServlet {
 			
 			// 파일 다운로드
 			aService.downloadFile(req, resp, fileDto);
-			logger.info("FileDownloadController doGet()...2");
+			logger.info("doGet()...2");
 			
 		}else {
 			resp.sendRedirect("/Jboard2/user/login.do?success=101");

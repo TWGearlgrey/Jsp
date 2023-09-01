@@ -6,8 +6,8 @@
 <%@ include file = "./_header.jsp" %>
 <main id="board">
     <section class="list">                
-        <form action="#">
-            <input type="text" name="search" placeholder="제목 키워드, 글쓴이 검색">
+        <form action="/Jboard2/list.do" method="get">
+            <input type="text" name="search" placeholder="제목 키워드 검색">
             <input type="submit" value="검색">
         </form>
         
@@ -23,7 +23,7 @@
             <c:forEach var="article" items="${requestScope.articles}">       
             <tr>
                 <td>${pageStartNum = pageStartNum-1 }</td>
-                <td><a href="/Jboard2/view.do?no=${article.no}">${article.title}[${article.comment}]</a></td>
+                <td><a href="/Jboard2/view.do?no=${article.no}">${article.title}&nbsp;[${article.comment}]</a></td>
                 <td>${article.nick}</td>
                 <td>${article.rdate}</td>
                 <td>${article.hit}</td>
@@ -36,7 +36,14 @@
         		<a href="/Jboard2/list.do?pg=${ pageGroupStart - 1}" class="prev">이전</a>
         	</c:if>
             <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}" step="1">
-            	<a href="/Jboard2/list.do?pg=${i}" class="num ${(currentPage==i)?'current' : ''}">${i}</a>
+				<c:choose>
+					<c:when test="${search == null}">
+						<a href="/Jboard2/list.do?pg=${i}" class="num ${(currentPage==i)?'current' : ''}">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="/Jboard2/list.do?pg=${i}&search=${search}" class="num ${(currentPage==i)?'current' : ''}">${i}</a>
+					</c:otherwise>
+				</c:choose>
            	</c:forEach>
             <c:if test="${pageGroupEnd < lastPageNum}">
             	<a href="/Jboard2/list.do?pg=${ pageGroupEnd + 1}" class="next">다음</a>

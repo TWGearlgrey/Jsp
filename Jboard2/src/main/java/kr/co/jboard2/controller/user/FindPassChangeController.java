@@ -27,7 +27,7 @@ public class FindPassChangeController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("FindPassChangeController doGet()...1");
+		logger.info("doGet()...1");
 		
 		HttpSession session = req.getSession();
 		String uid = (String) session.getAttribute("uid");
@@ -47,7 +47,7 @@ public class FindPassChangeController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("FindPassChangeController doPost()...1");
+		logger.info("doPost()...1");
 		
 		String uid   = req.getParameter("uid");
 		String pass1 = req.getParameter("pass1");

@@ -86,6 +86,16 @@ public class SQL {
 												+ "ORDER BY `no` DESC "
 												+ "LIMIT ?, 10";
 	
+	public final static String SELECT_ARTICLES_FOR_SEARCH = "SELECT "
+															+ "a.*, "
+															+ "b.`nick` "
+															+ "FROM `Article` AS a "
+															+ "JOIN `User` AS b "
+															+ "ON a.writer = b.uid "
+															+ "WHERE `parent`=0 AND `title` LIKE ? "
+															+ "ORDER BY `no` DESC "
+															+ "LIMIT ?, 10";
+	
 	public final static String SELECT_COMMENTS = "SELECT "
 												+ "a.*, "
 												+ "b.`nick` "
@@ -95,12 +105,14 @@ public class SQL {
 												+ "WHERE parent=?;";
 	
 	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0;";
+	public final static String SELECT_COUNT_TOTAL_FOR_SEARCH = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0 AND `title` LIKE ?;";
 	
 	public final static String UPDATE_ARTICLE = "UPDATE `Article` SET `title`=?, `content`=?, `file`=? WHERE `no`=?";
 	public final static String UPDATE_COMMENT = "UPDATE `Article` SET `content`=? WHERE `no`=?";
 	
 	public final static String UPDATE_ARTICLE_FOR_COMMENT = "UPDATE `Article` SET `comment` = `comment` + 1 WHERE `no`=?";
 	public final static String DELETE_ARTICLE_FOR_COMMENT = "UPDATE `Article` SET `comment` = `comment` - 1 WHERE `no`=?";
+	public final static String CURRENT_COMMENTS_COUNT = "SELECT `comment` FROM `Article` WHERE `no`=?";
 	
 	public final static String DELETE_ARTICLE = "DELETE FROM `Article` WHERE `no`=? OR `parent`=?;";
 	public final static String DELETE_COMMENT = "DELETE FROM `Article` WHERE `no`=?;";

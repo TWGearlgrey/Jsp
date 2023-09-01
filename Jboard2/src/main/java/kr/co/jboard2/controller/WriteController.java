@@ -33,7 +33,7 @@ public class WriteController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("WriterController doGet()...1");
+		logger.info("doGet()...1");
 		// 현재 세션 가져오기
 		HttpSession session = req.getSession();
 		UserDTO sessUser = (UserDTO) session.getAttribute("sessUser");
@@ -50,7 +50,7 @@ public class WriteController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("WriterController doPost()...1");
+		logger.info("doPost()...1");
 		
 		// 파일 업로드
 		MultipartRequest mr = aService.uploadFile(req);

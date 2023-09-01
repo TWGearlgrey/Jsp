@@ -26,7 +26,7 @@ public class FindIdResultController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("FindIdResultController doPost()...1");
+		logger.info("doPost()...1");
 		
 		String name  = req.getParameter("name");
 		String email = req.getParameter("email");

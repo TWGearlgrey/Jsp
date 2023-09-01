@@ -34,7 +34,7 @@ public class MyInfoController extends HttpServlet {
 		UserDTO sessUser = (UserDTO) session.getAttribute("sessUser");
 		
 		if(sessUser != null) {
-			logger.info("MyInfoController doGet()...1");
+			logger.info("doGet()...1");
 			
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/user/myInfo.jsp");
 			dispatcher.forward(req, resp);
@@ -47,7 +47,7 @@ public class MyInfoController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("MyInfoController doPost()...1");
+		logger.info("doPost()...1");
 		
 		// 비밀번호 변경 / 회원 탈퇴 / 회원 수정 ~> 총 3 종류의 post가 들어옴
 		String kind  = req.getParameter("kind");
@@ -67,7 +67,7 @@ public class MyInfoController extends HttpServlet {
 		
 		switch(kind) {
 			case "WITHDRAW":
-				logger.info("MyInfoController doPost()...2-1 : type = WITHDRAW");
+				logger.info("doPost()...2-1 : type = WITHDRAW");
 				int result1 = service.updateUserForWithdraw(uid);
 				
 				// JSON 생성
@@ -82,7 +82,7 @@ public class MyInfoController extends HttpServlet {
 				break;
 				
 			case "PASSWORD":
-				logger.info("MyInfoController doPost()...2-2 : type = PASSWORD");
+				logger.info("doPost()...2-2 : type = PASSWORD");
 				int result2 = service.updateUserPass(uid, pass);
 				
 				// JSON 생성
@@ -95,7 +95,7 @@ public class MyInfoController extends HttpServlet {
 				break;
 				
 			case "MODIFY":
-				logger.info("MyInfoController doPost()...2-3 : type = MODIFY");
+				logger.info("doPost()...2-3 : type = MODIFY");
 				UserDTO dto = new UserDTO();
 				dto.setUid(uid);
 				dto.setName(name);

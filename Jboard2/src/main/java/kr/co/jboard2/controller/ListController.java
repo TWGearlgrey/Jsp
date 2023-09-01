@@ -35,73 +35,49 @@ public class ListController extends HttpServlet {
 		UserDTO sessUser = (UserDTO) session.getAttribute("sessUser");
 		
 		if(sessUser != null) {
+			
 			logger.info("ListController doGet()...1");
 			
-			String pg = req.getParameter("pg");
+			// 데이터 수신
+			String pg     = req.getParameter("pg");
+			String search = req.getParameter("search");
 			
-			// DAO 객체 생성
-			ArticleDAO dao = ArticleDAO.getInstance();
+			// 현재 페이지 번호
+			int currentPage = service.getCurrentPage(pg);
 			
-			// 페이지 관련 변수
-			int start = 0;
-			int currentPage = 1;
-			int total = 0;
-			int lastPageNum = 0;
+			// 전체 게시물 갯수 
+			int total = service.selectCountTotal(search);
 			
-			int pageGroupCurrent = 1;
-			int pageGroupStart = 1;
-			int pageGroupEnd = 0;
+			// 마지막 페이지 번호
+			int lastPageNum = service.getLastPageNum(total);
 			
-			int pageStartNum = 0;
+			// 페이지 그룹 start, end 번호
+			int[] result = service.getPageGroupNum(currentPage, lastPageNum);
 			
-			// 현재 페이지 계산
-			if(pg != null) {
-				currentPage = Integer.parseInt(pg);
-			}
+			// 페이지 시작번호
+			int pageStartNum = service.getPageStartNum(total, currentPage);
 			
-			// Limit 시작값 계산
-			start = (currentPage -1) * 10;
+			// 시작 인덱스
+			int start = service.getStartNum(currentPage);
 			
-			// 전체 게시물 갯수 조회
-			total = dao.selectCountTotal();
-			
-			// 페이지 번호 계산
-			if(total % 10 == 0) {
-				lastPageNum = (total / 10);
-			}else {
-				lastPageNum = (total / 10) + 1;
-			}
-			
-			// 페이지 그룹 계산
-			pageGroupCurrent = (int) Math.ceil(currentPage / 10.0);
-			pageGroupStart   = (pageGroupCurrent - 1) * 10 + 1;
-			pageGroupEnd     = pageGroupCurrent * 10;
-			
-			if(pageGroupEnd > lastPageNum) {
-				pageGroupEnd = lastPageNum;
-			}
-			
-			// 페이지 시작번호 계산
-			pageStartNum = total - start + 1;
+			// 글 조회
+			List<ArticleDTO> articles = service.selectArticles(start, search);
+			req.setAttribute("articles", articles);
 			
 			req.setAttribute("pageStartNum", pageStartNum);
 			req.setAttribute("lastPageNum", lastPageNum);
 			req.setAttribute("currentPage", currentPage);
-			req.setAttribute("pageGroupStart", pageGroupStart);
-			req.setAttribute("pageGroupEnd", pageGroupEnd);
+			req.setAttribute("pageGroupStart", result[0]);
+			req.setAttribute("pageGroupEnd", result[1]);
+			req.setAttribute("search", search);
 			
 			logger.debug("total : " + total);
 			logger.debug("start : " + start);
 			logger.debug("lastPageNum : " + lastPageNum);
 			logger.debug("pageStartNum : " + pageStartNum);
-			logger.debug("pageGroupEnd : " + pageGroupEnd);
-			logger.debug("pageGroupStart : " + pageGroupStart);
-			logger.debug("pageGroupCurrent : " + pageGroupCurrent);
+			logger.debug("pageGroupEnd : " + result[1]);
+			logger.debug("pageGroupStart : " + result[0]);
 			logger.debug("currentPage : " + currentPage);
-			
-			// 현재 페이지 게시물 조회
-			List<ArticleDTO> articles = service.selectArticles(start);
-			req.setAttribute("articles", articles);
 			
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/list.jsp");
 			dispatcher.forward(req, resp);

@@ -27,7 +27,7 @@ public class RegisterController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("RegisterController doGet()...1");
+		logger.info("doGet()...1");
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/register.jsp");
 		dispatcher.forward(req, resp);
@@ -36,7 +36,7 @@ public class RegisterController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		logger.info("RegisterController doPost()...1");
+		logger.info("doPost()...1");
 		
 		String uid   = req.getParameter("uid");
 		String pass1 = req.getParameter("pass1");
@@ -69,7 +69,7 @@ public class RegisterController extends HttpServlet {
 		
 		service.insertUser(dto);
 		
-		logger.info("RegisterController doGet()...2 : " + dto);
+		logger.info("doGet()...2 : " + dto);
 		
 		resp.sendRedirect("/Jboard2/user/login.do?success=200");
 	}
