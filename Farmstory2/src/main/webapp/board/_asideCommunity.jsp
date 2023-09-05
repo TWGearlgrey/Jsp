@@ -6,11 +6,11 @@
             <img src="../images/sub_aside_cate5_tit.png" alt="커뮤니티"/>
 
             <ul class="lnb">
-                <li class="on"><a href="#">공지사항</a></li>
-                <li class=""><a href="#">오늘의식단</a></li>
-                <li class=""><a href="#">나도요리사</a></li>
-                <li class=""><a href="#">1:1고객문의</a></li>
-                <li class=""><a href="#">자주묻는질문</a></li>
+                <li class="${cate eq 'notice'?'on':'off'}"><a href="/Farmstory2/board/list.do?group=Community&cate=notice">공지사항</a></li>
+                <li class="${cate eq 'menu'?'on':'off'}"><a href="/Farmstory2/board/list.do?group=Community&cate=menu">오늘의식단</a></li>
+                <li class="${cate eq 'chef'?'on':'off'}"><a href="/Farmstory2/board/list.do?group=Community&cate=chef">나도요리사</a></li>
+                <li class="${cate eq 'qna'?'on':'off'}"><a href="/Farmstory2/board/list.do?group=Community&cate=qna">1:1고객문의</a></li>
+                <li class="${cate eq 'faq'?'on':'off'}"><a href="/Farmstory2/board/list.do?group=Community&cate=faq">자주묻는질문</a></li>
             </ul>
         </aside>
         

@@ -22,7 +22,7 @@ public class ViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		logger.info("doGet()...1");
-
+		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/market/view.jsp");
 		dispatcher.forward(req, resp);	
 	}

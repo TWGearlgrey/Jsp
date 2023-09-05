@@ -22,9 +22,6 @@
         <div id="user">
             <section class="login">
         		<form action="${ctxPath}/user/login.do" method="post">
-		        	<input type="hidden" name="target" value="target"/>
-		        	<input type="hidden" name="group" value="group"/>
-		        	<input type="hidden" name="cate" value="cate"/>
 		        	<input type="hidden" name="no" value="no"/>
 		            <table border="0">
 		                <tr>

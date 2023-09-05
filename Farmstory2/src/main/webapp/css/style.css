@@ -6,6 +6,7 @@
 }
 ul, ol {list-style: none;}
 a {text-decoration: none; color: #111;}
+input, textarea {outline: none;}
 
 #container {
     width: 980px;
@@ -923,6 +924,260 @@ input[type=number]::-webkit-outer-spin-button {
     right: 0;
 }
 
+.asideList .current {
+	font-weight: bold;
+}
+
+.asideList .search {
+	position: absolute;
+	display: inline-block;
+	right: 0px;
+	top: -10px;
+}
+
+.asideList > form {
+    float: right;
+    margin-bottom: -14px;
+}
+
+.asideList > form > input[name=search]{
+    width: 200px;
+    height: 26px;
+    text-indent: 6px;
+    border: 1px solid #d7d7d7;
+}
+.asideList > form > input[type=submit]{
+    border: 1px solid #d7d7d7;
+    background: #f2f2f2; 
+    color: #111;
+    padding: 6px;
+}
+
+/* 글쓰기 */
+.write {
+    position: relative;
+    width: 720px;
+    margin: 60px auto;
+}
+
+.write > article > p {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.write table {
+    width: 100%;
+    border-top: 2px solid #111;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 6px;
+}
+
+.write table th {
+    padding: 12px;
+    border-top: 1px solid #d1dee2;
+    border-bottom: 1px solid #d1dee2;
+    background: #e5ecef;
+    color: #383838;
+}
+.write table td {    
+    padding: 12px 6px;
+    border-top: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;    
+}
+.write table td:nth-child(1) {
+    width: 100px;
+    background: #f5f8f9;
+    text-align: center;
+}
+.write table input {
+    width: 100%;
+    height: 24px;
+    border: 0;    
+}
+.write table textarea {
+    width: 100%;
+    height: 280px;
+    resize: none;    
+    border: 0;
+}
+.write form > div {
+    margin-top: 10px;
+    text-align: right;
+}
+
+
+
+/* 글보기 */
+.view {
+    position: relative;
+    width: 720px;
+    margin: 60px auto;
+}
+
+.view > article > p {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.view table {
+    width: 100%;
+    border-top: 2px solid #111;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 6px;
+}
+
+.view table th {
+    padding: 12px;
+    border-top: 1px solid #d1dee2;
+    border-bottom: 1px solid #d1dee2;
+    background: #e5ecef;
+    color: #383838;
+}
+.view table td {    
+    padding: 12px 6px;
+    border-top: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;    
+}
+.view table td:nth-child(1) {
+    width: 100px;
+    background: #f5f8f9;
+    text-align: center;
+}
+.view table input {
+    width: 100%;
+    height: 24px;
+    border: 0;    
+}
+.view table textarea {
+    width: 100%;
+    height: 280px;
+    resize: none;    
+    border: 0;
+}
+.view > div {
+    padding: 16px 0;
+    text-align: right;
+}
+
+.view > section {
+    padding: 20px;
+    border: 1px solid #e3e3e3;
+    background: #f9f9f9;
+    margin-bottom: 16px;
+}
+.view > section > h3 {
+    font-weight: bold;
+}
+.view > .commentList > article {
+    border-top: 1px dotted #999;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.view > .commentList > article textarea {
+    width: 100%;
+    height: 60px;
+    padding: 6px;
+    box-sizing: border-box;
+    resize: none;
+    border: 0;
+    background: transparent;
+}
+.view > .commentList > article textarea.modi {
+	border: 1px solid #bbb;
+	background: white;
+}
+.view > .commentList > article div {
+    text-align: right;
+}
+
+.view > .commentList > article div > .can {
+	display: none;
+}
+
+.view > .commentList > .empty {
+    padding: 20px 0;
+    text-align: center;
+}
+
+.view > .commentForm > form > textarea {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #e4eaec;
+    margin: 10px 0;
+    resize: none;
+}
+.view > .commentForm > form > div {
+    text-align: right;
+}
+
+.view .downloadZone {
+	color: blue;
+	text-decoration: underline; 
+}
+
+.view input:focus {outline: none;}
+.view textarea:focus {outline: none;}
+
+
+
+/* 글수정 */
+.modify {
+    position: relative;
+    width: 720px;
+    margin: 60px auto;
+}
+
+.modify > article > p {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.modify table {
+    width: 100%;
+    border-top: 2px solid #111;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 6px;
+}
+
+.modify table th {
+    padding: 12px;
+    border-top: 1px solid #d1dee2;
+    border-bottom: 1px solid #d1dee2;
+    background: #e5ecef;
+    color: #383838;
+}
+.modify table td {    
+    padding: 12px 6px;
+    border-top: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;    
+}
+.modify table td:nth-child(1) {
+    width: 100px;
+    background: #f5f8f9;
+    text-align: center;
+}
+.modify table input {
+    width: 100%;
+    height: 24px;
+    border: 0;    
+}
+.modify table textarea {
+    width: 100%;
+    height: 280px;
+    resize: none;    
+    border: 0;
+}
+.modify form > div {
+    margin-top: 10px;
+    text-align: right;
+}
 
 
 

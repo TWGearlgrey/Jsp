@@ -1,5 +1,343 @@
 package kr.co.farmstory2.dao;
 
-public class ArticleDAO {
+import java.util.ArrayList;
+import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import kr.co.farmstory2.db.DBHelper;
+import kr.co.farmstory2.db.SQL;
+import kr.co.farmstory2.dto.ArticleDTO;
+import kr.co.farmstory2.dto.FileDTO;
+
+public class ArticleDAO extends DBHelper{
+
+	// 싱글톤 
+	private static ArticleDAO instance = new ArticleDAO();
+	public static ArticleDAO getInstance() {
+		return instance;
+	}
+	private ArticleDAO() {}
+	
+	// 로거
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	
+	
+	// CRUD 메서드 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	// 게시글 작성
+	public int insertArticle(ArticleDTO dto) {
+		int no = 0;
+		try {
+			logger.info("insertArticle() start");
+			
+			conn = getConnection();
+			conn.setAutoCommit(false); // Transaction 시작
+			
+			stmt = conn.createStatement();
+			psmt = conn.prepareStatement(SQL.INSERT_ARTICLE);
+			psmt.setString(1, dto.getCate());
+			psmt.setString(2, dto.getTitle());
+			psmt.setString(3, dto.getContent());
+			psmt.setInt(4, dto.getFile());
+			psmt.setString(5, dto.getWriter());
+			psmt.setString(6, dto.getRegip());
+			psmt.executeUpdate();
+			rs = stmt.executeQuery(SQL.SELECT_MAX_NO);
+			logger.debug("rs : " + rs);
+			conn.commit();
+			
+			if(rs.next()) {
+				no = rs.getInt(1);
+			}
+			close();
+			logger.info("insertArticle() try end...(no: " + no + ")");
+			
+		} catch (Exception e) {
+			logger.error("insertArticle() ERROR : " + e.getMessage());
+		}
+		return no;
+	}
+	
+	// 게시글 view
+	public ArticleDTO selectArticle(String no) {
+		ArticleDTO dto = null;
+		try {
+			logger.info("selectArticle() start");
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_ARTICLE);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new ArticleDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setParent(rs.getInt(2));
+				dto.setComment(rs.getInt(3));
+				dto.setCate(rs.getString(4));
+				dto.setTitle(rs.getString(5));
+				dto.setContent(rs.getString(6));
+				dto.setFile(rs.getInt(7));
+				dto.setHit(rs.getInt(8));
+				dto.setWriter(rs.getString(9));
+				dto.setRegip(rs.getString(10));
+				dto.setRdate(rs.getString(11));
+				
+				FileDTO fileDto = new FileDTO();
+				fileDto.setFno(rs.getInt(12));
+				fileDto.setAno(rs.getInt(13));
+				fileDto.setOriName(rs.getString(14));
+				fileDto.setNewName(rs.getString(15));
+				fileDto.setDownload(rs.getInt(16));
+				fileDto.setRdate(rs.getString(17));
+				
+				dto.setFileDto(fileDto);
+			}
+			close();
+			logger.info("selectArticle() try end...");
+			
+		} catch (Exception e) {
+			logger.error("selectArticle() ERROR : " + e.getMessage());
+		}
+		return dto;
+	}
+	
+	// 게시글 list
+	public List<ArticleDTO> selectArticles(String cate, int start) {
+		List<ArticleDTO> articles = new ArrayList<>();
+		try {
+			logger.info("selectArticles() start");
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_ARTILCES);
+			psmt.setString(1, cate);
+			psmt.setInt(2, start);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleDTO dto = new ArticleDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setParent(rs.getInt(2));
+				dto.setComment(rs.getInt(3));
+				dto.setCate(rs.getString(4));
+				dto.setTitle(rs.getString(5));
+				dto.setContent(rs.getString(6));
+				dto.setFile(rs.getInt(7));
+				dto.setHit(rs.getInt(8));
+				dto.setWriter(rs.getString(9));
+				dto.setRegip(rs.getString(10));
+				dto.setRdate(rs.getString(11));
+				dto.setNick(rs.getString(12));
+				
+				articles.add(dto);
+			}
+			close();
+			logger.info("selectArticles() try end...");
+			
+		}catch (Exception e) {
+			logger.error("selectArticles() ERROR : " + e.getMessage());
+		}
+		return articles;
+	}
+	
+	// 게시글 수정
+	public void updateArticle(ArticleDTO dto) {
+		try {
+			logger.info("updateArticle() start");
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_ARTICLE);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setInt(3, dto.getNo());
+			psmt.executeUpdate();
+			close();
+			logger.info("updateArticle() try end...");
+			
+		} catch (Exception e) {
+			logger.error("updateArticle() ERROR : " + e.getMessage());
+		}
+	}
+	
+	// 게시글 삭제
+	public void deleteArticle(String no) {
+		try {
+			logger.info("deleteArticle() start");
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			psmt.setString(2, no);
+			psmt.executeUpdate();
+			close();
+			logger.info("deleteArticle() try end...");
+			
+		} catch (Exception e) {
+			logger.error("deleteArticle() ERROR : " + e.getMessage());
+		}
+	}
+	
+	
+	// 추가 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	// 페이징을 위한 게시글 수 조회
+	public int selectCountTotal(String cate) {
+		
+		int total = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL);
+			psmt.setString(1, cate);
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();			
+		}catch (Exception e) {
+			logger.error("selectCountTotal() ERROR : " + e.getMessage());
+		}
+		
+		return total;
+	}
+
+	// view 페이지에서 댓글 조회
+	public List<ArticleDTO> selectComments(String parent) {
+		
+		List<ArticleDTO> comments = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COMMENTS);
+			psmt.setString(1, parent);
+			
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleDTO dto = new ArticleDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setParent(rs.getInt(2));
+				dto.setComment(rs.getInt(3));
+				dto.setCate(rs.getString(4));
+				dto.setTitle(rs.getString(5));
+				dto.setContent(rs.getString(6));
+				dto.setFile(rs.getInt(7));
+				dto.setHit(rs.getInt(8));
+				dto.setWriter(rs.getString(9));
+				dto.setRegip(rs.getString(10));
+				dto.setRdate(rs.getString(11));
+				dto.setNick(rs.getString(12));
+				
+				comments.add(dto);
+			}
+			close();
+		}catch (Exception e) {
+			logger.error("selectComments() ERROR : " + e.getMessage());
+		}
+		
+		return comments;
+	}
+	
+	public int[] insertComment(ArticleDTO dto) {
+		int[] result = {0, 0};
+		try {
+			conn = getConnection();
+			conn.setAutoCommit(false); // Transaction 시작
+			
+			stmt = conn.createStatement();
+			psmt = conn.prepareStatement(SQL.INSERT_COMMENT);
+			psmt.setInt(1, dto.getParent());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getWriter());
+			psmt.setString(4, dto.getRegip());
+			result[0] = psmt.executeUpdate();
+			rs = stmt.executeQuery(SQL.SELECT_MAX_NO);
+			conn.commit();
+			
+			if(rs.next()) {
+				result[1] = rs.getInt(1);
+			}
+			logger.debug("result = {" + result[0] + ", " + result[1] + ")");
+			
+			close();
+		}catch (Exception e) {
+			logger.error("insertComment() ERROR : " + e.getMessage());
+		}
+		return result;
+	}
+	
+	public void updateArticleForComment(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_PLUS_ARTICLE_FOR_COMMENT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error("updateArticleForComment() ERROR : " + e.getMessage());
+		}
+	}
+
+	// 게시글 조회수 count++;
+	public void updateHitOfArticle(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_HIT_OF_ARTICLE);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+			
+		} catch (Exception e) {
+			logger.error("countHitArticle : " + e.getMessage());
+		}
+	}
+	
+	public int deleteComment(String no) {
+		
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_COMMENT);
+			psmt.setString(1, no);
+			result = psmt.executeUpdate();
+			
+			close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public void deleteArticleForComment(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_MINUS_ARTICLE_FOR_COMMENT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error("deleteArticleForComment error : " + e.getMessage());
+		}
+	}
+	
+	public int currentCommentsCount(String no) {
+
+		int currentComment = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.CURRENT_COMMENTS_COUNT);
+			psmt.setString(1, no);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				currentComment = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			logger.error("currentCommentsCount error : " + e.getMessage());
+		}
+		return currentComment;
+	}
 }

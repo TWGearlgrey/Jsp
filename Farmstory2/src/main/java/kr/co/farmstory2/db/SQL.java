@@ -2,7 +2,7 @@ package kr.co.farmstory2.db;
 
 public class SQL {
 	
-	// ━━━━┫ User    ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	// ━━━━┫ User    ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	public static final String INSERT_USER = "INSERT INTO `User` SET "
 											+ "`uid`=?, "
 											+ "`pass`=SHA2(?, 256)," 
@@ -25,13 +25,17 @@ public class SQL {
 	public static final String SELECT_COUNT_NAME_AND_EMAIL	 = "SELECT COUNT(*) FROM `User` WHERE `name`=? AND `email`=?";
 	public static final String SELECT_COUNT_UID_AND_EMAIL	 = "SELECT COUNT(*) FROM `User` WHERE `uid`=? AND `email`=?";
 	public static final String SELECT_TERMS = "SELECT * FROM `Terms`";
-	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛	
+	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛	
 	
-	// ━━━━┫ Article ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓	
+	
+	
+	
+	// ━━━━┫ Article ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓	
 	public static final String INSERT_ARTICLE = "INSERT INTO `Article` SET "
 												+ "`cate`=?, "
 												+ "`title`=?, "
 												+ "`content`=?, "
+												+ "`file`=?, "
 												+ "`writer`=?, "
 												+ "`regip`=?, "
 												+ "`rdate`=NOW()";
@@ -45,11 +49,19 @@ public class SQL {
 	
 	public final static String UPDATE_ARTICLE = "UPDATE `Article` SET `title`=?, `content`=? WHERE `no`=?";
 	
+	public final static String UPDATE_PLUS_ARTICLE_FOR_COMMENT = "UPDATE `Article` SET `comment` = `comment` + 1 WHERE `no`=?";
+	public final static String UPDATE_MINUS_ARTICLE_FOR_COMMENT = "UPDATE `Article` SET `comment` = `comment` - 1 WHERE `no`=?";
+	
+	public final static String UPDATE_HIT_OF_ARTICLE = "UPDATE `Article` SET `hit`=`hit`+1 WHERE `no`= ?";
+	
 	public static final String SELECT_LATESTS = "SELECT `no`, `title`, `rdate` FROM `Article` "
 												+ "WHERE `parent`=0 AND `cate`=? "
 												+ "ORDER BY `no` DESC LIMIT ?;";
 	
-	public static final String SELECT_ARTICLE = "SELECT * FROM `Article` WHERE `no`=?";
+	public static final String SELECT_ARTICLE = "SELECT * FROM `Article` AS a "
+												+ "LEFT JOIN `File` AS b "
+												+ "ON a.`no` = b.`ano` "
+												+ "WHERE `no`=?";
 	
 	public static final String SELECT_ARTILCES = "SELECT "
 												+ "a.*, "
@@ -68,6 +80,8 @@ public class SQL {
 												+ "ON a.writer = b.uid "
 												+ "WHERE `parent`=?";
 	
+	public final static String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `Article`;";
+	
 	public static final String DELETE_ARTICLE = "DELETE FROM `Article` WHERE `no`=? OR `parent`=?";
 	public static final String DELETE_COMMENT = "DELETE FROM `Article` WHERE `no`=?";
 	
@@ -76,9 +90,14 @@ public class SQL {
 	
 	public final static String INSERT_COMMENT_COUNT = "UPDATE `Article` SET `comment` = `comment` + 1 WHERE `no`=?";
 	public final static String DELETE_COMMENT_COUNT = "UPDATE `Article` SET `comment` = `comment` - 1 WHERE `no`=?";
-	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛	
 	
-	// ━━━━┫ Product ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	public final static String CURRENT_COMMENTS_COUNT = "SELECT `comment` FROM `Article` WHERE `no`=?";
+	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛	
+	
+	
+	
+	
+	// ━━━━┫ Product ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	public final static String INSERT_PRODUCT ="INSERT INTO `Product` SET "
 												+ "`type`=?, "
 												+ "`pName`=?, "
@@ -98,9 +117,12 @@ public class SQL {
 	public final static String SELECT_PRODUCTS_TYPE = "SELECT * FROM `Product` WHERE `stock` > 0 AND `type`=? LIMIT ?, 10";
 	public final static String SELECT_COUNT_PRODUCTS_ALL = "SELECT COUNT(*) FROM `Product` WHERE `stock` > 0";
 	public final static String SELECT_COUNT_PRODUCTS_TYPE = "SELECT COUNT(*) FROM `Product` WHERE `stock` > 0 AND `type`=?";
+	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 	
 	
-	// ━━━━┫ Order   ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	
+	
+	// ━━━━┫ Order   ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 	public final static String INSERT_ORDER = "INSERT INTO `Order` SET "
 												+ "`orderProduct`=?, "
 												+ "`orderCount`=?, "
@@ -122,5 +144,19 @@ public class SQL {
 	public final static String DELETE_ORDER = "DELETE FROM `Order` WHERE `orderNo`=?";
 	
 	public final static String SELECT_COUNT_ORDERS_ALL = "SELECT COUNT(*) FROM `Order`";
-	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛	
+	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+	
+	
+
+	// ━━━━┫ File    ┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+	public final static String INSERT_FILE = "INSERT INTO `File` SET "
+			+ "`ano`=?, "
+			+ "`oriName`=?, "
+			+ "`newName`=?, "
+			+ "`rdate`=NOW()";
+
+	public final static String SELECT_FILE = "SELECT * FROM `File` WHERE `fno`=?";
+	
+	public final static String DELETE_FILE = "DELETE FROM `File` WHERE `ano`=?";
+	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 }
