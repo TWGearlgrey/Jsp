@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.co.farmstory2.dto.ArticleDTO;
 import kr.co.farmstory2.service.ArticleService;
 import kr.co.farmstory2.service.FileService;
 
@@ -38,6 +39,9 @@ public class DeleteController extends HttpServlet {
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
 		req.setAttribute("no", no);
+		
+		ArticleDTO dto = aService.selectArticle(no);
+		String fileName = dto.getFileDto().getNewName();
 
 		// 파일 삭제(DB)
 		int result = fService.deleteFile(no);
@@ -49,7 +53,10 @@ public class DeleteController extends HttpServlet {
 			logger.info("DELETE FILE DIRECTORY...");
 			
 			String path = aService.getFilePath(req);
-			File file = new File(path+"/"+"파일명"); // 수정해야함
+			
+			logger.debug("oriName : " + fileName);
+			
+			File file = new File(path+"/"+fileName); 
 			logger.debug("file : " + file);
 			
 			if(file.exists()) {

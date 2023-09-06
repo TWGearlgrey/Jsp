@@ -10,6 +10,8 @@
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
   
+ 
+ 
   <!-- MVC 보안설정 -->
   <security-constraint>
   	<display-name>Prohibit Model1</display-name>
@@ -25,6 +27,8 @@
   	- 시작 페이지 index.jsp 설정하지 않음
   	- controller.IndexController를 통한 기본 메인페이지 출력
   -->
+ 
+ 
   
   <!-- 인코딩 필터 등록 -->
   <filter>
@@ -40,5 +44,42 @@
   	<filter-name>SetCharacterEncodingFilter</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>  
+ 
+ 
   
+  <!-- 필터 등록/연결 -->
+  <filter>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<filter-class>kr.co.farmstory2.filter.CheckLoginFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<url-pattern>/board/write.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<url-pattern>/board/view.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<url-pattern>/board/modify.do</url-pattern>
+  </filter-mapping>
+  
+  <filter-mapping>
+  	<filter-name>CheckLoginFilter</filter-name>
+  	<url-pattern>/board/delete.do</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+  	<filter-name>CheckAdminFilter</filter-name>
+  	<filter-class>kr.co.farmstory2.filter.CheckAdminFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>CheckAdminFilter</filter-name>
+  	<url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
 </web-app>

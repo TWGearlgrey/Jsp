@@ -148,7 +148,8 @@ public class ArticleDAO extends DBHelper{
 			psmt = conn.prepareStatement(SQL.UPDATE_ARTICLE);
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
-			psmt.setInt(3, dto.getNo());
+			psmt.setInt(3, dto.getFile());
+			psmt.setInt(4, dto.getNo());
 			psmt.executeUpdate();
 			close();
 			logger.info("updateArticle() try end...");
@@ -176,6 +177,95 @@ public class ArticleDAO extends DBHelper{
 	}
 	
 	
+	
+	
+	// 댓글 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	// view 페이지에서 댓글 조회
+		public List<ArticleDTO> selectComments(String parent) {
+			
+			List<ArticleDTO> comments = new ArrayList<>();
+			
+			try {
+				conn = getConnection();
+				psmt = conn.prepareStatement(SQL.SELECT_COMMENTS);
+				psmt.setString(1, parent);
+				
+				rs = psmt.executeQuery();
+				
+				while(rs.next()) {
+					ArticleDTO dto = new ArticleDTO();
+					dto.setNo(rs.getInt(1));
+					dto.setParent(rs.getInt(2));
+					dto.setComment(rs.getInt(3));
+					dto.setCate(rs.getString(4));
+					dto.setTitle(rs.getString(5));
+					dto.setContent(rs.getString(6));
+					dto.setFile(rs.getInt(7));
+					dto.setHit(rs.getInt(8));
+					dto.setWriter(rs.getString(9));
+					dto.setRegip(rs.getString(10));
+					dto.setRdate(rs.getString(11));
+					dto.setNick(rs.getString(12));
+					
+					comments.add(dto);
+				}
+				close();
+			}catch (Exception e) {
+				logger.error("selectComments() ERROR : " + e.getMessage());
+			}
+			
+			return comments;
+		}
+		
+		
+		// 덧글 작성 {성공유무, 댓글 no} 반환
+		public int[] insertComment(ArticleDTO dto) {
+			int[] result = {0, 0};
+			try {
+				conn = getConnection();
+				conn.setAutoCommit(false); // Transaction 시작
+				
+				stmt = conn.createStatement();
+				psmt = conn.prepareStatement(SQL.INSERT_COMMENT);
+				psmt.setInt(1, dto.getParent());
+				psmt.setString(2, dto.getContent());
+				psmt.setString(3, dto.getWriter());
+				psmt.setString(4, dto.getRegip());
+				result[0] = psmt.executeUpdate();
+				rs = stmt.executeQuery(SQL.SELECT_MAX_NO);
+				conn.commit();
+				
+				if(rs.next()) {
+					result[1] = rs.getInt(1);
+				}
+				logger.debug("result = {" + result[0] + ", " + result[1] + ")");
+				
+				close();
+			}catch (Exception e) {
+				logger.error("insertComment() ERROR : " + e.getMessage());
+			}
+			return result;
+		}
+		
+		// 댓글 수정 ~~ 성공유무 반환
+		public int updataComment(String content, String no) {
+			int result = 0;
+			try {
+				conn = getConnection();
+				psmt = conn.prepareStatement(SQL.UPDATE_COMMENT);
+				psmt.setString(1, content);
+				psmt.setString(2, no);
+				result = psmt.executeUpdate();
+				close();
+				
+			} catch (Exception e) {
+				logger.error("updateComment ERROR : " + result);
+			}
+			return result;
+		}
+		
+		
+	
 	// 추가 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 	// 페이징을 위한 게시글 수 조회
 	public int selectCountTotal(String cate) {
@@ -198,84 +288,6 @@ public class ArticleDAO extends DBHelper{
 		return total;
 	}
 
-	// view 페이지에서 댓글 조회
-	public List<ArticleDTO> selectComments(String parent) {
-		
-		List<ArticleDTO> comments = new ArrayList<>();
-		
-		try {
-			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_COMMENTS);
-			psmt.setString(1, parent);
-			
-			rs = psmt.executeQuery();
-			
-			while(rs.next()) {
-				ArticleDTO dto = new ArticleDTO();
-				dto.setNo(rs.getInt(1));
-				dto.setParent(rs.getInt(2));
-				dto.setComment(rs.getInt(3));
-				dto.setCate(rs.getString(4));
-				dto.setTitle(rs.getString(5));
-				dto.setContent(rs.getString(6));
-				dto.setFile(rs.getInt(7));
-				dto.setHit(rs.getInt(8));
-				dto.setWriter(rs.getString(9));
-				dto.setRegip(rs.getString(10));
-				dto.setRdate(rs.getString(11));
-				dto.setNick(rs.getString(12));
-				
-				comments.add(dto);
-			}
-			close();
-		}catch (Exception e) {
-			logger.error("selectComments() ERROR : " + e.getMessage());
-		}
-		
-		return comments;
-	}
-	
-	public int[] insertComment(ArticleDTO dto) {
-		int[] result = {0, 0};
-		try {
-			conn = getConnection();
-			conn.setAutoCommit(false); // Transaction 시작
-			
-			stmt = conn.createStatement();
-			psmt = conn.prepareStatement(SQL.INSERT_COMMENT);
-			psmt.setInt(1, dto.getParent());
-			psmt.setString(2, dto.getContent());
-			psmt.setString(3, dto.getWriter());
-			psmt.setString(4, dto.getRegip());
-			result[0] = psmt.executeUpdate();
-			rs = stmt.executeQuery(SQL.SELECT_MAX_NO);
-			conn.commit();
-			
-			if(rs.next()) {
-				result[1] = rs.getInt(1);
-			}
-			logger.debug("result = {" + result[0] + ", " + result[1] + ")");
-			
-			close();
-		}catch (Exception e) {
-			logger.error("insertComment() ERROR : " + e.getMessage());
-		}
-		return result;
-	}
-	
-	public void updateArticleForComment(String no) {
-		try {
-			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.UPDATE_PLUS_ARTICLE_FOR_COMMENT);
-			psmt.setString(1, no);
-			psmt.executeUpdate();
-			close();
-			
-		}catch(Exception e) {
-			logger.error("updateArticleForComment() ERROR : " + e.getMessage());
-		}
-	}
-
 	// 게시글 조회수 count++;
 	public void updateHitOfArticle(String no) {
 		try {
@@ -290,8 +302,8 @@ public class ArticleDAO extends DBHelper{
 		}
 	}
 	
+	// 댓글 삭제 
 	public int deleteComment(String no) {
-		
 		int result = 0;
 		
 		try {
@@ -307,7 +319,22 @@ public class ArticleDAO extends DBHelper{
 		}
 		return result;
 	}
-	
+
+	// 댓글 등록 시 댓글 count++;
+	public void updateArticleForComment(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_PLUS_ARTICLE_FOR_COMMENT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error("updateArticleForComment() ERROR : " + e.getMessage());
+		}
+	}
+
+	// 댓글 삭제 시 댓글 count--;
 	public void deleteArticleForComment(String no) {
 		try {
 			conn = getConnection();
@@ -321,6 +348,7 @@ public class ArticleDAO extends DBHelper{
 		}
 	}
 	
+	// 현재 댓글 count. (댓글이 없습니다. 문자열 출력 여부 확인을 위함)
 	public int currentCommentsCount(String no) {
 
 		int currentComment = 0;

@@ -1181,6 +1181,223 @@ input[type=number]::-webkit-outer-spin-button {
 
 
 
+/* 장보기 */
+#sub > .market .lnb > li:nth-child(1) > a {background-image: url('../images/sub_cate2_lnb1.png');}
+#sub > .market .lnb > li:nth-child(1) > a:hover {background-image: url('../images/sub_cate2_lnb1_ov.png');}
+#sub > .market .lnb > li:nth-child(1).on > a {background-image: url('../images/sub_cate2_lnb1_ov.png');}
+
+#sub > .market > .list > .sort > a {
+    color: #999;
+}
+#sub > .market > .list > .sort > .on {
+    color:#111;
+}
+#sub > .market > .list > table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1px solid #111;
+    border-bottom: 1px solid #111;
+    margin-top: 10px;
+}
+#sub > .market > .list > table tr {
+    border-bottom: 1px solid #eee;
+}
+
+#sub > .market > .list > table tr > td {            
+    padding: 10px;            
+    box-sizing: border-box;
+    color: #777;
+}
+#sub > .market > .list > table tr > td:nth-child(1) {width: 10%;}
+#sub > .market > .list > table tr > td:nth-child(2) {width: 10%;}
+#sub > .market > .list > table tr > td:nth-child(3) {width: 20%;}
+#sub > .market > .list > table tr > td:nth-child(4) {width: 10%;}
+
+#sub > .market > .list > table tr > td > strong {
+    color: #111;
+    font-weight: bold;            
+}
+
+#sub > .market > .list > .paging {
+    margin: 20px 0;
+    text-align: center;
+}
+#sub > .market > .list > .paging > a {
+    color: #999;
+}
+#sub > .market > .list > .paging > .on {
+    color: #111;
+    text-decoration: underline;
+}
+
+#sub > .market > .view > h3 {
+    margin: 10px 0;
+    font-family: '고딕';
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#sub > .market > .view > .basic {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+#sub > .market > .view > .basic > img {
+    float: left;
+    width: 240px;
+    height: 240px;
+}
+#sub > .market > .view > .basic > table {
+    float: right;
+    width: 60%;
+    height: 200px;
+    margin-left: 16px;
+    border-top: 2px solid #e7e7e7;
+    border-bottom: 2px solid #e7e7e7;
+}
+
+#sub > .market > .view > .basic > table em {            
+    color: #777;
+}
+#sub > .market > .view > .basic > table .total {
+    font-weight: bold;
+    color: #c20a0a;        
+}
+
+#sub > .market > .view > .basic > .btnOrder {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+
+#sub > .market > .view > .detail > img { width: 760px; }
+#sub > .market > .view > .delivery {}
+#sub > .market > .view > .exchange table {
+    width: 100%;
+    border-collapse: collapse;                     
+}
+#sub > .market > .view > .exchange table tr {}
+#sub > .market > .view > .exchange table td {
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+#sub > .market > .view > .exchange table td:first-child {border-left: none;}
+#sub > .market > .view > .exchange table td:last-child {border-right: none;}
+
+#sub > .market > .view > .exchange table ul > li {
+    margin-left: 12px;
+    list-style-type: disc;
+    line-height: 18px;
+}
+
+
+input[type=number]{
+    width: 60px;
+    outline: none;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;         
+}
+
+#sub > .market > .order {}
+#sub > .market > .order > h3 {
+    margin: 10px 0;
+    font-family: '고딕';
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#sub > .market > .order > .info {
+    width: 100%;
+    height: 270px;
+    position: relative;
+    overflow: hidden;
+}
+#sub > .market > .order > .info > img {
+    float: left;
+    width: 240px;
+}
+#sub > .market > .order > .info > table {
+    float: right;
+    width: 60%;
+    height: 200px;
+    margin-left: 16px;
+    border-top: 2px solid #e7e7e7;
+    border-bottom: 2px solid #e7e7e7;
+}
+
+#sub > .market > .order > .info > table em {            
+    color: #777;
+}
+#sub > .market > .order > .info > table .total {
+    font-weight: bold;
+    color: #c20a0a;        
+}
+
+#sub > .market > .order > .info > .btnOrder {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+#sub > .market > .order > .info .final {
+	font-weight: bold;
+	color: #c20a0a;
+}
+
+
+#sub > .market > .order > .shipping {}
+#sub > .market > .order > .shipping table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 2px solid #be0808;            
+}
+#sub > .market > .order > .shipping table tr {}
+#sub > .market > .order > .shipping table td {
+    padding: 10px;
+    border-bottom: 1px solid #d7d7d7;
+}
+#sub > .market > .order > .shipping table td:first-child {
+    width: 120px;
+    background: #f7f7f7;
+}
+
+#sub > .market > .order > .shipping input {
+    height: 18px;
+    border: 1px solid #d7d7d7;
+    outline: none;
+}
+
+#sub > .market > .order > .shipping input[name=addr1] {
+    display: block;
+    width: 320px;
+    margin-top: 2px;
+}
+
+#sub > .market > .order > .shipping input[name=addr2] {
+    display: block;
+    width: 320px;
+    margin-top: 2px;
+}
+
+#sub > .market > .order > .shipping textarea {
+    width: 320px;
+    height: 60px;
+    border: 1px solid #d7d7d7;
+    resize: none;            
+    outline: none;
+}
+
+#sub > .market > .order > p {
+    margin: 16px 0;
+    text-align: center;
+}
+
+
 
 /* 버튼 공통 */
 .btnNext   { display: inline-block; padding: 8px; border: 1px solid #bebebe; background: #e9e9e9; color: #111;}

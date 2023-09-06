@@ -1,14 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
         <main>
-            <aside>
-                <h3>주요기능</h3>
-                <ul>
-                    <li><a href="/Farmstory2/admin/productList.do">상품관리</a></li>
-                    <li><a href="/Farmstory2/admin/orderList.do">주문관리</a></li>
-                    <li class="on"><a href="/Farmstory2/admin/userList.do">회원관리</a></li>                    
-                </ul>
-            </aside>
+            <%@ include file="./_aside.jsp" %>
             <section id="orderList">
                 <nav>
                     <h3>회원목록</h3>

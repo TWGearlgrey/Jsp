@@ -31,27 +31,36 @@ public class CommentController extends HttpServlet {
 		String kind   = req.getParameter("kind");
 		String no     = req.getParameter("no");
 		String parent = req.getParameter("parent");
+		String content = req.getParameter("content");
 		
-		logger.debug("kind   : " + kind);
-		logger.debug("no     : " + no);
-		logger.debug("parent : " + parent);
+		logger.debug("kind    : " + kind);
+		logger.debug("no      : " + no);
+		logger.debug("parent  : " + parent);
+		logger.debug("content : " + content);
 		
 		int result = 0;
 		int currentComment = 0;
 		
 		switch(kind) {
-		case "REMOVE": // 추가 확장을 위해 switch. case를 사용
-			result = service.deleteComment(no);
-			logger.info("doGet()...2 :: DELETE COMMENT : " + result);
-			
-			if(result > 0) {
-				service.deleteArticleForComment(parent);
-				logger.info("doGet()...3 :: COMMENT COUNT--;");
-				currentComment = service.currentCommentsCount(parent);
-				logger.info("doGet()...4 :: CURRENT COMMENTS : " + currentComment);
-			}
-			
-			break;
+			case "REMOVE": 
+				result = service.deleteComment(no);
+				logger.info("doGet()...2-1 :: DELETE COMMENT : " + result);
+				
+				if(result > 0) {
+					service.deleteArticleForComment(parent);
+					logger.info("doGet()...2-2 :: COMMENT COUNT--;");
+					currentComment = service.currentCommentsCount(parent);
+					logger.info("doGet()...2-3 :: CURRENT COMMENTS : " + currentComment);
+				}
+				logger.info("doGet()...2-4 :: DELETE END...");
+				break;
+				
+				
+			case "MODIFY":
+				result = service.updataComment(content, no);
+				logger.info("doGet...3-1 :: COMMENT MODIFY...");
+				logger.info("doGet...3-1 :: MODIFY END...");
+				break;
 		}
 		
 		// JSON 출력

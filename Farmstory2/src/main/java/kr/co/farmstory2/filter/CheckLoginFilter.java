@@ -1,4 +1,4 @@
-package kr.co.farmstory2.controller.filter;
+package kr.co.farmstory2.filter;
 
 import java.io.IOException;
 
@@ -22,23 +22,22 @@ public class CheckLoginFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
-		logger.debug("doFilter...1");
+		// 로그인 여부 확인
+		logger.debug("doFilter...");
 		
-		HttpServletRequest httprRequest = (HttpServletRequest) request;
-		HttpSession session = httprRequest.getSession();
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpSession session = httpRequest.getSession();
 		
 		UserDTO sessUser = (UserDTO) session.getAttribute("sessUser");
 		
 		if(sessUser != null) {
-			logger.debug("doFilter...2 : sessUser IS NOT NULL");
+			logger.debug("here1...");
 			chain.doFilter(request, response);
 			
-		}else { // 다음 필터 호출. 필터 없을 시 최종 자원 요청
-			logger.debug("doFilter...3");
+		}else {
+			// 다음 필터 호출, 필터 없으면 최종 자원 요청
+			logger.debug("here2...");
 			((HttpServletResponse)response).sendRedirect("/Farmstory2/user/login.do?success=101");
 		}
-		
-		
 	}
 }

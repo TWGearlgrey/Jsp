@@ -58,6 +58,10 @@ public enum ArticleService {
 	
 	
 	// 추가 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	public int updataComment(String content, String no) {
+		return dao.updataComment(content, no);
+	}
+		
 	public int selectCountTotal(String cate) {
 		return dao.selectCountTotal(cate);
 	}
@@ -204,6 +208,17 @@ public enum ArticleService {
 		
 		return mr;
 	}
+	
+	
+	// 경로구하기
+	public String uploadFilePath(HttpServletRequest req) {
+		
+		ServletContext ctx = req.getServletContext();
+		String path = ctx.getRealPath("/thumb");
+		
+		return path;
+	}
+	
 	
 	// 파일 다운로드
 	public void downloadFile(HttpServletRequest req, HttpServletResponse resp, FileDTO dto) throws IOException {

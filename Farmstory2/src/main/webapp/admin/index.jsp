@@ -1,14 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
         <main>
-            <aside>
-                <h3>주요기능</h3>
-                <ul>
-                    <li><a href="/Farmstory2/admin/productList.do">상품관리</a></li>
-                    <li><a href="/Farmstory2/admin/orderList.do">주문관리</a></li>
-                    <li><a href="/Farmstory2/admin/userList.do">회원관리</a></li>                    
-                </ul>
-            </aside>
+            <%@ include file="./_aside.jsp" %>
             <section>
                 <nav>
                     <h3>관리자 메인</h3>
@@ -36,22 +29,6 @@
                             <td>100</td>
                             <td>2023-01-01</td>
                         </tr>
-                        <tr>
-                            <td>1011</td>
-                            <td>사과 500g</td>
-                            <td>과일</td>
-                            <td>4,000원</td>
-                            <td>100</td>
-                            <td>2023-01-01</td>
-                        </tr>
-                        <tr>
-                            <td>1011</td>
-                            <td>사과 500g</td>
-                            <td>과일</td>
-                            <td>4,000원</td>
-                            <td>100</td>
-                            <td>2023-01-01</td>
-                        </tr>                        
                     </table>
                 </article>
 
@@ -70,26 +47,6 @@
                             <th>합계</th>
                             <th>주문자</th>
                             <th>주문일</th>
-                        </tr>
-                        <tr>
-                            <td>1011</td>
-                            <td>사과 500g</td>
-                            <td>4,000원</td>
-                            <td>2개</td>
-                            <td>3,000원</td>
-                            <td>8,000원</td>
-                            <td>홍길동</td>
-                            <td>2023-01-01</td>
-                        </tr>
-                        <tr>
-                            <td>1011</td>
-                            <td>사과 500g</td>
-                            <td>4,000원</td>
-                            <td>2개</td>
-                            <td>3,000원</td>
-                            <td>8,000원</td>
-                            <td>홍길동</td>
-                            <td>2023-01-01</td>
                         </tr>
                         <tr>
                             <td>1011</td>
@@ -127,24 +84,6 @@
                             <td>2</td>
                             <td>2023-01-01</td>
                         </tr>
-                        <tr>
-                            <td>a101</td>
-                            <td>김유신</td>
-                            <td>유신123</td>
-                            <td>010-1234-1001</td>
-                            <td>yusin123@naver.com</td>
-                            <td>2</td>
-                            <td>2023-01-01</td>
-                        </tr>
-                        <tr>
-                            <td>a101</td>
-                            <td>김유신</td>
-                            <td>유신123</td>
-                            <td>010-1234-1001</td>
-                            <td>yusin123@naver.com</td>
-                            <td>2</td>
-                            <td>2023-01-01</td>
-                        </tr>                        
                     </table>
                 </article>
             </section>

@@ -64,7 +64,7 @@ public class ListController extends HttpServlet {
 		
 		logger.debug("group          : " + group);
 		logger.debug("cate           : " + cate);
-		logger.debug("articles       : " + articles);
+		logger.debug("articles       : " + articles.subList(0, 1));
 		logger.debug("currentPage    : " + currentPage);
 		logger.debug("lastPageNum    : " + lastPageNum);
 		logger.debug("pageGroupStart : " + result[0]);
