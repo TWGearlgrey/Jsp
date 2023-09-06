@@ -1,6 +1,7 @@
 package kr.co.farmstory2.dto;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.UUID;
 
 public class ProductDTO {
@@ -53,6 +54,10 @@ public class ProductDTO {
 	public int getpNo() {
 		return pNo;
 	}
+	public String getpNoWithComma() {
+		DecimalFormat df = new DecimalFormat("###,###");
+		return df.format(pNo);
+	}
 	public void setpNo(int pNo) {
 		this.pNo = pNo;
 	}
@@ -86,6 +91,10 @@ public class ProductDTO {
 	public int getPrice() {
 		return price;
 	}
+	public String getPriceWithComma() {
+		DecimalFormat df = new DecimalFormat("###,###");
+		return df.format(price);
+	}
 	public void setPrice(int price) {
 		this.price = price;
 	}
@@ -97,6 +106,10 @@ public class ProductDTO {
 	
 	public int getDelivery() {
 		return delivery;
+	}
+	public String getDeliveryWithComma() {
+		DecimalFormat df = new DecimalFormat("###,###");
+		return df.format(delivery);
 	}
 	public void setDelivery(int delivery) {
 		this.delivery = delivery;
@@ -110,6 +123,10 @@ public class ProductDTO {
 	public int getStock() {
 		return stock;
 	}
+	public String getStockWithComma() {
+		DecimalFormat df = new DecimalFormat("###,###");
+		return df.format(stock);
+	}
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
@@ -121,6 +138,10 @@ public class ProductDTO {
 	
 	public int getSold() {
 		return sold;
+	}
+	public String getSoldWithComma() {
+		DecimalFormat df = new DecimalFormat("###,###");
+		return df.format(sold);
 	}
 	public void setSold(int sold) {
 		this.sold = sold;
@@ -190,6 +211,9 @@ public class ProductDTO {
 	
 	
 	public String getRdate() {
+		return rdate.substring(0, 10);
+	}
+	public String getFullRdate() {
 		return rdate;
 	}
 	public void setRdate(String rdate) {

@@ -1,6 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
-<%@ include file="./_aside.jsp" %>
+		<div id="sub">
+		    <div><img src="../images/sub_top_tit2.png" alt="MARKET"></div>
+		    <section class="market">
+		        <aside>
+		            <img src="../images/sub_aside_cate2_tit.png" alt="장보기"/>
+		
+		            <ul class="lnb">
+		                <li class="on"><a href="./list.do">장보기</a></li>
+		            </ul>
+		        </aside>
+		        <article class="view">
+		            <nav>
+		                <img src="../images/sub_nav_tit_cate2_tit1.png" alt="장보기"/>
+		                <p>
+		                    HOME > 장보기 > <em>장보기</em>
+		                </p>
+		            </nav>
+		
+		            <!-- 내용 시작 -->
                     <h3>기본정보</h3>
                     <div class="basic">
                         <img src="../images/market_item_thumb.jpg" alt="딸기 500g">
@@ -36,7 +54,7 @@
                                 <td class="total">4,000원</td>
                             </tr>
 
-                            <a href="./order.html" class="btnOrder">
+                            <a href="./order.do" class="btnOrder">
                                 <img src="../images/market_btn_order.gif" alt="바로 구매하기"/>
                             </a>
 

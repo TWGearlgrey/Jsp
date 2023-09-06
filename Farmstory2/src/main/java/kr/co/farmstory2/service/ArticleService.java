@@ -137,7 +137,6 @@ public enum ArticleService {
 		if(pg != null){
 			currentPage = Integer.parseInt(pg);	
 		}
-		
 		return currentPage;
 	}
 	

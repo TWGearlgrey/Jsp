@@ -3,21 +3,11 @@
 <<script>
 
 	$(function() {
-		
 		$('.btnRegister').click(function(e) {
-			
-			e.preventDefault();
-			
-			$('.formRegister').submit();
-			
-			if(confirm('상품을 더 등록하시겠습니까?')) {
-				location.href = '/Farmstory2/admin/productRegister.do';
-			}else {
-				location.href = '/Farmstory2/admin/productList.do';
+			if(confirm('상품을 등록하시겠습니까?')) {
+				$('.formRegister').submit();
 			}
-			
 		});
-		
 	});
 
 </script>

@@ -20,16 +20,22 @@
                             <th>재고</th>
                             <th>등록일</th>
                         </tr>
+                        <c:forEach var="prod" items="${products}">
                         <tr>
                             <td><input type="checkbox" name=""/></td>
-                            <td><img src="./images/sample_item1.jpg" class="thumb" alt="샘플1"></td>
-                            <td>1011</td>
-                            <td>사과 500g</td>
-                            <td>과일</td>
-                            <td>4,000원</td>
-                            <td>100</td>
-                            <td>2023-01-01</td>
+                            <td><img src="/Farmstory2/thumb/${prod.thumb1}" class="thumb" alt="샘플1"></td>
+                            <td>${prod.pNoWithComma}</td>
+                            <td>${prod.pName}</td>
+                            <td>
+								<c:if test="${prod.type == 1}">과일</c:if>
+								<c:if test="${prod.type == 2}">야채</c:if>
+								<c:if test="${prod.type == 3}">곡물</c:if>
+							</td>
+                            <td>${prod.priceWithComma}</td>
+                            <td>${prod.stockWithComma}</td>
+                            <td>${prod.rdate}</td>
                         </tr>
+                        </c:forEach>
                     </table>
 
                     <p>
@@ -38,13 +44,15 @@
                     </p>
                     
                     <p class="paging">
-                        <a href="#"><</a>
-                        <a href="#" class="on">[1]</a>
-                        <a href="#">[2]</a>
-                        <a href="#">[3]</a>
-                        <a href="#">[4]</a>
-                        <a href="#">[5]</a>
-                        <a href="#">></a>
+                    	<c:if test="${pageGroupStart > 1}">
+                        <a href="./productList.do?pg=${pageGroupStart - 1}" class="prev"><</a>
+                        </c:if>
+                        <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+                        <a href="./productList.do?pg=${i}" class="${(currentPage == i)? 'on':''}">[${i}]</a>
+                        </c:forEach>
+                        <c:if test="${pageGroupEnd < lastPageNum}">
+                        <a href="//productList.do?pg=${pageGroupStart + 1}" class="next"">></a>
+                        </c:if>
                     </p>
 
                 </article>

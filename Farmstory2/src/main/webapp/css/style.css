@@ -893,6 +893,13 @@ input[type=number]::-webkit-outer-spin-button {
     background: #fff;
 }
 
+.asideList table tr > td:nth-child(2) > a {
+	display: inline-block;
+    max-width: 325px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .asideList table tr > td:nth-child(2) {
     width: auto;
     text-align: left;

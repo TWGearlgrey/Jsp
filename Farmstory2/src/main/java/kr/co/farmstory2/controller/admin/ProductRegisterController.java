@@ -85,6 +85,6 @@ public class ProductRegisterController extends HttpServlet {
 		
 		pService.insertProduct(dto);
 		
-		//resp.sendRedirect("/Farmstory2/admin/productRegister.do");
+		resp.sendRedirect("/Farmstory2/admin/productRegister.do");
 	}
 }

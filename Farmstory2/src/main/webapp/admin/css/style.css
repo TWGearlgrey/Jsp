@@ -107,11 +107,11 @@ main > section > article table tr {
     border-bottom: 1px dotted #999;
 }
 main > section > article table tr > th {
-    padding: 12px;
+    padding: 11px;
     background-color: #fbfbfb;
 }
 main > section > article table tr > td {
-    padding: 12px;
+    padding: 11px;
     text-align: center;
 }
 

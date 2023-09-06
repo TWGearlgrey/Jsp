@@ -26,6 +26,7 @@
 			                </tr>
 			                <c:if test="${article.file > 0}">
 			                <tr>
+			                	<!-- 글 수정시, 파일을 첨부하지 않으면 첨부되어 있던 파일이 삭제되는 현상 발생. 수정 필요함. -->
 			                	<td>첨부파일</td>
 			                	<td>
 					                <img src="../images/floppy_disc_icon.png" alt="fileIcon">
