@@ -458,10 +458,10 @@ main > .info > div > .account {
     box-sizing: border-box;
     color: #777;
 }
-#sub > .market > .list > table tr > td:nth-child(1) {width: 10%;}
-#sub > .market > .list > table tr > td:nth-child(2) {width: 10%;}
+#sub > .market > .list > table tr > td:nth-child(1) {width: 0%; height: 280px;}
+#sub > .market > .list > table tr > td:nth-child(2) {width: 3%; text-align: center;}
 #sub > .market > .list > table tr > td:nth-child(3) {width: 20%;}
-#sub > .market > .list > table tr > td:nth-child(4) {width: 10%;}
+#sub > .market > .list > table tr > td:nth-child(4) {width: 5%; text-align: center;}
 
 #sub > .market > .list > table tr > td > strong {
     color: #111;
@@ -491,9 +491,12 @@ main > .info > div > .account {
     width: 100%;
     height: 270px;
     position: relative;
-    overflow: hidden;
+    margin-bottom: 30px;
+    /*overflow: hidden;*/
 }
 #sub > .market > .view > .basic > img {
+	width: 280px;
+	height: 280px;
     float: left;
 }
 #sub > .market > .view > .basic > table {
@@ -516,11 +519,22 @@ main > .info > div > .account {
 #sub > .market > .view > .basic > .btnOrder {
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: -30px;
 }
 
 
-#sub > .market > .view > .detail {}
+#sub > .market > .view > .detail {
+	width: 762px;
+	height: auto;
+	overflow: hidden;
+}
+
+#sub > .market > .view > .detail > img {
+	width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
 #sub > .market > .view > .delivery {}
 #sub > .market > .view > .exchange table {
     width: 100%;
@@ -895,7 +909,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .asideList table tr > td:nth-child(2) > a {
 	display: inline-block;
-    max-width: 325px;
+    max-width: 310px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1057,7 +1071,8 @@ input[type=number]::-webkit-outer-spin-button {
 .view table input {
     width: 100%;
     height: 24px;
-    border: 0;    
+    border: 0;   
+    text-align: right; 
 }
 .view table textarea {
     width: 100%;
@@ -1215,10 +1230,13 @@ input[type=number]::-webkit-outer-spin-button {
     box-sizing: border-box;
     color: #777;
 }
+
+/*
 #sub > .market > .list > table tr > td:nth-child(1) {width: 10%;}
 #sub > .market > .list > table tr > td:nth-child(2) {width: 10%;}
 #sub > .market > .list > table tr > td:nth-child(3) {width: 20%;}
 #sub > .market > .list > table tr > td:nth-child(4) {width: 10%;}
+*/
 
 #sub > .market > .list > table tr > td > strong {
     color: #111;
@@ -1237,68 +1255,6 @@ input[type=number]::-webkit-outer-spin-button {
     text-decoration: underline;
 }
 
-#sub > .market > .view > h3 {
-    margin: 10px 0;
-    font-family: '고딕';
-    font-size: 16px;
-    font-weight: bold;
-}
-
-#sub > .market > .view > .basic {
-    width: 100%;
-    height: 300px;
-    position: relative;
-    overflow: hidden;
-}
-#sub > .market > .view > .basic > img {
-    float: left;
-    width: 240px;
-    height: 240px;
-}
-#sub > .market > .view > .basic > table {
-    float: right;
-    width: 60%;
-    height: 200px;
-    margin-left: 16px;
-    border-top: 2px solid #e7e7e7;
-    border-bottom: 2px solid #e7e7e7;
-}
-
-#sub > .market > .view > .basic > table em {            
-    color: #777;
-}
-#sub > .market > .view > .basic > table .total {
-    font-weight: bold;
-    color: #c20a0a;        
-}
-
-#sub > .market > .view > .basic > .btnOrder {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-
-
-#sub > .market > .view > .detail > img { width: 760px; }
-#sub > .market > .view > .delivery {}
-#sub > .market > .view > .exchange table {
-    width: 100%;
-    border-collapse: collapse;                     
-}
-#sub > .market > .view > .exchange table tr {}
-#sub > .market > .view > .exchange table td {
-    padding: 10px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-}
-#sub > .market > .view > .exchange table td:first-child {border-left: none;}
-#sub > .market > .view > .exchange table td:last-child {border-right: none;}
-
-#sub > .market > .view > .exchange table ul > li {
-    margin-left: 12px;
-    list-style-type: disc;
-    line-height: 18px;
-}
 
 
 input[type=number]{

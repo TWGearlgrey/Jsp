@@ -29,7 +29,7 @@
                             <tr>
                                 <td>구분</td>
                                 <td>
-                                    <select name="type">
+                                    <select name="type" required>
                                         <option value="">구분</option>
                                         <option value="1">과일</option>
                                         <option value="2">야채</option>

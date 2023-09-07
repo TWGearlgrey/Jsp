@@ -24,9 +24,7 @@ public class ProductRegisterController extends HttpServlet {
 
 	private static final long serialVersionUID = -7282661194074999566L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	private ProductService pService = ProductService.INSTANCE;
-	private FileService fService = FileService.INSTANCE;
-	private ArticleService aService = ArticleService.INSTANCE;
+	private ProductService service = ProductService.INSTANCE;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -43,7 +41,7 @@ public class ProductRegisterController extends HttpServlet {
 		logger.info("doPost()...1");
 		
 		// 파일 업로드
-		MultipartRequest mr = aService.uploadFile(req);
+		MultipartRequest mr = service.uploadFile(req);
 		
 		String seller   = mr.getParameter("seller");
 		String pName    = mr.getParameter("pName");
@@ -55,7 +53,7 @@ public class ProductRegisterController extends HttpServlet {
 		String thumb2   = mr.getOriginalFileName("thumb2");
 		String thumb3   = mr.getOriginalFileName("thumb3");
 		String etc      = mr.getParameter("etc");
-		String path     = aService.uploadFilePath(req);
+		String path     = service.getFilePath(req);
 		
 		logger.debug("seller   : " + seller);
 		logger.debug("pName    : " + pName);
@@ -83,7 +81,7 @@ public class ProductRegisterController extends HttpServlet {
 		
 		logger.debug("dto : " + dto);
 		
-		pService.insertProduct(dto);
+		service.insertProduct(dto);
 		
 		resp.sendRedirect("/Farmstory2/admin/productRegister.do");
 	}

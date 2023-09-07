@@ -29,13 +29,16 @@
                         <c:forEach var="prod" items="${products}">
                         <tr>
                             <td>
-                                <a href="#"><img src="/Farmstory2/thumb/${prod.thumb1}" alt="${prod.pName}"></a>
+                                <a href="${ctxPath}/market/view.do?pNo=${prod.pNo}"><img src="/Farmstory2/thumb/${prod.thumb1}" alt="${prod.pName}"></a>
                             </td>
                             <c:if test="${prod.type eq 1}"><td>과일</td></c:if>
                             <c:if test="${prod.type eq 2}"><td>야채</td></c:if>
                             <c:if test="${prod.type eq 3}"><td>곡류</td></c:if>
-                            <td><a href="#">${prod.pName}</a></td>
-                            <td><strong>${prod.priceWithComma}</strong>원</td>
+                            <td><a href="${ctxPath}/market/view.do?pNo=${prod.pNo}">${prod.pName}</a></td>
+                            <td>
+                            	<strong>${prod.priceWithComma}</strong>원<br>
+                            	(<img src="../images/delivery_icon.png" alt="delivery">${prod.deliveryWithComma}원)
+                           	</td>
                         </tr>
                         </c:forEach>
                     </table>

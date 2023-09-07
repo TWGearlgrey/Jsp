@@ -209,16 +209,6 @@ public enum ArticleService {
 	}
 	
 	
-	// 경로구하기
-	public String uploadFilePath(HttpServletRequest req) {
-		
-		ServletContext ctx = req.getServletContext();
-		String path = ctx.getRealPath("/thumb");
-		
-		return path;
-	}
-	
-	
 	// 파일 다운로드
 	public void downloadFile(HttpServletRequest req, HttpServletResponse resp, FileDTO dto) throws IOException {
 		// response 파일 다운로드 헤더 수정 (response : server에서 client로 넘어가는 전송 객체) 

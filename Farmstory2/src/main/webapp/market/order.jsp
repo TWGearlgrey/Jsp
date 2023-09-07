@@ -21,61 +21,69 @@
 		            <!-- 내용 시작 -->
                     <h3>주문상품 확인</h3>
                     <div class="info">
-                        <img src="../images/market_item_thumb.jpg" alt="딸기 500g">
+                        <img src="/Farmstory2/thumb/${thumb2}" alt="딸기 500g">
 
                         <table border="0">                            
                             <tr>
                                 <td>상품명</td>
-                                <td>딸기 500g</td>
+                                <td>${pName}</td>
                             </tr>
                             <tr>
                                 <td>상품코드</td>
-                                <td>01</td>
+                                <td>${pNo}</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
-                                <td class="delivery">5,0000원</td>
+                                <td class="delivery">${total > 30000? '무료':deliveryWithComma}</td>
                             </tr>
                             <tr>
                                 <td>판매가격</td>
-                                <td>4,000원</td>
+                                <td>${priceWithComma}원</td>
                             </tr>
                             <tr>
                                 <td>구매수량</td>
-                                <td class="count">1개</td>
+                                <td class="count">${count}</td>
                             </tr>
                             <tr>
                                 <td>합계</td>
-                                <td class="total">4,000원</td>
+                                <td class="total">${finalPriceWithComma}원</td>
                             </tr>
                         </table>
                     </div>
                     <h3>주문정보 입력</h3>
                     <div class="shipping">
-                        <table>
-                            <tr>
-                                <td>받는분</td>
-                                <td><input type="text" name="receiver"></td>
-                            </tr>
-                            <tr>
-                                <td>휴대폰</td>
-                                <td><input type="text" name="hp"></td>
-                            </tr>
-                            <tr>
-                                <td>배송주소</td>
-                                <td>
-                                    <input type="text" name="zip" readonly><button id="btnZip">우편번호 검색</button>
-                                    <input type="text" name="addr1" placeholder="기본주소 검색">
-                                    <input type="text" name="addr2" placeholder="상세주소 입력">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>기타</td>
-                                <td>
-                                    <textarea name="etc"></textarea>
-                                </td>
-                            </tr>
-                        </table>
+                        <form id="formOrder" action="#" method="post">
+                        	<input type="hidden" name="orderProduct"  value="${pNo}">
+		            		<input type="hidden" name="orderCount"    value="${count}">
+		            		<input type="hidden" name="orderDelivery" value="${delivery}">
+		            		<input type="hidden" name="orderPrice"    value="${price}">
+		            		<input type="hidden" name="orderTotal"    value="${finalPrice}">
+		            		<input type="hidden" name="orderUser"     value="${sessUser.uid}">
+	                        <table>
+	                            <tr>
+	                                <td>받는분</td>
+	                                <td><input type="text" name="receiver" value="${sessUser.name}"></td>
+	                            </tr>
+	                            <tr>
+	                                <td>휴대폰</td>
+	                                <td><input type="text" name="hp" value="${sessUser.hp}"></td>
+	                            </tr>
+	                            <tr>
+	                                <td>배송주소</td>
+	                                <td>
+	                                    <input type="text" name="zip" value="${sessUser.zip }" readonly><button id="btnZip">우편번호 검색</button>
+	                                    <input type="text" name="addr1" value="${sessUser.addr1}">
+	                                    <input type="text" name="addr2" value="${sessUser.addr2}">
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td>기타</td>
+	                                <td>
+	                                    <textarea name="orderEtc" placeholder="부재 시 경비실에 맡겨주세요 등의 메시지를 남겨주세요."></textarea>
+	                                </td>
+	                            </tr>
+	                        </table>
+                        </form>
                     </div>
 
                     <p>

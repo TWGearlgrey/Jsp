@@ -1,10 +1,17 @@
 package kr.co.farmstory2.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.farmstory2.dao.ProductDAO;
 import kr.co.farmstory2.dto.ProductDTO;
@@ -51,7 +58,42 @@ public enum ProductService {
 		return dao.selectCountProductsTotal(type);
 	}
 	
-	// 페이징 구현
+	
+	
+	
+	// thumb 업로드 구현 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	public String getFilePath(HttpServletRequest req) {
+		
+		ServletContext ctx = req.getServletContext();
+		String path = ctx.getRealPath("/thumb");
+		
+		return path;
+	}
+	
+	
+	public MultipartRequest uploadFile(HttpServletRequest req) {
+		// 경로구하기
+		String path = getFilePath(req);
+		
+		// 최대 업로드 파일 크기
+		int maxSize = 1024 * 1024 * 10;
+		
+		// 파일 업로드 및 Multipart 객체 생성
+		MultipartRequest mr = null;
+		try {
+			mr = new MultipartRequest(req, 
+									  path, 
+									  maxSize, 
+									  "UTF-8", 
+									  new DefaultFileRenamePolicy());
+			
+		} catch (IOException e) {
+			logger.error("uploadFile error : " + e.getMessage());
+		}
+		
+		return mr;
+	}
+
 	
 	// 리스트 페이징 구현 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 	public int getLastPageNum(int total) {
