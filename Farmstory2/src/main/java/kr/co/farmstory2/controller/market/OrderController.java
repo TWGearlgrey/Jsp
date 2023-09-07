@@ -13,13 +13,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import kr.co.farmstory2.db.Utils;
+import kr.co.farmstory2.dto.OrderDTO;
+import kr.co.farmstory2.service.OrderService;
 
 @WebServlet("/market/order.do")
 public class OrderController extends HttpServlet {
 
 	private static final long serialVersionUID = -764008782917500862L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -33,14 +35,13 @@ public class OrderController extends HttpServlet {
 		String total      = req.getParameter("total");
 		String finalPrice = req.getParameter("final");
 		
-		logger.debug("thumb2 : " + thumb2);
-		logger.debug("pName : " + pName);
-		logger.debug("pNo : " + pNo);
-		logger.debug("delivery : " + delivery);
-		logger.debug("deliveryWithComma : " + Utils.comma(delivery)+'원');
-		logger.debug("price : " + price);
-		logger.debug("count : " + count);
-		logger.debug("total : " + total);
+		logger.debug("thumb2     : " + thumb2);
+		logger.debug("pName      : " + pName);
+		logger.debug("pNo        : " + pNo);
+		logger.debug("delivery   : " + delivery);
+		logger.debug("price      : " + price);
+		logger.debug("count      : " + count);
+		logger.debug("total      : " + total);
 		logger.debug("finalPrice : " + finalPrice);
 		
 		req.setAttribute("thumb2", thumb2);
@@ -55,6 +56,8 @@ public class OrderController extends HttpServlet {
 		req.setAttribute("totalWithComma", Utils.comma(total));
 		req.setAttribute("finalPrice", finalPrice);
 		req.setAttribute("finalPriceWithComma", Utils.comma(finalPrice));
+		
+		logger.info("doPost()...2");
 
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/market/order.jsp");
 		dispatcher.forward(req, resp);	

@@ -28,11 +28,18 @@ public class ListController extends HttpServlet {
 
 		logger.info("market > doGet()...1");
 
-		String type = req.getParameter("type");
-		String pg   = req.getParameter("pg");
+		String type    = req.getParameter("type");
+		String pg      = req.getParameter("pg");
+		String no      = req.getParameter("no");
+		String success = req.getParameter("success");
 		
-		logger.debug("type : " + type + "(NULL IS '0')");
-		logger.debug("pg   : " + pg);
+		logger.debug("type    : " + type + "(NULL IS '0')");
+		logger.debug("pg      : " + pg);
+		logger.debug("no      : " + no);
+		logger.debug("success : " + success);
+		
+		req.setAttribute("no", no);
+		req.setAttribute("success", success);
 		
 		if(type == null){
 			type = "0";

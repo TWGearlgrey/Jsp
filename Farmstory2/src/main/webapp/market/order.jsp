@@ -1,5 +1,25 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/Farmstory2/js/zipcode.js"></script>
+<script src="/Farmstory2/js/validation.js"></script>
+<script>
+
+	window.onload = function() {
+		
+		const orderBtn  = document.getElementById('btnBuy');
+		const formOrder = document.getElementById('formOrder');
+		
+		orderBtn.onclick = function(e) {
+			e.preventDefault();
+
+			if(confirm('정말 구매하시겠습니까?')){
+				formOrder.submit();
+			}
+		};
+	};
+	
+</script>
 		<div id="sub">
 		    <div><img src="../images/sub_top_tit2.png" alt="MARKET"></div>
 		    <section class="market">
@@ -52,7 +72,7 @@
                     </div>
                     <h3>주문정보 입력</h3>
                     <div class="shipping">
-                        <form id="formOrder" action="#" method="post">
+                        <form id="formOrder" action="/Farmstory2/market/orderComplete.do" method="post">
                         	<input type="hidden" name="orderProduct"  value="${pNo}">
 		            		<input type="hidden" name="orderCount"    value="${count}">
 		            		<input type="hidden" name="orderDelivery" value="${delivery}">
@@ -71,7 +91,7 @@
 	                            <tr>
 	                                <td>배송주소</td>
 	                                <td>
-	                                    <input type="text" name="zip" value="${sessUser.zip }" readonly><button id="btnZip">우편번호 검색</button>
+	                                    <input type="text" name="zip" value="${sessUser.zip }" readonly><button type="button" id="btnZip" onclick="zipcode()">우편번호 검색</button>
 	                                    <input type="text" name="addr1" value="${sessUser.addr1}">
 	                                    <input type="text" name="addr2" value="${sessUser.addr2}">
 	                                </td>
@@ -88,7 +108,7 @@
 
                     <p>
                         <a href="#" id="btnBuy"><img src="../images/market_btn_buy.gif" alt="구매하기"></a>
-                        <a href="#" id="btnShopping"><img src="../images/market_btn_shopping.gif"></a>
+                        <a href="#" id="btnShopping"><img src="../images/market_btn_shopping.gif" alt="계속 쇼핑하기"></a>
                     </p>
                     <!-- 내용 끝 -->
                     

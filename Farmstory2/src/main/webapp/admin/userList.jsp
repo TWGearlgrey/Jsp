@@ -1,5 +1,20 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<Script>
+
+	window.onload = function() {
+		
+		const userList = document.getElementsByClassName('showPopup')[0];
+		
+		userList.addEventListener('click', function(e) {
+			e.preventDefault();
+			
+			/* 상세확인 클릭시 uid를 ajax로 날려서 데이터 받아오기 */
+			
+		});
+	}
+
+</Script>
         <main>
             <%@ include file="./_aside.jsp" %>
             <section id="orderList">
@@ -21,63 +36,29 @@
                             <th>가입일</th>
                             <th>확인</th>
                         </tr>
+                        <c:forEach var="user" items="${users}">
                         <tr>
                             <td><input type="checkbox" name=""/></td>
-                            <td>a101</td>
-                            <td>김유신</td>                            
-                            <td>유신101</td>
-                            <td>yusin101@naver.com</td>
-                            <td>010-1234-1001</td>
+                            <td>${user.uid}</td>
+                            <td>${user.name}</td>                            
+                            <td>${user.nick}</td>
+                            <td>${user.email}</td>
+                            <td>${user.hp}</td>
                             <td>
                                 <select name="grade">
-                                    <option>1</option>
-                                    <option selected>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    <option ${(user.role eq 'USER')?'selected':''}>USER</option>
+                                    <option ${(user.role eq 'VIP')?'selected':''}>VIP</option>
+                                    <option ${(user.role eq 'VVIP')?'selected':''}>VVIP</option>
+                                    <option ${(user.role eq 'SELLER')?'selected':''}>SELLER</option>
+                                    <option ${(user.role eq 'ADMIN')?'selected':''}>ADMIN</option>
                                 </select>
                             </td>
                             <td>2023-01-01 13:06:14</td>
-                            <td><a href="#" class="showPopup">[상세확인]</a></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" name=""/></td>
-                            <td>a102</td>
-                            <td>김춘추</td>                            
-                            <td>춘추102</td>
-                            <td>chunchu102@naver.com</td>
-                            <td>010-1234-1002</td>
                             <td>
-                                <select name="grade">
-                                    <option>1</option>
-                                    <option selected>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </td>
-                            <td>2023-01-02 13:06:14</td>
-                            <td><a href="#" class="showPopup">[상세확인]</a></td>
+                            	<a data-uid="${user.uid}" href="#" class="showPopup">[상세확인]</a>
+                           	</td>
                         </tr>
-                        <tr>
-                            <td><input type="checkbox" name=""/></td>
-                            <td>a103</td>
-                            <td>장보고</td>                            
-                            <td>보고103</td>
-                            <td>bogo103@naver.com</td>
-                            <td>010-1234-1003</td>
-                            <td>
-                                <select name="grade">
-                                    <option>1</option>
-                                    <option selected>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </td>
-                            <td>2023-01-03 13:06:14</td>
-                            <td><a href="#" class="showPopup">[상세확인]</a></td>
-                        </tr>
+                        </c:forEach>
                     </table>
 
                     <p>
@@ -85,13 +66,15 @@
                     </p>
                     
                     <p class="paging">
-                        <a href="#"><</a>
-                        <a href="#" class="on">[1]</a>
-                        <a href="#">[2]</a>
-                        <a href="#">[3]</a>
-                        <a href="#">[4]</a>
-                        <a href="#">[5]</a>
-                        <a href="#">></a>
+                    	<c:if test="${pageGroupStart > 1}">
+                        <a href="./productList.do?pg=${pageGroupStart - 1}" class="prev"><</a>
+                        </c:if>
+                        <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
+                        <a href="./productList.do?pg=${i}" class="${(currentPage == i)? 'on':''}">[${i}]</a>
+                        </c:forEach>
+                        <c:if test="${pageGroupEnd < lastPageNum}">
+                        <a href="//productList.do?pg=${pageGroupStart + 1}" class="next"">></a>
+                        </c:if>
                     </p>
                 </article>
             </section>
@@ -110,46 +93,46 @@
                     <table border="0">
                         <tr>
                             <td>아이디</td>
-                            <td>a101</td>
+                            <td class="user_uid"></td>
                         </tr>
                         <tr>
                             <td>이름</td>
-                            <td>김유신</td>
+                            <td class="user_name"></td>
                         </tr>
                         <tr>
                             <td>별명</td>
-                            <td>유신101</td>
+                            <td class="user_nick"></td>
                         </tr>
                         <tr>
                             <td>이메일</td>
-                            <td>yusin101@naver.com</td>
+                            <td class="user_email"></td>
                         </tr>
                         <tr>
                             <td>휴대폰</td>
-                            <td>010-1234-1001</td>
+                            <td class="user_hp"></td>
                         </tr>
                         <tr>
                             <td>등급</td>
-                            <td>2등급(준회원)</td>
+                            <td class="user_role"></td>
                         </tr>
                         <tr>
                             <td>주소</td>
                             <td>
-                                <p>
-                                    부산광역시 부산진구 대연동 120
+                                <p class="user_addr1">
+                                    
                                 </p>
-                                <p>
-                                    한빛빌딩 10층
+                                <p class="user_addr2">
+                                    
                                 </p>
                             </td>
                         </tr>
                         <tr>
                             <td>아이피</td>
-                            <td>192.168.10.112</td>
+                            <td class="user_regip"></td>
                         </tr>
                         <tr>
                             <td>회원가입일</td>
-                            <td>2023-01-01 13:06:14</td>
+                            <td class="user_regDate"></td>
                         </tr>
                     </table>
                 </article>

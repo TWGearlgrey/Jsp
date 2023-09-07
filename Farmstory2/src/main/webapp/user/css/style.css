@@ -58,7 +58,7 @@
 }
 
 /* 약관 */
-.terms {
+#user > .terms {
     width: 600px;
     height: auto;            
     margin: 60px auto;

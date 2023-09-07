@@ -88,10 +88,5 @@ public class LoginController extends HttpServlet {
 			
 			resp.sendRedirect("/Farmstory2/user/login.do?success=100");
 		}
-		
-		
-		
-		
-	
 	}
 }

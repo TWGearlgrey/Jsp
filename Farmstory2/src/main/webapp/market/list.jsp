@@ -1,5 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+<script>
+
+	const success = ${success};
+	const no = ${no};
+
+	if(success == 200) {
+		alert('상품이 주문되었습니다!\n주문 번호는 ' + no + '입니다.');
+	}
+
+</script>
 		<div id="sub">
 		    <div><img src="../images/sub_top_tit2.png" alt="MARKET"></div>
 		    <section class="market">
@@ -37,7 +47,7 @@
                             <td><a href="${ctxPath}/market/view.do?pNo=${prod.pNo}">${prod.pName}</a></td>
                             <td>
                             	<strong>${prod.priceWithComma}</strong>원<br>
-                            	(<img src="../images/delivery_icon.png" alt="delivery">${prod.deliveryWithComma}원)
+                            	(<img src="../images/delivery_icon.png" alt="delivery">${prod.delivery eq 0?'무료':prod.deliveryWithComma}<c:if test="${prod.delivery ne 0}">원</c:if>)
                            	</td>
                         </tr>
                         </c:forEach>

@@ -1,5 +1,6 @@
 package kr.co.farmstory2.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -75,13 +76,64 @@ public class UserDAO extends DBHelper {
 		return dto;
 	}
 	
-	public List<UserDTO> selectUsers() {
-		return null;
+	public List<UserDTO> selectUsers(int start) {
+		logger.info("selectUsers() start");
+		List<UserDTO> users = new ArrayList<>();
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_USERS);
+			psmt.setInt(1, start);
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				UserDTO dto = new UserDTO();
+				dto.setUid(rs.getString(1));
+				dto.setPass(rs.getString(2));
+				dto.setName(rs.getString(3));
+				dto.setNick(rs.getString(4));
+				dto.setEmail(rs.getString(5));
+				dto.setHp(rs.getString(6));
+				dto.setRole(rs.getString(7));
+				dto.setZip(rs.getString(8));
+				dto.setAddr1(rs.getString(9));
+				dto.setAddr2(rs.getString(10));
+				dto.setRegip(rs.getString(11));
+				dto.setRegDate(rs.getString(12));
+				dto.setLeaveDate(rs.getString(13));
+				users.add(dto);
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.error("selectUsers() ERROR : " + e.getMessage());
+		}
+		logger.info("selectUsers() try end...");
+		return users;
 	}
 	
 	public void updateUser(UserDTO dto) {}
 	
 	public void deleteUser(String uid) {}
+	
+	public int selectCountUsersTotal() {
+		int total = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_USERS_ALL);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+			
+		}catch (Exception e) {
+			logger.error("selectCountUersTotal() ERROR : " + e.getMessage());
+		}
+		return total;
+	}
 	
 	
 	

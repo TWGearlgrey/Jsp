@@ -34,6 +34,9 @@ public class OrderDTO {
 	public void setOrderProduct(int orderProduct) {
 		this.orderProduct = orderProduct;
 	}
+	public void setOrderProduct(String orderProduct) {
+		this.orderProduct = Integer.parseInt(orderProduct);
+	}
 	
 	
 	
@@ -42,6 +45,9 @@ public class OrderDTO {
 	}
 	public void setOrderCount(int orderCount) {
 		this.orderCount = orderCount;
+	}
+	public void setOrderCount(String orderCount) {
+		this.orderCount = Integer.parseInt(orderCount);
 	}
 	
 	
@@ -52,6 +58,9 @@ public class OrderDTO {
 	public void setOrderDelivery(int orderDelivery) {
 		this.orderDelivery = orderDelivery;
 	}
+	public void setOrderDelivery(String orderDelivery) {
+		this.orderDelivery = Integer.parseInt(orderDelivery);
+	}
 	
 	
 	
@@ -61,6 +70,9 @@ public class OrderDTO {
 	public void setOrderPrice(int orderPrice) {
 		this.orderPrice = orderPrice;
 	}
+	public void setOrderPrice(String orderPrice) {
+		this.orderPrice = Integer.parseInt(orderPrice);
+	}
 	
 	
 	
@@ -69,6 +81,9 @@ public class OrderDTO {
 	}
 	public void setOrderTotal(int orderTotal) {
 		this.orderTotal = orderTotal;
+	}
+	public void setOrderTotal(String orderTotal) {
+		this.orderTotal = Integer.parseInt(orderTotal);
 	}
 	
 	

@@ -17,10 +17,14 @@ public class SQL {
 											+ "`regDate`=NOW()";
 	
 	public static final String SELECT_USER        = "SELECT * FROM `User` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
+	public static final String SELECT_USER_UID    = "SELECT * FROM `User` WHERE `uid`=?";
+	public static final String SELECT_USERS       = "SELECT * FROM `User` LIMIT ?, 10";
 	public static final String SELECT_COUNT_UID   = "SELECT COUNT(*) FROM `User` WHERE `uid`=?";
 	public static final String SELECT_COUNT_NICK  = "SELECT COUNT(*) FROM `User` WHERE `nick`=?";
 	public static final String SELECT_COUNT_EMAIL = "SELECT COUNT(*) FROM `User` WHERE `email`=?";
 	public static final String SELECT_COUNT_HP    = "SELECT COUNT(*) FROM `User` WHERE `hp`=?";
+	
+	public final static String SELECT_COUNT_USERS_ALL = "SELECT COUNT(*) FROM `User` WHERE `leaveDate` IS NULL";
 	
 	public static final String SELECT_COUNT_NAME_AND_EMAIL	 = "SELECT COUNT(*) FROM `User` WHERE `name`=? AND `email`=?";
 	public static final String SELECT_COUNT_UID_AND_EMAIL	 = "SELECT COUNT(*) FROM `User` WHERE `uid`=? AND `email`=?";
@@ -139,6 +143,7 @@ public class SQL {
 												+ "`orderUser`=?, "
 												+ "`orderDate`=NOW()";
 	
+	public final static String SELECT_MAX_ORDER_NO = "SELECT MAX(`orderNo`) FROM `Order`;";
 	public final static String SELECT_ORDER = "";
 	public final static String SELECT_ORDERS ="SELECT a.*, b.pName, c.name, b.thumb1 FROM `Order` AS a JOIN `Product` AS b ON a.orderProduct = b.pNo JOIN `User` AS c ON a.orderUser = c.uid ORDER BY `orderNo` LIMIT ?, 10";
 	public final static String UPDATE_ORDER = "";
