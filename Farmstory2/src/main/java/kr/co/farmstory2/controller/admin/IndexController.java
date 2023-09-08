@@ -42,9 +42,9 @@ public class IndexController extends HttpServlet {
 		req.setAttribute("orders", orders);
 		req.setAttribute("users", users);
 		
-		logger.debug("products : " + products.subList(0, 1));
-		logger.debug("orders   : " + orders.subList(0, 1));
-		logger.debug("users    : " + users.subList(0, 1));
+		logger.debug("products : " + products);
+		logger.debug("orders   : " + orders);
+		logger.debug("users    : " + users);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/index.jsp");
 		dispatcher.forward(req, resp);

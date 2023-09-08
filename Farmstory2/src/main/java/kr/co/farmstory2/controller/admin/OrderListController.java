@@ -29,6 +29,11 @@ public class OrderListController extends HttpServlet {
 		logger.info("doGet()...1");
 		
 		String pg = req.getParameter("pg");
+		String success = req.getParameter("success");
+		if(success == null) {
+			success = "0";
+		}
+		logger.debug("success : " + success);
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
@@ -52,16 +57,14 @@ public class OrderListController extends HttpServlet {
 		List<OrderDTO> orders = service.selectOrders(start);
 		
 		req.setAttribute("orders", orders);
-		req.setAttribute("orders.", orders);
-		req.setAttribute("orders", orders);
-		req.setAttribute("orders", orders);
+		req.setAttribute("success", success);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum);
 		
-		logger.debug("orders         : " + orders.subList(0, 1));
+		logger.debug("orders         : " + orders);
 		logger.debug("currentPage    : " + currentPage);
 		logger.debug("lastPageNum    : " + lastPageNum);
 		logger.debug("pageGroupStart : " + result[0]);
@@ -70,5 +73,23 @@ public class OrderListController extends HttpServlet {
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/orderList.jsp");
 		dispatcher.forward(req, resp);	
+	}
+	
+	
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		logger.info("doPost()...1");
+		int count = 1;
+		
+		String[] chks = req.getParameterValues("chk_order");
+		
+		for(String orderNo : chks) {
+			service.deleteOrder(orderNo);
+			logger.debug("delete order(count:"+ count++ +") orderNo : " + orderNo);
+		}
+		
+		resp.sendRedirect("/Farmstory2/admin/orderList.do?success=200");
 	}
 }

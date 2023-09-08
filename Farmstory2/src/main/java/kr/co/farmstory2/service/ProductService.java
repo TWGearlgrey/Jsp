@@ -43,8 +43,8 @@ public enum ProductService {
 		dao.updateProduct(dto);
 	}
 	
-	public void deleteProduct(int pNo) {
-		dao.deleteProduct(pNo);
+	public int deleteProduct(String pNo) {
+		return dao.deleteProduct(pNo);
 	}
 	
 	// ────────────────────────────────────────────────────────────────┘
@@ -57,8 +57,6 @@ public enum ProductService {
 	public int selectCountProductsTotal(String type) {
 		return dao.selectCountProductsTotal(type);
 	}
-	
-	
 	
 	
 	// thumb 업로드 구현 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

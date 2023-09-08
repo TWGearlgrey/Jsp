@@ -30,7 +30,7 @@
 		
 		            <!-- 내용 시작 -->
                     <p class="sort">
-                        <a href="./list.do?type=0" class="${type == 0?'on':''}">전체(10) |</a>
+                        <a href="./list.do?type=0" class="${type == 0?'on':''}">전체(${total}) |</a>
                         <a href="./list.do?type=1" class="${type == 1?'on':''}">과일 |</a>
                         <a href="./list.do?type=2" class="${type == 2?'on':''}">야채 |</a>
                         <a href="./list.do?type=3" class="${type == 3?'on':''}">곡류</a>
@@ -52,6 +52,9 @@
                         </tr>
                         </c:forEach>
                     </table>
+                    <c:if test="${lastPageNum == 0}">
+			        <h3 style="text-align: center; margin: 60px;">등록 된 상품이 없습니다.</h3>
+			        </c:if>
 
                     <p class="paging">
                     	<c:if test="${pageGroupStart > 1}">

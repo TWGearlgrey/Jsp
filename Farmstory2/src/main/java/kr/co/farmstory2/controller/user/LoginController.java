@@ -88,6 +88,7 @@ public class LoginController extends HttpServlet {
 			
 			// 사용자 세션 설정
 			session.setAttribute("sessUser", user);
+			logger.info("user : " + user);
 			
 			// 리다이렉트
 			resp.sendRedirect(ctxPath);

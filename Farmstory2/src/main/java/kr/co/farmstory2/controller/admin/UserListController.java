@@ -56,7 +56,7 @@ public class UserListController extends HttpServlet {
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum);
 		
-		logger.debug("products       : " + users.subList(0, 1));
+		logger.debug("products       : " + users);
 		logger.debug("currentPage    : " + currentPage);
 		logger.debug("lastPageNum    : " + lastPageNum);
 		logger.debug("pageGroupStart : " + result[0]);

@@ -39,6 +39,9 @@
                         </tr>
                         </c:forEach>
                     </table>
+                    <c:if test="${products.isEmpty()}">
+	                    	<h3 style="text-align: center; margin: 40px;">등록된 상품이 없습니다.</h3>
+                    </c:if>
                 </article>
 
                 <article>
@@ -70,6 +73,9 @@
                         </tr>
                         </c:forEach>
                     </table>
+                    <c:if test="${orders.isEmpty()}">
+	                    	<h3 style="text-align: center; margin: 40px;">주문 내역이 없습니다.</h3>
+                    </c:if>
                 </article>
                 <article>
                     <h3>
@@ -98,6 +104,9 @@
                         </tr>
                         </c:forEach>
                     </table>
+                    <c:if test="${users.isEmpty()}">
+	                    	<h3 style="text-align: center; margin: 40px;">등록 된 회원이 없습니다.</h3>
+                    </c:if>
                 </article>
             </section>
         </main>

@@ -1,5 +1,6 @@
 package kr.co.farmstory2.controller.admin;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,11 @@ public class ProductListController extends HttpServlet {
 		logger.info("doGet()...1");
 		
 		String pg = req.getParameter("pg");
+		String success = req.getParameter("success");
+		if(success == null) {
+			success = "0";
+		}
+		logger.debug("success : " + success);
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
@@ -52,13 +58,14 @@ public class ProductListController extends HttpServlet {
 		
 		List<ProductDTO> products = service.selectProducts(start);
 		req.setAttribute("products", products);
+		req.setAttribute("success", success);
 		req.setAttribute("lastPageNum", lastPageNum);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum);
 		
-		logger.debug("products       : " + products.subList(0, 1));
+		logger.debug("products       : " + products);
 		logger.debug("currentPage    : " + currentPage);
 		logger.debug("lastPageNum    : " + lastPageNum);
 		logger.debug("pageGroupStart : " + result[0]);
@@ -67,5 +74,68 @@ public class ProductListController extends HttpServlet {
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/productList.jsp");
 		dispatcher.forward(req, resp);	
+	}
+	
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		logger.info("doPost()...1");
+		int count = 0;
+		
+		String[] chks = req.getParameterValues("chk_prod");
+		String[] thumb1 = req.getParameterValues("thumb1");
+		String[] thumb2 = req.getParameterValues("thumb2");
+		String[] thumb3 = req.getParameterValues("thumb3");
+		logger.debug("chk_prod : " + chks.toString());
+		logger.debug("thumb1   : " + thumb1.toString());
+		logger.debug("thumb2   : " + thumb2.toString());
+		logger.debug("thumb3   : " + thumb3.toString());
+		
+		for(String pNo : chks) {
+			int result = service.deleteProduct(pNo);
+			logger.debug("delete order(count:"+ count +") pNo : " + pNo);
+			logger.debug("result : " +result);
+			
+			if(result > 0) { // ProductList(DB)가 삭제된다면.
+
+				// thumb 폴더에 있는 사진도 삭제...
+				String path = service.getFilePath(req);
+				
+				File file1 = new File(path+"/"+thumb1[count]);
+				File file2 = new File(path+"/"+thumb2[count]);
+				File file3 = new File(path+"/"+thumb3[count]);
+				
+				logger.debug("count : " + count);
+				logger.debug("file1 : " + file1);
+				logger.debug("file1 : " + file2);
+				logger.debug("file1 : " + file3);
+				
+				if(file1.exists()) {
+					file1.delete();
+					logger.debug("fifle1 DELETE");
+				}
+				
+				if(file2.exists()) {
+					file2.delete();
+					logger.debug("fifle2 DELETE");
+				}
+				
+				if(file3.exists()) {
+					file3.delete();
+					logger.debug("fifle3 DELETE");
+				}
+				
+				count++;
+				logger.debug("count : " + count);
+				
+			}else {
+				logger.info("DELETE FAILED:: reason FILE IS NULL.");
+			}
+			
+		}
+		
+		resp.sendRedirect("/Farmstory2/admin/productList.do?success=200");
+	
 	}
 }

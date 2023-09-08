@@ -59,7 +59,11 @@
                         </tr>
                         </c:forEach>
                     </table>
+                    <c:if test="${users.isEmpty()}">
+	                    	<h3 style="text-align: center; margin: 40px;">등록 된 회원이 없습니다.</h3>
+                    </c:if>
 
+					<c:if test="${!users.isEmpty()}">
                     <p>
                         <a href="#" class="orderDelete">선택수정</a>                        
                     </p>
@@ -75,6 +79,8 @@
                         <a href="./userList.do?pg=${pageGroupStart + 1}" class="next"">></a>
                         </c:if>
                     </p>
+                    
+                    </c:if>
                 </article>
             </section>
         </main>

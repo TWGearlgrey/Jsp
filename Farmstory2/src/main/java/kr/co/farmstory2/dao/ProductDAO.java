@@ -151,7 +151,20 @@ public class ProductDAO extends DBHelper {
 	
 	public void updateProduct(ProductDTO dto) {}
 	
-	public void deleteProduct(int pNo) {}
+	public int deleteProduct(String pNo) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_PRODUCT);
+			psmt.setString(1, pNo);
+			result = psmt.executeUpdate();
+			close();
+			
+		} catch (Exception e) {
+			logger.error("deleteProduct() ERROR : " + e.getMessage());
+		}
+		return result;
+	}
 	
 	// ────────────────────────────────────────────────────────────────┘
 	

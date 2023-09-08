@@ -70,9 +70,10 @@ public class ListController extends HttpServlet {
 		req.setAttribute("pageGroupStart", result[0]);
 		req.setAttribute("pageGroupEnd", result[1]);
 		req.setAttribute("pageStartNum", pageStartNum);
+		req.setAttribute("total", total);
 		req.setAttribute("type", type);
 		
-		logger.debug("products       : " + products.subList(0, 1));
+		logger.debug("products       : " + products);
 		logger.debug("currentPage    : " + currentPage);
 		logger.debug("lastPageNum    : " + lastPageNum);
 		logger.debug("pageGroupStart : " + result[0]);

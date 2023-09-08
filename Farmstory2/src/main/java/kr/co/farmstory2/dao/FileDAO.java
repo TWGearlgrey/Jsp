@@ -15,7 +15,7 @@ public class FileDAO extends DBHelper {
     
 	public void insertFile(FileDTO dto) {
 		try {
-			logger.info("insertFile() start");
+			logger.debug("insertFile() start");
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.INSERT_FILE);
 			psmt.setInt(1, dto.getAno());
@@ -23,7 +23,7 @@ public class FileDAO extends DBHelper {
 			psmt.setString(3, dto.getNewName());
 			psmt.executeUpdate();
 			close();
-			logger.info("insertFile() end...");
+			logger.debug("insertFile() end...");
 			
 		} catch (Exception e) {
 			logger.error("insertFile() ERROR : " + e.getMessage());
@@ -35,7 +35,7 @@ public class FileDAO extends DBHelper {
 		FileDTO dto  = null;
 		
 		try {
-			logger.info("selectFile() start");
+			logger.debug("selectFile() start");
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_FILE);
 			psmt.setString(1, fno);
@@ -50,7 +50,7 @@ public class FileDAO extends DBHelper {
 				dto.setDownload(rs.getInt(5));
 				dto.setRdate(rs.getString(6));
 			}
-			logger.info("selectFile() end...");
+			logger.debug("selectFile() end...");
 			
 		} catch (Exception e) {
 			logger.error("selectFile() ERROR : " + e.getMessage());
@@ -71,13 +71,13 @@ public class FileDAO extends DBHelper {
 		int result = 0;
 		
 		try {
-			logger.info("deleteFile() start");
+			logger.debug("deleteFile() start");
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.DELETE_FILE);
 			psmt.setString(1, ano);
 			result = psmt.executeUpdate();
 			close();
-			logger.info("deleteFile() end...");
+			logger.debug("deleteFile() end...");
 			
 		} catch (Exception e) {
 			logger.error("deleteFile() ERROR : " + e.getMessage());

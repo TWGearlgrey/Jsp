@@ -30,7 +30,7 @@ public class ArticleDAO extends DBHelper{
 	public int insertArticle(ArticleDTO dto) {
 		int no = 0;
 		try {
-			logger.info("insertArticle() start");
+			logger.debug("insertArticle() start");
 			
 			conn = getConnection();
 			conn.setAutoCommit(false); // Transaction 시작
@@ -52,7 +52,7 @@ public class ArticleDAO extends DBHelper{
 				no = rs.getInt(1);
 			}
 			close();
-			logger.info("insertArticle() try end...(no: " + no + ")");
+			logger.debug("insertArticle() try end...(no: " + no + ")");
 			
 		} catch (Exception e) {
 			logger.error("insertArticle() ERROR : " + e.getMessage());
@@ -64,7 +64,7 @@ public class ArticleDAO extends DBHelper{
 	public ArticleDTO selectArticle(String no) {
 		ArticleDTO dto = null;
 		try {
-			logger.info("selectArticle() start");
+			logger.debug("selectArticle() start");
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_ARTICLE);
 			psmt.setString(1, no);
@@ -95,7 +95,7 @@ public class ArticleDAO extends DBHelper{
 				dto.setFileDto(fileDto);
 			}
 			close();
-			logger.info("selectArticle() try end...");
+			logger.debug("selectArticle() try end...");
 			
 		} catch (Exception e) {
 			logger.error("selectArticle() ERROR : " + e.getMessage());
@@ -107,7 +107,7 @@ public class ArticleDAO extends DBHelper{
 	public List<ArticleDTO> selectArticles(String cate, int start, String search) {
 		List<ArticleDTO> articles = new ArrayList<>();
 		try {
-			logger.info("selectArticles() start");
+			logger.debug("selectArticles() start");
 			conn = getConnection();
 			
 			if(search == null) {
@@ -141,7 +141,7 @@ public class ArticleDAO extends DBHelper{
 				articles.add(dto);
 			}
 			close();
-			logger.info("selectArticles() try end...");
+			logger.debug("selectArticles() try end...");
 			
 		}catch (Exception e) {
 			logger.error("selectArticles() ERROR : " + e.getMessage());
@@ -152,7 +152,7 @@ public class ArticleDAO extends DBHelper{
 	// 게시글 수정
 	public void updateArticle(ArticleDTO dto) {
 		try {
-			logger.info("updateArticle() start");
+			logger.debug("updateArticle() start");
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.UPDATE_ARTICLE);
 			psmt.setString(1, dto.getTitle());
@@ -161,7 +161,7 @@ public class ArticleDAO extends DBHelper{
 			psmt.setInt(4, dto.getNo());
 			psmt.executeUpdate();
 			close();
-			logger.info("updateArticle() try end...");
+			logger.debug("updateArticle() try end...");
 			
 		} catch (Exception e) {
 			logger.error("updateArticle() ERROR : " + e.getMessage());
@@ -171,14 +171,14 @@ public class ArticleDAO extends DBHelper{
 	// 게시글 삭제
 	public void deleteArticle(String no) {
 		try {
-			logger.info("deleteArticle() start");
+			logger.debug("deleteArticle() start");
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.DELETE_ARTICLE);
 			psmt.setString(1, no);
 			psmt.setString(2, no);
 			psmt.executeUpdate();
 			close();
-			logger.info("deleteArticle() try end...");
+			logger.debug("deleteArticle() try end...");
 			
 		} catch (Exception e) {
 			logger.error("deleteArticle() ERROR : " + e.getMessage());
@@ -417,7 +417,7 @@ public class ArticleDAO extends DBHelper{
 	
 	// 현재 댓글 update
 	public void updateCommentCount(String no) {
-		logger.info("updateCommentCount()...1");
+		logger.debug("updateCommentCount()...1");
 		int result = currentCommentsCount(no);
 		try {
 			conn = getConnection();
@@ -426,7 +426,7 @@ public class ArticleDAO extends DBHelper{
 			psmt.setString(2, no);
 			psmt.executeUpdate();
 			close();
-			logger.info("updateCommentCount()...2");
+			logger.debug("updateCommentCount()...2");
 			
 		} catch (Exception e) {
 			logger.error("updateCommentCount ERROR : " + e.getMessage());

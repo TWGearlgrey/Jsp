@@ -1,5 +1,7 @@
 package kr.co.farmstory2.dto;
 
+import java.text.DecimalFormat;
+
 public class OrderDTO {
 	
 	private int orderNo;
@@ -78,6 +80,10 @@ public class OrderDTO {
 	public void setOrderCount(int orderCount) {
 		this.orderCount = orderCount;
 	}
+	public String getOrderCountWithComma() {
+		DecimalFormat df = new DecimalFormat("###,###");
+		return df.format(orderCount);
+	}
 	public void setOrderCount(String orderCount) {
 		this.orderCount = Integer.parseInt(orderCount);
 	}
@@ -89,6 +95,10 @@ public class OrderDTO {
 	}
 	public void setOrderDelivery(int orderDelivery) {
 		this.orderDelivery = orderDelivery;
+	}
+	public String getOrderDeliveryWithComma() {
+		DecimalFormat df = new DecimalFormat("###,###");
+		return df.format(orderDelivery);
 	}
 	public void setOrderDelivery(String orderDelivery) {
 		this.orderDelivery = Integer.parseInt(orderDelivery);
@@ -102,6 +112,10 @@ public class OrderDTO {
 	public void setOrderPrice(int orderPrice) {
 		this.orderPrice = orderPrice;
 	}
+	public String getOrderPriceWithComma() {
+		DecimalFormat df = new DecimalFormat("###,###");
+		return df.format(orderPrice);
+	}
 	public void setOrderPrice(String orderPrice) {
 		this.orderPrice = Integer.parseInt(orderPrice);
 	}
@@ -113,6 +127,10 @@ public class OrderDTO {
 	}
 	public void setOrderTotal(int orderTotal) {
 		this.orderTotal = orderTotal;
+	}
+	public String getOrderTotalWithComma() {
+		DecimalFormat df = new DecimalFormat("###,###");
+		return df.format(orderTotal);
 	}
 	public void setOrderTotal(String orderTotal) {
 		this.orderTotal = Integer.parseInt(orderTotal);

@@ -15,7 +15,7 @@ public class UserDAO extends DBHelper {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	public void insertUser(UserDTO dto) {
-		logger.info("insertUser() start");
+		logger.debug("insertUser() start");
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.INSERT_USER);
@@ -32,7 +32,7 @@ public class UserDAO extends DBHelper {
 			psmt.executeUpdate();
 			close();
 			
-			logger.info("insertUser() try end...");
+			logger.debug("insertUser() try end...");
 			
 		} catch (Exception e) {
 			logger.error("insertUser() ERROR : " + e.getMessage());
@@ -41,7 +41,7 @@ public class UserDAO extends DBHelper {
 	}
 	
 	public UserDTO selectUser(String uid, String pass) {
-		logger.info("selectUser() start");
+		logger.debug("selectUser() start");
 		UserDTO dto = null;
 		
 		try {
@@ -72,12 +72,12 @@ public class UserDAO extends DBHelper {
 		} catch (Exception e) {
 			logger.error("selectUser() error : " + e.getMessage());
 		}
-		logger.info("selectUser() try end... (dto: " + dto + ")");
+		logger.debug("selectUser() try end... (dto: " + dto + ")");
 		return dto;
 	}
 	
 	public List<UserDTO> selectUsers(int start) {
-		logger.info("selectUsers() start");
+		logger.debug("selectUsers() start");
 		List<UserDTO> users = new ArrayList<>();
 		
 		try {
@@ -108,7 +108,7 @@ public class UserDAO extends DBHelper {
 		} catch (Exception e) {
 			logger.error("selectUsers() ERROR : " + e.getMessage());
 		}
-		logger.info("selectUsers() try end...");
+		logger.debug("selectUsers() try end...");
 		return users;
 	}
 	
@@ -141,7 +141,7 @@ public class UserDAO extends DBHelper {
 	
 	// 아이디 중복 체크
 	public int selectCountUid(String uid) {
-		logger.info("selectCountUid() start");
+		logger.debug("selectCountUid() start");
 		int result = 0;
 		
 		try {
@@ -158,13 +158,13 @@ public class UserDAO extends DBHelper {
 		} catch (Exception e) {
 			logger.error("selectCountUid() error : " + e.getMessage());
 		}
-		logger.info("selectCountUid() try end... (result: " + result +")");
+		logger.debug("selectCountUid() try end... (result: " + result +")");
 		return result;
 	}
 	
 	// 닉네임 중복 체크
 	public int selectCountNick(String nick) {
-		logger.info("selectCountNick() start");
+		logger.debug("selectCountNick() start");
 		int result = 0;
 		
 		try {
@@ -181,13 +181,13 @@ public class UserDAO extends DBHelper {
 		} catch (Exception e) {
 			logger.error("selectCountNick() error : " + e.getMessage());
 		}
-		logger.info("selectCountNick() try end... (result: " + result +")");
+		logger.debug("selectCountNick() try end... (result: " + result +")");
 		return result;
 	}
 	
 	// 휴대폰 중복 체크
 	public int selectCountHp(String hp) {
-		logger.info("selectCountHp() start");
+		logger.debug("selectCountHp() start");
 		int result = 0;
 		
 		try {
@@ -204,13 +204,13 @@ public class UserDAO extends DBHelper {
 		} catch (Exception e) {
 			logger.error("selectCountHp() error : " + e.getMessage());
 		}
-		logger.info("selectCountHp() try end... (result: " + result +")");
+		logger.debug("selectCountHp() try end... (result: " + result +")");
 		return result;
 	}
 	
 	// 이메일 중복 체크
 	public int selectCountEmail(String email) {
-		logger.info("selectCountEmail() start");
+		logger.debug("selectCountEmail() start");
 		int result = 0;
 		
 		try {
@@ -227,7 +227,7 @@ public class UserDAO extends DBHelper {
 		} catch (Exception e) {
 			logger.error("selectCountEmail() error : " + e.getMessage());
 		}
-		logger.info("selectCountEmail() try end... (result: " + result +")");
+		logger.debug("selectCountEmail() try end... (result: " + result +")");
 		return result;
 	}
 }

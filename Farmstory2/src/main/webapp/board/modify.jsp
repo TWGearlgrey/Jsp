@@ -37,7 +37,7 @@
 			                </c:if>
 			            </table>
 			            <div>
-			                <a href="./list.do?group=${group}&cate=${cate}&no=${article.no}" class="btnCancel">취소</a>
+			                <a href="./view.do?group=${group}&cate=${cate}&no=${article.no}" class="btnCancel">취소</a>
 			                <input type="submit"  class="btnWrite" value="수정완료">
 			            </div>
 			        </form>

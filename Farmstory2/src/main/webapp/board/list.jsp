@@ -11,7 +11,8 @@
 			    <form action="${ctxPath}/board/list.do" method="get" class="search">
 			    	<input type="hidden" name="group" value="${group}">
 			    	<input type="hidden" name="cate" value="${cate}">
-		            <input type="text" name="search" placeholder="제목 검색" required>
+		            <input type="text" name="search" placeholder="제목 검색" required 
+		            		oninvalid="this.setCustomValidity('검색어를 입력해주세요.')"/>
 		            <input type="submit" value="검색">
 		        </form>
 		        
@@ -40,6 +41,9 @@
 			            </tr>
 			            </c:forEach>
 			        </table>
+			        <c:if test="${lastPageNum == 0}">
+			        <h3 style="text-align: center; margin: 60px;">검색 결과가 없습니다.</h3>
+			        </c:if>
 			    </article>
 			
 			    <!-- 페이지 네비게이션 -->

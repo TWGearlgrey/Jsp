@@ -98,7 +98,7 @@ public class ModifyController extends HttpServlet {
 		}
 		
 		// Redirect
-		resp.sendRedirect("/Farmstory2/board/list.do?group="+group+"&cate="+cate);
+		resp.sendRedirect("/Farmstory2/board/view.do?group="+group+"&cate="+cate+"&no="+no);
 		
 	}
 }

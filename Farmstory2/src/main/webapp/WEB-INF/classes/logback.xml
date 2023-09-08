@@ -44,10 +44,10 @@
 		</encoder>
 	</appender>
   
-	<root level="debug">
-		<!--
+	<root level="debug"> <!-- 배포시 INFO 레벨 이상 -->
 		<appender-ref ref="STDOUT" />
-		 -->
+		<!-- 배포용 
 		<appender-ref ref="ROLLING_DAILY" />
+		 -->
 	</root>
 </configuration>

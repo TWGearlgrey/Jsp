@@ -17,7 +17,7 @@ public class OrderDAO extends DBHelper {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public int insertOrder(OrderDTO dto) {
-		logger.info("insertOrder()... START");
+		logger.debug("insertOrder()... START");
 		int no = 0;
 		try {
 			conn = getConnection();
@@ -46,7 +46,7 @@ public class OrderDAO extends DBHelper {
 				no = rs.getInt(1);
 			}
 			close();
-			logger.info("insertOrder()... END");
+			logger.debug("insertOrder()... END");
 			
 		} catch (Exception e) {
 			logger.error("insertOrder ERROR : " + e.getMessage());
@@ -100,7 +100,16 @@ public class OrderDAO extends DBHelper {
 	}
 	
 	public void deleteOrder(String orderNo) {
-		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_ORDER);
+			psmt.setString(1, orderNo);
+			psmt.executeUpdate();
+			close();
+			
+		} catch (Exception e) {
+			logger.error("deleteOrder() ERROR : " + e.getMessage());
+		}
 	}
 	
 	public int selectCountOrdersTotal() {
