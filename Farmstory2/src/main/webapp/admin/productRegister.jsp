@@ -12,7 +12,14 @@
 
 </script>
         <main>
-            <%@ include file="./_aside.jsp" %>
+            <aside>
+			    <h3>주요기능</h3>
+			    <ul>
+			        <li class="on"><a href="/Farmstory2/admin/productList.do">상품관리</a></li>
+			        <li><a href="/Farmstory2/admin/orderList.do">주문관리</a></li>
+			        <li><a href="/Farmstory2/admin/userList.do">회원관리</a></li>                    
+			    </ul>
+			</aside>
             <section id="productRegister">
                 <nav>
                     <h3>상품등록</h3>

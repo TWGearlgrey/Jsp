@@ -3,6 +3,7 @@ package kr.co.farmstory2.controller.user;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,10 +19,18 @@ import kr.co.farmstory2.service.UserService;
 
 @WebServlet("/user/login.do")
 public class LoginController extends HttpServlet {
+	
+	private String ctxPath;
 
 	private static final long serialVersionUID = 1294748459753276074L;
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private UserService service = UserService.INSTANCE;
+	
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		// 컨텍스트 경로(/Farmstory2) 구하기(최초 1번, 모든 컨트롤러에 정의)
+		ctxPath = config.getServletContext().getContextPath();
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -81,12 +90,12 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("sessUser", user);
 			
 			// 리다이렉트
-			resp.sendRedirect("/Farmstory2");
+			resp.sendRedirect(ctxPath);
 			
 		}else {
 			logger.info("doPost()...LOGIN FAILES");
 			
-			resp.sendRedirect("/Farmstory2/user/login.do?success=100");
+			resp.sendRedirect(ctxPath+"/user/login.do?success=100");
 		}
 	}
 }

@@ -47,8 +47,9 @@ public class CommentController extends HttpServlet {
 				logger.info("doGet()...2-1 :: DELETE COMMENT : " + result);
 				
 				if(result > 0) {
-					service.deleteArticleForComment(parent);
-					logger.info("doGet()...2-2 :: COMMENT COUNT--;");
+					service.updateCommentCount(parent);
+					logger.info("doGet()...2-2 :: COMMENT COUNT");
+					
 					currentComment = service.currentCommentsCount(parent);
 					logger.info("doGet()...2-3 :: CURRENT COMMENTS : " + currentComment);
 				}
@@ -100,12 +101,9 @@ public class CommentController extends HttpServlet {
 		
 		// 댓글 카운트 ++;
 		if(result[0] > 0) {
-			service.updateArticleForComment(no);
-			logger.info("doPost()...3 :: COMMENT COUNT++;");
+			service.updateCommentCount(no);
+			logger.info("doPost()...3 :: COMMENT COUNT");
 		}
-		
-		// 작성한 댓글 번호 확인
-		///// 구현 필요함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
 		// Json 출력(ajax 요청에 응답)
 		JsonObject json = new JsonObject();

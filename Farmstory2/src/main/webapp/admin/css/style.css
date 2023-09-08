@@ -222,8 +222,21 @@ footer > p {
     box-sizing: border-box;
 }
 
+#orderList > article > table th:nth-child(3){
+	width: 190px;
+}
+
 #orderList .paging {
     text-align: center;
+}
+
+#userList .paging {
+    text-align: center;
+}
+
+#userList .paging > .on {
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 #orderList .paging > .on {
@@ -289,6 +302,11 @@ footer > p {
 #orderPopup > section > article > table .thumb {
     width: 10%;
 }
+
+#orderPopup > section > article > table .thumb img {
+	width: 120px;
+    height: 120px;
+}	
 
 #orderPopup > section > article > table tr {
     border-bottom: 1px dotted #999;

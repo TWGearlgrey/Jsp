@@ -40,8 +40,8 @@ public enum ArticleService {
 	}
 	
 	// 게시글 list
-	public List<ArticleDTO> selectArticles(String cate, int start) {
-		return dao.selectArticles(cate, start);
+	public List<ArticleDTO> selectArticles(String cate, int start, String search) {
+		return dao.selectArticles(cate, start, search);
 	}
 	
 	// 게시글 수정
@@ -58,12 +58,16 @@ public enum ArticleService {
 	
 	
 	// 추가 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+	public List<ArticleDTO> latestsArticles(String cate, int num) {
+		return dao.latestsArticles(cate, num);
+	}
+	
 	public int updataComment(String content, String no) {
 		return dao.updataComment(content, no);
 	}
 		
-	public int selectCountTotal(String cate) {
-		return dao.selectCountTotal(cate);
+	public int selectCountTotal(String cate, String search) {
+		return dao.selectCountTotal(cate, search);
 	}
 	
 	public List<ArticleDTO> selectComments(String parent) {
@@ -74,9 +78,15 @@ public enum ArticleService {
 		return dao.insertComment(dto);
 	}
 	
+	/*
 	public void updateArticleForComment(String no) {
 		dao.updateArticleForComment(no);
 	}
+	
+	public void deleteArticleForComment(String no) {
+		dao.deleteArticleForComment(no);
+	}
+	*/
 	
 	public void updateHitOfArticle(String no) {
 		dao.updateHitOfArticle(no);
@@ -86,12 +96,12 @@ public enum ArticleService {
 		return dao.deleteComment(no);
 	}
 	
-	public void deleteArticleForComment(String no) {
-		dao.deleteArticleForComment(no);
-	}
-	
 	public int currentCommentsCount(String no) {
 		return dao.currentCommentsCount(no);
+	}
+	
+	public void updateCommentCount(String no) {
+		dao.updateCommentCount(no);
 	}
 	
 	

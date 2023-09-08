@@ -59,7 +59,7 @@ public class SQL {
 	
 	public final static String UPDATE_HIT_OF_ARTICLE = "UPDATE `Article` SET `hit`=`hit`+1 WHERE `no`= ?";
 	
-	public static final String SELECT_LATESTS = "SELECT `no`, `title`, `rdate` FROM `Article` "
+	public static final String SELECT_LATESTS = "SELECT `no`, `cate`, `title`, `rdate` FROM `Article` "
 												+ "WHERE `parent`=0 AND `cate`=? "
 												+ "ORDER BY `no` DESC LIMIT ?;";
 	
@@ -74,6 +74,15 @@ public class SQL {
 												+ "FROM `Article` AS a "
 												+ "JOIN `User` AS b ON a.writer = b.uid "
 												+ "WHERE `parent`=0 AND `cate`=? "
+												+ "ORDER BY `no` DESC "
+												+ "LIMIT ?, 10";
+	
+	public static final String SELECT_ARTILCES_FOR_SEARCH = "SELECT "
+												+ "a.*, "
+												+ "b.`nick` "
+												+ "FROM `Article` AS a "
+												+ "JOIN `User` AS b ON a.writer = b.uid "
+												+ "WHERE (`parent`=0 AND `cate`=?) AND `title` LIKE ? "
 												+ "ORDER BY `no` DESC "
 												+ "LIMIT ?, 10";
 	
@@ -92,11 +101,14 @@ public class SQL {
 	
 	// 추가
 	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0 AND `cate`=?";
+	public final static String SELECT_COUNT_TOTAL_FOR_SEARCH = "SELECT COUNT(*) FROM `Article` WHERE (`parent`=0 AND `cate`=?) AND `title` LIKE ?;";
 	
 	public final static String INSERT_COMMENT_COUNT = "UPDATE `Article` SET `comment` = `comment` + 1 WHERE `no`=?";
 	public final static String DELETE_COMMENT_COUNT = "UPDATE `Article` SET `comment` = `comment` - 1 WHERE `no`=?";
 	
-	public final static String CURRENT_COMMENTS_COUNT = "SELECT `comment` FROM `Article` WHERE `no`=?";
+	//public final static String CURRENT_COMMENTS_COUNT = "SELECT `comment` FROM `Article` WHERE `no`=?";
+	public final static String CURRENT_COMMENTS_COUNT = "SELECT COUNT(*) FROM `Article` WHERE `parent`=?";
+	public final static String CURRENT_COMMENTS_UPDATE = "UPDATE `Article` SET `comment`=? WHERE `no`=?";
 	// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛	
 	
 	

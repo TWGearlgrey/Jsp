@@ -2,22 +2,17 @@
 <%@ include file="./_header.jsp" %>
 <Script>
 
-	window.onload = function() {
-		
-		const userList = document.getElementsByClassName('showPopup')[0];
-		
-		userList.addEventListener('click', function(e) {
-			e.preventDefault();
-			
-			/* 상세확인 클릭시 uid를 ajax로 날려서 데이터 받아오기 */
-			
-		});
-	}
-
 </Script>
         <main>
-            <%@ include file="./_aside.jsp" %>
-            <section id="orderList">
+            <aside>
+			    <h3>주요기능</h3>
+			    <ul>
+			        <li><a href="/Farmstory2/admin/productList.do">상품관리</a></li>
+			        <li><a href="/Farmstory2/admin/orderList.do">주문관리</a></li>
+			        <li class="on"><a href="/Farmstory2/admin/userList.do">회원관리</a></li>                    
+			    </ul>
+			</aside>
+            <section id="userList">
                 <nav>
                     <h3>회원목록</h3>
                 </nav>
@@ -39,11 +34,11 @@
                         <c:forEach var="user" items="${users}">
                         <tr>
                             <td><input type="checkbox" name=""/></td>
-                            <td>${user.uid}</td>
-                            <td>${user.name}</td>                            
-                            <td>${user.nick}</td>
-                            <td>${user.email}</td>
-                            <td>${user.hp}</td>
+                            <td class="u_uid">${user.uid}</td>
+                            <td class="u_name">${user.name}</td>                            
+                            <td class="u_nick">${user.nick}</td>
+                            <td class="u_email">${user.email}</td>
+                            <td class="u_hp">${user.hp}</td>
                             <td>
                                 <select name="grade">
                                     <option ${(user.role eq 'USER')?'selected':''}>USER</option>
@@ -53,9 +48,13 @@
                                     <option ${(user.role eq 'ADMIN')?'selected':''}>ADMIN</option>
                                 </select>
                             </td>
-                            <td>2023-01-01 13:06:14</td>
+                            <td class="u_regDate">${user.regDate}</td>
+                            <td class="u_role" style="display: none">${user.role}</td>
+                            <td class="u_regip" style="display: none">${user.regip}</td>
+                            <td class="u_addr1" style="display: none">${user.addr1}</td>
+                            <td class="u_addr2" style="display: none">${user.addr2}</td>
                             <td>
-                            	<a data-uid="${user.uid}" href="#" class="showPopup">[상세확인]</a>
+                            	<a href="#" class="showUserPopup">[상세확인]</a>
                            	</td>
                         </tr>
                         </c:forEach>
@@ -67,13 +66,13 @@
                     
                     <p class="paging">
                     	<c:if test="${pageGroupStart > 1}">
-                        <a href="./productList.do?pg=${pageGroupStart - 1}" class="prev"><</a>
+                        <a href="./userList.do?pg=${pageGroupStart - 1}" class="prev"><</a>
                         </c:if>
                         <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-                        <a href="./productList.do?pg=${i}" class="${(currentPage == i)? 'on':''}">[${i}]</a>
+                        <a href="./userList.do?pg=${i}" class="${(currentPage == i)? 'on':''}">[${i}]</a>
                         </c:forEach>
                         <c:if test="${pageGroupEnd < lastPageNum}">
-                        <a href="//productList.do?pg=${pageGroupStart + 1}" class="next"">></a>
+                        <a href="./userList.do?pg=${pageGroupStart + 1}" class="next"">></a>
                         </c:if>
                     </p>
                 </article>
@@ -93,46 +92,46 @@
                     <table border="0">
                         <tr>
                             <td>아이디</td>
-                            <td class="user_uid"></td>
+                            <td class="u_uid"></td>
                         </tr>
                         <tr>
                             <td>이름</td>
-                            <td class="user_name"></td>
+                            <td class="u_name"></td>
                         </tr>
                         <tr>
                             <td>별명</td>
-                            <td class="user_nick"></td>
+                            <td class="u_nick"></td>
                         </tr>
                         <tr>
                             <td>이메일</td>
-                            <td class="user_email"></td>
+                            <td class="u_email"></td>
                         </tr>
                         <tr>
                             <td>휴대폰</td>
-                            <td class="user_hp"></td>
+                            <td class="u_hp"></td>
                         </tr>
                         <tr>
                             <td>등급</td>
-                            <td class="user_role"></td>
+                            <td class="u_role"></td>
                         </tr>
                         <tr>
                             <td>주소</td>
                             <td>
-                                <p class="user_addr1">
+                                <p class="u_addr1">
                                     
                                 </p>
-                                <p class="user_addr2">
+                                <p class="u_addr2">
                                     
                                 </p>
                             </td>
                         </tr>
                         <tr>
                             <td>아이피</td>
-                            <td class="user_regip"></td>
+                            <td class="u_regip"></td>
                         </tr>
                         <tr>
                             <td>회원가입일</td>
-                            <td class="user_regDate"></td>
+                            <td class="u_regDate"></td>
                         </tr>
                     </table>
                 </article>

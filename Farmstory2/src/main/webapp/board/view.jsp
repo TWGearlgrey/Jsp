@@ -156,9 +156,14 @@
 			
 			const txt = $(this).text();
 			if(txt == '수정') {
-				// 수정 버튼 (!!!! 문제점 수정을 여러개 동시에 가능한 문제가 발생.)
-				//$(this).parent().prev().attr('id', 'modi'); id중복이 안되는 것을 이용하려 했으나 id가 중복하여 생성되어 보류
+				// 다른 댓글 수정 취소
+				$('.mod').parent().prev().removeClass('modi');
+				$('.mod').parent().prev().attr('readonly', true);
+				$('.mod').text('수정');
+				$('.mod').prev().hide();
+				$('.mod').prev().prev().show();
 				
+				// 수정 모드 전환
 				$(this).parent().prev().addClass('modi');
 				$(this).parent().prev().attr('readonly', false); 
 				$(this).parent().prev().focus(); 
@@ -264,8 +269,8 @@
 						<div>
 							<c:if test="${sessUser.uid eq comment.writer}">
 							<a href="#" class="del" data-no="${comment.no}" data-pno="${article.no}">삭제</a>
-							<a href="#" class="can">취소</a>
-							<a href="#" class="mod">수정</a>
+							<a href="#" class="can" data-no="${comment.no}">취소</a>
+							<a href="#" class="mod" data-no="${comment.no}">수정</a>
 							</c:if>
 						</div>                
 			        </article>

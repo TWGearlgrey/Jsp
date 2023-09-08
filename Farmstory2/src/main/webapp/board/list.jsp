@@ -8,8 +8,10 @@
 			<section class="asideList">
 			    <h3>글목록</h3>
 			    
-			    <form action="#" method="get" class="search">
-		            <input type="text" name="search" placeholder="제목 키워드 및 작성자 검색">
+			    <form action="${ctxPath}/board/list.do" method="get" class="search">
+			    	<input type="hidden" name="group" value="${group}">
+			    	<input type="hidden" name="cate" value="${cate}">
+		            <input type="text" name="search" placeholder="제목 검색" required>
 		            <input type="submit" value="검색">
 		        </form>
 		        
@@ -45,9 +47,18 @@
 		        	<c:if test="${pageGroupStart > 1}">
 		            	<a href="/Farmstory2/board/list.do?group=${group}&cate=${cate}&pg=${pageGroupStart - 1}" class="prev">이전</a>
 		            </c:if>
+		            
 		            <c:forEach var="i" begin="${pageGroupStart}" end="${pageGroupEnd}">
-		            	<a href="/Farmstory2/board/list.do?group=${group}&cate=${cate}&pg=${i}" class="num ${currentPage == i?'current':'off'}">${i}</a>
+		            	<c:choose>
+		            		<c:when test="${search == null}">
+		            			<a href="/Farmstory2/board/list.do?group=${group}&cate=${cate}&pg=${i}" class="num ${currentPage == i?'current':'off'}">${i}</a>
+		            		</c:when>
+		            		<c:otherwise>
+		            			<a href="/Farmstory2/board/list.do?group=${group}&cate=${cate}&search=${search}&pg=${i}" class="num ${currentPage == i?'current':'off'}">${i}</a>
+		            		</c:otherwise>
+		            	</c:choose>
 		            </c:forEach>
+		            
 		            <c:if test="${pageGroupEnd < lastPageNum}">
 		            	<a href="/Farmstory2/board/list.do?group=${group}&cate=${cate}&pg=${pageGroupEnd + 1}" class="next">다음</a>
 		            </c:if>

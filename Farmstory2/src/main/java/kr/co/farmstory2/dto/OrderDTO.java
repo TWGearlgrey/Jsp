@@ -18,6 +18,34 @@ public class OrderDTO {
 	private String orderDate;
 	
 	
+	// 추가 영역
+	private String pName;
+	private String name;
+	private String thumb1;
+	
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	// 추가영역 end
+	
+	
 	
 	public int getOrderNo() {
 		return orderNo;
@@ -25,6 +53,10 @@ public class OrderDTO {
 	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
 	}
+	public void setOrderNo(String orderNo) {
+		this.orderNo = Integer.parseInt(orderNo);
+	}
+	
 	
 	
 	
@@ -155,6 +187,9 @@ public class OrderDTO {
 		return orderDate;
 	}
 	public void setOrderDate(String orderDate) {
+		this.orderDate = orderDate.substring(0, 10);
+	}
+	public void setOrderFullDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 	

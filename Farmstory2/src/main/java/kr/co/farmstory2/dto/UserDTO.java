@@ -121,6 +121,9 @@ public class UserDTO {
 		return regDate;
 	}
 	public void setRegDate(String regDate) {
+		this.regDate = regDate.substring(0, 10);
+	}
+	public void setRegFullDate(String regDate) {
 		this.regDate = regDate;
 	}
 	

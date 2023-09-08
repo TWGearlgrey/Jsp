@@ -104,14 +104,23 @@ public class ArticleDAO extends DBHelper{
 	}
 	
 	// 게시글 list
-	public List<ArticleDTO> selectArticles(String cate, int start) {
+	public List<ArticleDTO> selectArticles(String cate, int start, String search) {
 		List<ArticleDTO> articles = new ArrayList<>();
 		try {
 			logger.info("selectArticles() start");
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_ARTILCES);
-			psmt.setString(1, cate);
-			psmt.setInt(2, start);
+			
+			if(search == null) {
+				psmt = conn.prepareStatement(SQL.SELECT_ARTILCES);
+				psmt.setString(1, cate);
+				psmt.setInt(2, start);
+				
+			}else {
+				psmt = conn.prepareStatement(SQL.SELECT_ARTILCES_FOR_SEARCH);
+				psmt.setString(1, cate);
+				psmt.setString(2, "%"+search+"%");
+				psmt.setInt(3, start);
+			}
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -174,6 +183,32 @@ public class ArticleDAO extends DBHelper{
 		} catch (Exception e) {
 			logger.error("deleteArticle() ERROR : " + e.getMessage());
 		}
+	}
+	
+	// 메인페이지 최신 게시글 view
+	public List<ArticleDTO> latestsArticles(String cate, int num) {
+		List<ArticleDTO> latests = new ArrayList<>();
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_LATESTS);
+			psmt.setString(1, cate);
+			psmt.setInt(2, num);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleDTO dto = new ArticleDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setCate(rs.getString(2));
+				dto.setTitle(rs.getString(3));
+				dto.setRdate(rs.getString(4));
+				latests.add(dto);
+			}
+			close();
+			
+		} catch (Exception e) {
+			logger.error("latestsArticles() ERROR : " + e.getMessage());
+		}
+		return latests;
 	}
 	
 	
@@ -268,14 +303,21 @@ public class ArticleDAO extends DBHelper{
 	
 	// 추가 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 	// 페이징을 위한 게시글 수 조회
-	public int selectCountTotal(String cate) {
+	public int selectCountTotal(String cate, String search) {
 		
 		int total = 0;
 		
 		try {
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL);
-			psmt.setString(1, cate);
+			
+			if(search == null) {
+				psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL);
+				psmt.setString(1, cate);
+			}else {
+				psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL_FOR_SEARCH);
+				psmt.setString(1, cate);
+				psmt.setString(2, "%"+search+"%");
+			}
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				total = rs.getInt(1);
@@ -320,34 +362,6 @@ public class ArticleDAO extends DBHelper{
 		return result;
 	}
 
-	// 댓글 등록 시 댓글 count++;
-	public void updateArticleForComment(String no) {
-		try {
-			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.UPDATE_PLUS_ARTICLE_FOR_COMMENT);
-			psmt.setString(1, no);
-			psmt.executeUpdate();
-			close();
-			
-		}catch(Exception e) {
-			logger.error("updateArticleForComment() ERROR : " + e.getMessage());
-		}
-	}
-
-	// 댓글 삭제 시 댓글 count--;
-	public void deleteArticleForComment(String no) {
-		try {
-			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.UPDATE_MINUS_ARTICLE_FOR_COMMENT);
-			psmt.setString(1, no);
-			psmt.executeUpdate();
-			close();
-			
-		}catch(Exception e) {
-			logger.error("deleteArticleForComment error : " + e.getMessage());
-		}
-	}
-	
 	// 현재 댓글 count. (댓글이 없습니다. 문자열 출력 여부 확인을 위함)
 	public int currentCommentsCount(String no) {
 
@@ -367,5 +381,56 @@ public class ArticleDAO extends DBHelper{
 			logger.error("currentCommentsCount error : " + e.getMessage());
 		}
 		return currentComment;
+	}
+
+	// 댓글 등록 시 댓글 count++;
+	/*
+	public void updateArticleForComment(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_PLUS_ARTICLE_FOR_COMMENT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error("updateArticleForComment() ERROR : " + e.getMessage());
+		}
+	}
+	*/
+
+	// 댓글 삭제 시 댓글 count--;
+	/*
+	public void deleteArticleForComment(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_MINUS_ARTICLE_FOR_COMMENT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+			
+		}catch(Exception e) {
+			logger.error("deleteArticleForComment error : " + e.getMessage());
+		}
+	}
+	*/
+	
+	// 현재 댓글 update
+	public void updateCommentCount(String no) {
+		logger.info("updateCommentCount()...1");
+		int result = currentCommentsCount(no);
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.CURRENT_COMMENTS_UPDATE);
+			psmt.setInt(1, result);
+			psmt.setString(2, no);
+			psmt.executeUpdate();
+			close();
+			logger.info("updateCommentCount()...2");
+			
+		} catch (Exception e) {
+			logger.error("updateCommentCount ERROR : " + e.getMessage());
+		}
+		logger.info("updateCommentCount()...3 END");
 	}
 }

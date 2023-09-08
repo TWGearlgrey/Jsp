@@ -1,7 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
         <main>
-            <%@ include file="./_aside.jsp" %>
+            <aside>
+			    <h3>주요기능</h3>
+			    <ul>
+			        <li class="on"><a href="/Farmstory2/admin/productList.do">상품관리</a></li>
+			        <li><a href="/Farmstory2/admin/orderList.do">주문관리</a></li>
+			        <li><a href="/Farmstory2/admin/userList.do">회원관리</a></li>                    
+			    </ul>
+			</aside>
             <section id="productList">
                 <nav>
                     <h3>상품목록</h3>
@@ -51,7 +58,7 @@
                         <a href="./productList.do?pg=${i}" class="${(currentPage == i)? 'on':''}">[${i}]</a>
                         </c:forEach>
                         <c:if test="${pageGroupEnd < lastPageNum}">
-                        <a href="//productList.do?pg=${pageGroupStart + 1}" class="next"">></a>
+                        <a href="./productList.do?pg=${pageGroupStart + 1}" class="next"">></a>
                         </c:if>
                     </p>
 

@@ -28,15 +28,16 @@ public class ListController extends HttpServlet {
 		
 		logger.info("doGet()...1");
 
-		String group = req.getParameter("group");
-		String cate  = req.getParameter("cate");
-		String pg    = req.getParameter("pg");
+		String group  = req.getParameter("group");
+		String cate   = req.getParameter("cate");
+		String pg     = req.getParameter("pg");
+		String search = req.getParameter("search");
 		
 		// 현재 페이지 번호
 		int currentPage = service.getCurrentPage(pg);
 		
 		// 전체 게시물 갯수 
-		int total = service.selectCountTotal(cate);
+		int total = service.selectCountTotal(cate, search);
 		
 		// 마지막 페이지 번호
 		int lastPageNum = service.getLastPageNum(total);
@@ -51,10 +52,11 @@ public class ListController extends HttpServlet {
 		int start = service.getStartNum(currentPage);
 		
 		// 현재 페이지 게시물 조회
-		List<ArticleDTO> articles = service.selectArticles(cate, start);
+		List<ArticleDTO> articles = service.selectArticles(cate, start, search);
 		
 		req.setAttribute("group", group);
 		req.setAttribute("cate", cate);
+		req.setAttribute("search", search);
 		req.setAttribute("articles", articles);
 		req.setAttribute("currentPage", currentPage);
 		req.setAttribute("lastPageNum", lastPageNum);
@@ -64,7 +66,10 @@ public class ListController extends HttpServlet {
 		
 		logger.debug("group          : " + group);
 		logger.debug("cate           : " + cate);
-		logger.debug("articles       : " + articles.subList(0, 1));
+		logger.debug("pg             : " + pg);
+		logger.debug("search         : " + search);
+		
+		//logger.debug("articles       : " + articles.subList(0, 1));
 		logger.debug("currentPage    : " + currentPage);
 		logger.debug("lastPageNum    : " + lastPageNum);
 		logger.debug("pageGroupStart : " + result[0]);

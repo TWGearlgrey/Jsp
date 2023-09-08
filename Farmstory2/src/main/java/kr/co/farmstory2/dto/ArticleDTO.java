@@ -161,7 +161,4 @@ public class ArticleDTO {
 				+ title + ", content=" + content + ", file=" + file + ", hit=" + hit + ", writer=" + writer + ", regip="
 				+ regip + ", rdate=" + rdate + "]";
 	}
-	
-	
-	
 }
